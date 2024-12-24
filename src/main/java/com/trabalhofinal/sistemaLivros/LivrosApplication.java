@@ -1,4 +1,4 @@
-package com.trabalhofinal.livros;
+package com.trabalhofinal.sistemaLivros;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
