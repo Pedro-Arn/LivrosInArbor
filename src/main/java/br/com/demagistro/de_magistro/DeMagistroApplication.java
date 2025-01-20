@@ -1,13 +1,13 @@
-package com.trabalhofinal.sistemaLivros;
+package br.com.demagistro.de_magistro;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class LivrosApplication {
+public class DeMagistroApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(LivrosApplication.class, args);
+		SpringApplication.run(DeMagistroApplication.class, args);
 	}
 
 }
