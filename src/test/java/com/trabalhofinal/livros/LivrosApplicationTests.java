@@ -1,10 +1,10 @@
-package br.com.demagistro.de_magistro;
+package com.trabalhofinal.livros;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DeMagistroApplicationTests {
+class LivrosApplicationTests {
 
 	@Test
 	void contextLoads() {
