@@ -8,11 +8,11 @@
 		<version>3.4.1</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.trabalhofinal</groupId>
-	<artifactId>sistemaLivros</artifactId>
+	<groupId>br.com.demagistro</groupId>
+	<artifactId>demagistro</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>sistemaLivros</name>
-	<description>Sistema aberto para consulta de livros</description>
+	<name>demagistro</name>
+	<description>De Magistro: Sistema aberto para consulta de livros</description>
 	<url/>
 	<licenses>
 		<license/>
