@@ -2,7 +2,9 @@ body {
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
-    background: url('../img/background.jpg') no-repeat center center fixed;
+    height: 300vh;
+    background-color: black;
+    background: url('../img/HOME.png') no-repeat center center;
     background-size: cover;
 }
 
