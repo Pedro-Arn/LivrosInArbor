@@ -1,0 +1,62 @@
+body {
+    background: url(../img/booksBackground.png) no-repeat center center;
+    height: 200vh;
+}
+
+.main {
+    margin-top: 100px;
+}
+
+.container {
+    display: flex;
+    background-color: rgba(198, 198, 198, 0.249);
+    padding: 30px;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.412);
+    margin: 0px 100px 0px 100px;
+}
+
+.book-cover {
+    display: block;
+}
+
+.book-cover img {
+    max-width: 350px;
+}
+
+.book-data {
+    display: block;
+    margin: 20px;
+    margin-left: 20px;
+}
+
+.book-data .book-description {
+    margin-top: 60px;
+}
+
+.book-data .book-author {
+    text-decoration: none;
+    font-size: large;
+}
+
+.book-data .book-year {
+    font-size: small;
+    margin-top: -5px;
+    margin-left: 10px;
+}
+
+.book-data p {
+    font-family: "Readex Pro", serif;
+    font-size: large;
+    text-align: justify;
+    align-items: baseline;
+    color: white;
+}
+
+.book-data .book-title {
+    font-family: "Rajdhani", serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: xx-large;
+    color: white;
+    margin: 10px;
+}

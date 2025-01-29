@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/booksInfo.css' %}">
+<script src="{% static 'js/script.js' %}"></script> 
+{% endblock head %}
+
+{% block content %}
+	<button id="myBtn">Filtrar</button>
+
+	<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+  
+  </div>
+
+	<h1>Book List</h1>
+	<ul>
+		{% for livro in livros %}
+			<li>{{ livro.titulo }} - {{ livro.autor.nome }}</li>
+    {% empty %}
+      <li>Nenhum livro encontrado.</li>
+		{% endfor %}
+	</ul>
+
+    <script src="{% static 'js/script.js' %}"></script> 
+
+{% endblock %}
