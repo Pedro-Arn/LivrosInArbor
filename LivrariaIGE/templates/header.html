@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Header</title>
+    <link rel="stylesheet" href="../header/header.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">LOGO</div>
+
+        <div class="search-bar">
+            <input type="text">
+            <i class="fas fa-search"></i>
+        </div>
+
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Contato</a></li>
+                <li><a href="#">Sobre</a></li>
+            </ul>
+        </nav>
+
+        <div class="user-area">
+            <button id="login-btn">Login</button>
+            <i class="fa-solid fa-user user-icon hidden" id="user-icon" alt="Usuário"></i>
+        </div>
+    </header>
+
+    <div id="user-popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close-btn">&times;</span>
+            <h3>Meu perfil</h3>
+            <p><strong>Nome Completo: </strong>Lívia Amaral Lopes</p>
+            <p><strong>E-mail: </strong>livia@gmail.com</p>
+            <p><strong>Usuário: </strong>lv.lopes</p>
+            <p><strong>Data de Nascimento: </strong>20/03/2004</p>
+            <p><strong>Gênero: </strong>Feminino</p>
+            <p><strong>Ocupação: </strong>Estudante</p>
+            <hr>
+            <a href="#">Meus Comentários</a>
+            <button id="logout-btn">Sair</button>
+        </div>
+    </div>
+
+    <script src="../header/header.js"></script>
+</body>
+
+</html>
