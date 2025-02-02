@@ -13,11 +13,11 @@ from apps.usuario.forms import RegistrarUsuarioForm
 
 
 class HomePage(TemplateView):
-    template_name = "usuario/home.html"
+    template_name = "home.html"
 
 
 class RegistrarUsuarioView(FormView):
-    template_name = 'usuario/registrar.html'
+    template_name = 'login.html'
     form_class = RegistrarUsuarioForm
     # success_url = reverse_lazy('home')
 

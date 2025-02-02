@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="pt-br">
+{% extends 'base.html' %}
+{% load static %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Page</title>
+{% block head %}
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../static/css/book.css">
-</head>
+{% endblock head %}
 
-<body>
-    <iframe src="../templates/header.html" style="width:100%; height: auto; border: none;"></iframe>
+{% block title %}obj.titulo{% endblock title %}
+
+{% block content %} 
+    {% include 'header.html' %}
     <div class="breadcrumb">
         Engenharia Civil &gt; 3º Período &gt; XXXX
     </div>
@@ -91,7 +90,6 @@
             <button class="btn-enviar">Enviar Comentário</button>
         </div>
     </div>
-    <iframe src="../templates/footer.html" style="width:100%; border: none; height: 264px;"></iframe>
-</body>
-
+    {% include 'footer.html' %}
+{% endblock content %}
 </html>

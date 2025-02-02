@@ -18,7 +18,7 @@ from apps.livros.models import Livros, Comentario, Favoritos
 
 class ListarLivrosView(ListView):
     model = Livros
-    template_name = 'livro/listar_livro.html'
+    template_name = 'search.html'
     context_object_name = 'livros'
     paginate_by = 10
 
@@ -65,7 +65,7 @@ class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class DetalhesLivroView(DetailView):
     model = Livros
-    template_name = 'livro/detalhes_livro.html'
+    template_name = 'book.html'
     context_object_name = 'livro'
 
     def get_context_data(self, **kwargs):
