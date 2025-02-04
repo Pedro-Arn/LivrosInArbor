@@ -6,12 +6,12 @@
     <link rel="stylesheet" href="../static/css/book.css">
 {% endblock head %}
 
-{% block title %}obj.titulo{% endblock title %}
+{% block title %}{{ livro.titulo }}{% endblock title %}
 
 {% block content %} 
     {% include 'header.html' %}
     <div class="breadcrumb">
-        Engenharia Civil &gt; 3º Período &gt; XXXX
+        {{ livro.materia.nome }} &gt; {{ livro.materia.periodo }} &gt; {{ livro.titulo }}
     </div>
     <section class="detalhes-livro">
         <div class="livro-container">
@@ -19,76 +19,71 @@
                 <img src="../book/img/image.png" alt="Capa do Livro">
             </div>
             <div class="livro-info">
-                <h2 class="livro-materia">Livro recomendado para xxxx</h2>
-                <p class="livro-titulo"><strong>Título: </strong>Título Exemplo</p>
-                <p class="livro-editora"><strong>Editora: </strong>Editora Exemplo</p>
-                <p class="livro-ano"><strong>Ano de Publicação: </strong>2020</p>
-                <p class="livro-autor"><strong>Autor: </strong><a href="autor.html">Nome do Autor</a></p>
-                <p class="livro-descricao"><strong>Descrição: </strong>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce in hendrerit velit. Suspendisse
-                    potenti.
-                    Nullam aliquet mi sed sem ullamcorper, in porta justo consectetur.
-                </p>
-                <a href="https://www.exemplo.com" class="btn-comprar" target="_blank">Comprar Livro</a>
+                <h2 class="livro-materia">{{ livro.titulo }}</h2>
+                <p class="livro-editora"><strong>Editora: </strong>{{ livro.editora }}</p>
+                <p class="livro-ano"><strong>Ano de Publicação: </strong>{{ livro.ano_publicacao }}</p>
+                <p class="livro-autor"><strong>Autor: </strong><a href="autor.html">{{ livro.autor.nome_completo }}</a></p>
+                <p class="livro-descricao"><strong>Descrição: </strong>{{ livro.descricao }}</p>
+                <a href="{{ livro.link.link }}" class="btn-comprar" target="_blank">Comprar Livro</a>
             </div>
         </div>
     </section>
 
     <div class="comentarios-container">
-        <h3 class="comentarios-titulo">Comentários sobre o Livro</h3>
-
-        <div class="comentario">
-            <div class="comentario-header">
-                <div class="comentario-avatar">
-                    <i class="fa-solid fa-user-graduate"></i>
+        <h3 class="comentarios-titulo">Comentários</h3>
+        
+        {% if comentarios %}
+            {% for comentario in comentarios %}
+                <div class="comentario">
+                    <div class="comentario-header">
+                        <div class="comentario-avatar">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <span class="comentario-usuario">{{ comentario.usuario.get_full_name }} &gt; </span> {{ comentario.postado_em }}<br>
+                        {% if request.user.usuario == comentario.usuario %}
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="comentario_id" value="{{ comentario.id }}">
+                                <button type="submit" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este comentário?');">
+                                    Excluir
+                                </button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <p class="comentario-texto">{{comentario.corpo}}</p>
                 </div>
-                <span class="comentario-usuario">Usuário 1</span>
-            </div>
-            <p class="comentario-texto">
-                Esse livro foi muito esclarecedor e me ajudou a entender melhor os fundamentos da engenharia.
-            </p>
-        </div>
+            {% endfor %}
 
-        <div class="comentario">
-            <div class="comentario-header">
-                <div class="comentario-avatar">
-                    <i class="fa-solid fa-user-graduate"></i>
-                </div>
-                <span class="comentario-usuario">Usuário 2</span>
-            </div>
-            <p class="comentario-texto">
-                Recomendo a leitura para todos os estudantes, a abordagem é prática e objetiva.
-            </p>
-        </div>
+            <div class="pagination">
+                {% if comentarios.has_previous %}
+                    <a href="?page=1" class="pagina-link">Primeira</a>
+                    <a href="?page={{ comentarios.previous_page_number }}" class="pagina-link">Anterior</a>
+                {% endif %}
 
-        <div class="comentario">
-            <div class="comentario-header">
-                <div class="comentario-avatar">
-                    <i class="fa-solid fa-user-graduate"></i>
-                </div>
-                <span class="comentario-usuario">Usuário 3</span>
-            </div>
-            <p class="comentario-texto">
-                Uma excelente referência para os estudos iniciais. Vale muito a pena!
-            </p>
-        </div>
+                <span class="pagina-atual">Página {{ comentarios.number }} de {{ comentarios.paginator.num_pages }}</span>
 
-        <div class="comentario">
-            <div class="comentario-header">
-                <div class="comentario-avatar">
-                    <i class="fa-solid fa-user-graduate"></i>
-                </div>
-                <span class="comentario-usuario">Usuário 4</span>
+                {% if comentarios.has_next %}
+                    <a href="?page={{ comentarios.next_page_number }}" class="pagina-link">Próxima</a>
+                    <a href="?page={{ comentarios.paginator.num_pages }}" class="pagina-link">Última</a>
+                {% endif %}
             </div>
-            <p class="comentario-texto">
-                Os conceitos explicados nesse livro facilitam a compreensão de tópicos complexos.
-            </p>
-        </div>
-
+        {% endif %}
+        
         <div class="novo-comentario">
-            <textarea placeholder="Digite seu comentário aqui..."></textarea>
-            <button class="btn-enviar">Enviar Comentário</button>
-        </div>
+            <form method="POST"> {% csrf_token %}
+              {% for field in form %}
+                <div>
+                    {{ form.corpo }}
+                  {% if field.errors %}
+                    <div style="color: red;">
+                      {{ field.errors }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+              <button class="btn-enviar" type="submit">Enviar Comentário</button>
+            </form>
+          </div>
     </div>
     {% include 'footer.html' %}
 {% endblock content %}
