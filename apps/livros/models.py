@@ -6,6 +6,7 @@ from apps.curso.models import Materias
 from apps.livros.managers import LivrosManager
 from apps.usuario.models import Usuario
 
+
 class Link(models.Model):
     site = models.CharField(
         'Site de compra', 
@@ -27,7 +28,7 @@ class Livros(models.Model):
         null=False,
         unique=True
     )
-    descrição = models.TextField(max_length=500, blank=True)
+    descricao = models.TextField(max_length=500, blank=True)
     ano_publicacao = models.DateField(
         'Data de publicação',
         blank=True,
@@ -53,7 +54,6 @@ class Livros(models.Model):
     )
     slug = models.SlugField(unique=True, blank=True)
     # capa
-    # comentarios
 
     objects = LivrosManager()
 
@@ -88,24 +88,3 @@ class Comentario(models.Model):
 
     def __str__(self):
         return f'{self.livro.titulo} by {self.usuario.first_name}'
-
-
-class Favoritos(models.Model):
-    livro = models.ForeignKey(
-        Livros,
-        related_name='livro_favorito',
-        on_delete=models.CASCADE,
-    )
-    usuario = models.ForeignKey(
-        Usuario,
-        related_name='favoritos_usuario',
-        on_delete=models.CASCADE
-    )
-
-    class Meta:
-        unique_together = ('livro', 'usuario')
-        verbose_name = 'Livro Favorito'
-        verbose_name_plural = 'Livros Favoritos'
-
-    def __str__(self):
-        return self.livro.titulo

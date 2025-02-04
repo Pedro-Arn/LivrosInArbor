@@ -10,6 +10,7 @@ class Autor(models.Model):
         verbose_name='Data de nascimento',
     )
     slug = models.SlugField(unique=True, blank=True)
+    # foto_perfil = models.ImageField()
 
     class Meta:
         verbose_name = 'Autor'
