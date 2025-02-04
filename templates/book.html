@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../static/css/book.css">
+{% endblock head %}
+
+{% block title %}{{ livro.titulo }}{% endblock title %}
+
+{% block content %} 
+    {% include 'header.html' %}
+    <div class="breadcrumb">
+        {{ livro.materia.nome }} &gt; {{ livro.materia.periodo }} &gt; {{ livro.titulo }}
+    </div>
+    <section class="detalhes-livro">
+        <div class="livro-container">
+            <div class="livro-imagem">
+                <img src="../book/img/image.png" alt="Capa do Livro">
+            </div>
+            <div class="livro-info">
+                <h2 class="livro-materia">{{ livro.titulo }}</h2>
+                <p class="livro-editora"><strong>Editora: </strong>{{ livro.editora }}</p>
+                <p class="livro-ano"><strong>Ano de Publicação: </strong>{{ livro.ano_publicacao }}</p>
+                <p class="livro-autor"><strong>Autor: </strong><a href="autor.html">{{ livro.autor.nome_completo }}</a></p>
+                <p class="livro-descricao"><strong>Descrição: </strong>{{ livro.descricao }}</p>
+                <a href="{{ livro.link.link }}" class="btn-comprar" target="_blank">Comprar Livro</a>
+            </div>
+        </div>
+    </section>
+
+    <div class="comentarios-container">
+        <h3 class="comentarios-titulo">Comentários</h3>
+        
+        {% if comentarios %}
+            {% for comentario in comentarios %}
+                <div class="comentario">
+                    <div class="comentario-header">
+                        <div class="comentario-avatar">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <span class="comentario-usuario">{{ comentario.usuario.get_full_name }} &gt; </span> {{ comentario.postado_em }}<br>
+                        {% if request.user.usuario == comentario.usuario %}
+                            <form method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="comentario_id" value="{{ comentario.id }}">
+                                <button type="submit" class="btn-excluir" onclick="return confirm('Tem certeza que deseja excluir este comentário?');">
+                                    Excluir
+                                </button>
+                            </form>
+                        {% endif %}
+                    </div>
+                    <p class="comentario-texto">{{comentario.corpo}}</p>
+                </div>
+            {% endfor %}
+
+            <div class="pagination">
+                {% if comentarios.has_previous %}
+                    <a href="?page=1" class="pagina-link">Primeira</a>
+                    <a href="?page={{ comentarios.previous_page_number }}" class="pagina-link">Anterior</a>
+                {% endif %}
+
+                <span class="pagina-atual">Página {{ comentarios.number }} de {{ comentarios.paginator.num_pages }}</span>
+
+                {% if comentarios.has_next %}
+                    <a href="?page={{ comentarios.next_page_number }}" class="pagina-link">Próxima</a>
+                    <a href="?page={{ comentarios.paginator.num_pages }}" class="pagina-link">Última</a>
+                {% endif %}
+            </div>
+        {% endif %}
+        
+        <div class="novo-comentario">
+            <form method="POST"> {% csrf_token %}
+              {% for field in form %}
+                <div>
+                    {{ form.corpo }}
+                  {% if field.errors %}
+                    <div style="color: red;">
+                      {{ field.errors }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+              <button class="btn-enviar" type="submit">Enviar Comentário</button>
+            </form>
+          </div>
+    </div>
+    {% include 'footer.html' %}
+{% endblock content %}
+</html>

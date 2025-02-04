@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/autor.css' %}">
+<link rel="stylesheet" href="../static/css/book.css">
+{% endblock head %}
+
+
+{% block content %}
+    {% include 'header.html' %}
+        <div class="breadcrumb">
+            Autores &gt; {{ object.nome_completo }}
+        </div>
+        <section class="detalhes-livro">
+            <div class="livro-container">
+                <div class="livro-imagem">
+                    <img src="../book/img/image.png" alt="Capa do Livro">
+                </div>
+                <div class="livro-info">
+                    <h2 class="livro-materia">{{ object.nome_completo }}</h2>
+                    <p class="livro-editora"><strong>Data de nascimento: </strong>{{ object.data_nascimento }}</p>
+                    <p class="livro-descricao"><strong>Biografia: </strong>{{ object.biografia }}</p>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- livros -->
+    {% include 'footer.html' %}
+{% endblock content %}
+    
