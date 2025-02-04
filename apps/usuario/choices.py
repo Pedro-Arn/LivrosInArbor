@@ -8,7 +8,7 @@ class Generos(models.TextChoices):
 class Ocupacoes(models.TextChoices):
     ESTUDANTE = 'E', 'Estudante'
     PROFESSOR = 'P', 'Professor'
-    OUTRO = 'O', 'Outro'
+    OUTRO = 'V', 'Visitante'
 
 class Identificacoes(models.TextChoices):
     MATRICULA = 'M', 'Matrícula'

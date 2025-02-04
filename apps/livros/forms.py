@@ -16,3 +16,12 @@ class ComentarLivroForm(forms.ModelForm):
     class Meta:
         model = Comentario
         fields = ['corpo']
+
+        widgets = {
+            'corpo': forms.Textarea(attrs={
+                'placeholder': 'Digite seu comentário aqui...',
+                'class': 'textarea-comentario',
+                'rows': 4,
+                'cols': 50, 
+            })
+        }

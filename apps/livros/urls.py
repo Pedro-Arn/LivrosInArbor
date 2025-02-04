@@ -7,6 +7,8 @@ from apps.livros.views import (
     DesfavoritarLivroView,
 )
 
+app_name = 'livros'
+
 urlpatterns = [
     path('livros/', ListarLivrosView.as_view(), name='lista_livros'),
     path('livros/<slug:slug>', DetalhesLivroView.as_view(), name='detalhes_livro'),
