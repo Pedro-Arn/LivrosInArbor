@@ -11,7 +11,7 @@
 
 body {
     align-items: center;
-    background: rgb(253, 245, 230);
+    background: rgb(87, 127, 128);
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -31,7 +31,7 @@ body {
 }
 
 .bloco {
-    background-color: #045d9c;
+    background-color: rgb(124, 7, 7);
     border-radius: 15px;
     color: white;
     cursor: pointer;
@@ -116,7 +116,7 @@ body {
 }
 
 .bloco {
-    background-color: #045d9c;
+    background-color: rgb(179, 105, 74);
     color: white;
     padding-top: 30px;
     padding-bottom: 20px;
@@ -139,7 +139,7 @@ body {
     font-size: 40px;
 }
 
-/* Seção 3 - Texto e Slider */
+
 .seção-3 {
     width: 93%;
     background-color: #ffffff;

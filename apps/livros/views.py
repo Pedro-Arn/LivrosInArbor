@@ -47,7 +47,7 @@ class ListarLivrosView(ListView):
 class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Livros
     form_class = AdicionarLivrosForm
-    template_name = 'livro/adicionar_livro.html'
+    template_name = 'adicionar_livro.html'
     login_url = 'usuario:login'
     success_url = '.'
 
