@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="{% static 'css/booksInfo.css' %}">
+    <link rel="stylesheet" href="../static/css/header.css">
+    <link rel="stylesheet" href="../static/css/footer.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Readex+Pro:wght@160..700&display=swap" rel="stylesheet">
+
+    <title>Document</title>
+</head>
+<body>
+  {% include 'includes/header.html' %}
+
+  <div class="main">
+    <div class="container">
+      <div class="book-cover">
+          <img class="cover" src="../static/img/engsoftware.jpg">
+      </div>
+      <div class="book-data">
+        <span class="book-title">{{ object.titulo }}</span>
+        <a class="book-author">{{ object.autor }}</a>
+        <p class="book-year">{{ object.ano_publicacao }}</p>
+        <p class="book-description">{{object.descricao}}</p>
+      </div>
+      
+    </div>
+    <div class="comment-section">
+      <h2>Comentarios:</h2>
+      <hr>
+      <div class="add-comment">
+        <form method="POST">
+          {% csrf_token %}
+          {% for field in form %}
+            <div>
+              {{ field.label_tag }}
+              {{ field }}
+              {% if field.errors %}
+                <div style="color: red;">
+                  {{ field.errors }}
+                </div>
+              {% endif %}
+            </div>
+          {% endfor %}
+          <button type="submit">Comentar</button>
+        </form>
+      </div>
+      <div class="view-comments">
+        
+        
+        {% if comentarios %}
+        <ul>
+          {% for comentario in comentarios %}
+            <li>
+              <strong>{{ comentario.usuario.get_full_name }}</strong> ({{ comentario.postado_em }})<br>
+              {{ comentario.corpo }}
+              <hr>
+            </li>
+          {% endfor %}
+        </ul>
+        {% endif %}
+          
+      </div>
+    </div>
+  </div>
+
+  {% include 'includes/footer.html' %}
+</body>
+</html>

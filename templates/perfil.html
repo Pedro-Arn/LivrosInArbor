@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+{% endblock head %}
+
+
+{% block content %}
+  {% include 'header.html' %}
+    <div class="main">
+      <div class="container">
+        <div class="perfil">
+          fotos
+        </div>
+        <div class="info">
+          <span class="usuario">{{ username }}</span>
+          <p>{{ user.nome_completo }}</p>
+          <p>{{ user.data_nascimento }}</p>
+          <p>{{ user.get_genero_display }}</p>
+          <p>{{ user.get_ocupacao_display }}</p>
+        </div>
+        <div class="favoritos">
+          
+        </div>
+      </div>
+    </div>
+  {% include 'footer.html' %}
+{% endblock content %}
+    
