@@ -14,7 +14,7 @@ class RegistrarUsuarioForm(UserCreationForm):
     )
     password1 = forms.CharField(
         widget=forms.PasswordInput(attrs={
-            'placeholder': 'Confirme a senha',
+            'placeholder': 'Insira a senha',
         }),
     )
     password2 = forms.CharField(

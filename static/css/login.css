@@ -123,6 +123,15 @@ body {
     color: #434343;
 }
 
+.sign-up h1 {
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+.sign-up button {
+    margin-bottom: 20px;
+}
+
 .sign-in {
     left: 0;
     width: 50%;
