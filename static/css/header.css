@@ -2,28 +2,35 @@
 
 * {
     box-sizing: border-box;
-    color: #151f2a;
     font-family: 'Poppins', sans-serif;
     letter-spacing: 1px;
     margin: 0;
     padding: 0;
+    color: #000000;
 }
 
 header {
     align-items: center;
     animation: fadeInDown 0.8s ease-in-out;
-    background: rgb(253, 245, 230);
+    background: #faf3e6;
     box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     display: flex;
     justify-content: space-between;
     padding: 15px 30px;
     width: 100%;
+    font-size: 14px;
 }
 
 .logo {
-    flex-shrink: 0;
-    font-size: 22px;
-    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.logo img {
+    width: 22px;
 }
 
 .search-bar {
@@ -41,15 +48,20 @@ header {
     background: transparent;
     border: none;
     flex: 1;
-    font-size: 14px;
     outline: none;
     padding: 5px;
+}
+
+.search-bar button {
+    border: none;
+    background-color: transparent;
 }
 
 .search-bar i {
     color: #000000;
     cursor: pointer;
     font-size: 16px;
+    outline: none;
 }
 
 .nav-links {
@@ -59,33 +71,35 @@ header {
 }
 
 .nav-links a {
+    color: #151f2a;
     font-weight: 500;
     text-decoration: none;
     transition: all 0.3s ease-in-out;
 }
 
 .nav-links a:hover {
-    color: rgb(99, 139, 186);
+    color: #235E80;
     transform: scale(1.1);
 }
 
-#login-btn {
+#login-btn, #logout-btn {
     background: transparent;
-    border: 2px solid rgb(99, 139, 186);
+    border: 2px solid #045d9c;
+    ;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 16px;
     font-weight: 600;
     padding: 8px 15px;
     transition: all 0.3s ease-in-out;
     width: 100px;
 }
 
-#login-btn:hover {
-    background: rgba(99, 139, 186, 0.522);
+#login-btn:hover, #logout-btn:hover {
+    background: #045d9c;
+    color: #fff;
 }
 
-#logout-btn {
+/* #logout-btn {
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -93,9 +107,10 @@ header {
     margin-top: 10px;
     text-align: center;
     width: 100%;
-}
+    outline: none;
+} */
 
-.popup {
+/* .popup {
     animation: fadeIn 0.3s ease-in-out;
     background: rgb(254, 254, 254);
     border-radius: 8px;
@@ -125,7 +140,7 @@ header {
 button:hover {
     color: rgb(99, 139, 186);
     transition: all 0.3s ease-in-out;
-}
+} */
 
 .close-btn {
     cursor: pointer;
@@ -139,10 +154,14 @@ button:hover {
     gap: 15px;
 }
 
+/* .user-area button {
+    border: none;
+} */
+
 .user-icon {
-    color: rgb(92, 136, 148);
+    color: #045d9c;
     cursor: pointer;
-    font-size: 23px;
+    font-size: 20px;
     padding: 8px 15px;
     text-align: center;
     transition: all 0.3s ease-in-out;

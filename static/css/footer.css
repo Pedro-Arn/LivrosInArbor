@@ -1,82 +1,64 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Radio+Canada:ital,wght@0,300..700;1,300..700&display=swap');
-
 * {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     letter-spacing: 1px;
-    font-size: 0.93rem;
+    font-size: 13px;
     font-weight: 400;
+    
 }
 
 footer {
     width: 100%;
-    color: #f9e9d1;
 }
 
 #footer-content {
-    background-color: #181f27;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    padding: 3rem 3.5rem;
+    background-color: #19232c;
+    color: #f9e9d1;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 40px 50px 0 50px ; 
+    flex-wrap: wrap;
+    gap: 40px;
 }
 
-#footer-contacts h1 {
-    margin-bottom: 0.75rem;
+.logo-footer {
+    font-size: 20px;
+    display: flex;
+    justify-items: center;
+    color: #fff;
+    gap: 6px;
+}
+
+.logo-footer img {
+    width: 20px;
+}
+
+#footer-contacts {
+    margin-right: 200px;
 }
 
 #footer-contacts p {
-    margin-right: 2rem;
-}
-
-#footer-social-media {
-    display: flex;
-    gap: 1.6rem;
-    margin-top: 1.5rem;
-}
-
-#footer-social-media .footer-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 2rem;
-    width: 2rem;
     color: #f9e9d1;
-    border-radius: 50%;
-    transition: all 0.4s;
-    text-decoration: none;
 }
 
-#instagram {
-    background-color: transparent;
-    border: 0.01rem solid #f9e9d1;
+#footer-list {
+    margin-left: 100px;
 }
 
-#facebook {
-    background-color: transparent;
-    border: 0.01rem solid #f9e9d1;
-}
-
-#twitter {
-    background-color: transparent;
-    border: 0.01rem solid #f9e9d1;
-}
-
-#youtube {
-    background-color: transparent;
-    border: 0.01rem solid #f9e9d1;
-}
-
-#footer-social-media .footer-link:hover {
-    opacity: 0.5;
-}
-
+#footer-contacts,
 .footer-list {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
+    align-items: flex-start;
+    gap: 12px;
     list-style: none;
+}
+
+.footer-list h3 {
+    color: #f9e9d1;
 }
 
 .footer-list .footer-link {
@@ -89,65 +71,23 @@ footer {
     color: #5f9ea0;
 }
 
-#footer-subscribe {
-    display: flex;
-    flex-direction: column;
-    gap: 0.9rem;
-}
-
-#footer-subscribe p {
-    color: #a8a29e;
-}
-
-#input-group {
-    display: flex;
-    align-items: center;
-    background-color: transparent;
-    border: 0.01rem solid #f9e9d1;
-    border-radius: 15px;
-}
-
-#input-group input {
-    all: unset;
-    padding: 0.5rem;
-    width: 100%;
-}
-
-#input-group button {
-    background-color: #5f9ea0;
-    border: none;
-    color: #f9e9d1;
-    padding: 0px 1rem;
-    font-size: 1rem;
-    height: 100%;
-    border-radius: 0px 15px 15px 0px;
-    cursor: pointer;
-    transition: all 0.4s;
-}
-
-#input-group button:hover {
-    opacity: 0.8;
-}
-
 #footer-copyright {
-    display: flex;
-    justify-content: center;
-    background-color: #181f27;
-    font-size: 0.7rem;
-    padding: 1rem;
+    color: #f9e9d1;
+    text-align: center;
+    width: 100%;
+    font-size: 10px; 
+    padding: 0 50px 10px 50px ; 
     font-weight: 100;
 }
 
 @media screen and (max-width: 768px) {
     #footer-content {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 2rem;
+        flex-direction: column;
+        align-items: center;
     }
-}
 
-@media screen and (max-width: 426px) {
-    #footer-content {
-        grid-template-columns: repeat(1, 1fr);
-        padding: 3rem 2rem;
+    #footer-contacts, #footer-list {
+        margin: 0;
     }
+    
 }

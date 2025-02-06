@@ -2,7 +2,7 @@
 
 * {
     box-sizing: border-box;
-    color: #151f2a;
+    color: #14111d;
     font-family: 'Poppins', sans-serif;
     letter-spacing: 1px;
     margin: 0;
@@ -11,7 +11,7 @@
 
 body {
     align-items: center;
-    background: rgb(87, 127, 128);
+    background: #faf3e6;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,8 +30,20 @@ body {
     grid-template-columns: repeat(3, 1fr);
 }
 
+.seção-2 {
+    padding: 20px;
+    width: 95%;
+    text-align: center;
+    align-items: center;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
 .bloco {
-    background-color: rgb(124, 7, 7);
     border-radius: 15px;
     color: white;
     cursor: pointer;
@@ -43,13 +55,17 @@ body {
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
+.container .bloco {
+    background-color: #045d9c;
+}
+
 .bloco:hover {
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     transform: scale(1.05);
 }
 
 .bloco i {
-    color: rgb(255, 255, 255);
+    color: #faf3e6;
     font-size: 40px;
 }
 
@@ -57,6 +73,7 @@ body {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.5);
     display: none;
+    top: 0;
     height: 100%;
     justify-content: center;
     left: 0;
@@ -89,9 +106,9 @@ body {
 .btn-materia,
 .btn-periodo {
     background-color: #ffaf53;
+    color: #ffffff;
     border: none;
     border-radius: 5px;
-    color: white;
     cursor: pointer;
     padding: 10px;
     transition: background-color 0.3s ease;
@@ -101,44 +118,6 @@ body {
 .btn-periodo:hover {
     background-color: #ff7700;
 }
-
-.seção-2 {
-    padding: 20px;
-    width: 95%;
-    text-align: center;
-    align-items: center;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-}
-
-.bloco {
-    background-color: rgb(179, 105, 74);
-    color: white;
-    padding-top: 30px;
-    padding-bottom: 20px;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    font-size: 16px;
-    display: grid;
-    gap: 15px;
-    text-align: center;
-}
-
-.bloco:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-}
-
-.bloco i {
-    color: rgb(255, 255, 255);
-    font-size: 40px;
-}
-
 
 .seção-3 {
     width: 93%;
@@ -172,7 +151,7 @@ body {
 .carrossel-container {
     margin-top: 30px;
     margin-right: 50px;
-    width: 590px;
+    max-width: 600px;
     height: 350px;
     display: flex;
     flex-direction: column;
@@ -187,13 +166,13 @@ body {
 
 .carrossel {
     display: flex;
-    gap: 20px;
+    gap: 15px;
     transition: transform 0.8s ease-in-out;
     will-change: transform;
 }
 
 .livro {
-    width: 170px;
+    width: 130px;
     border-radius: 5px;
     object-fit: cover;
     transition: transform 0.5s ease-in-out;
@@ -219,30 +198,22 @@ body {
     .conteudo {
         flex-direction: column;
         text-align: center;
+        align-items: center;
     }
 
     .texto {
-        max-width: 100%;
+        margin-bottom: 0;
     }
 
     .carrossel-container {
-        max-width: 300px;
-        height: 300px;
+        margin: 0;
+        max-width: 400px;
     }
 }
 
-@media screen and (max-width: 600px) {
-    .conteudo {
-        flex-direction: column;
-    }
+@media screen and (max-width: 400px) {
 
-    .livro {
-        width: 150px;
-        height: 250px;
-    }
-
-    .livro.destaque {
-        width: 180px;
-        height: 280px;
+    .carrossel-container{
+        max-width: 300px;
     }
 }
