@@ -9,7 +9,10 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <body>
     <header>
-        <div class="logo">LOGO</div>
+        <div class="logo">
+            <img src="../static/imgs/Logo preta.png" alt="Logo">
+            LivrariaIGE
+        </div>
         
         <form class="search-bar" action="{% url 'livros:lista_livros' %}" method="GET" onsubmit="return checkSearchQuery()">
             <input type="text" name="search_query" placeholder="Pesquisar..." value="{{ request.GET.search_query }}">
@@ -35,7 +38,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
             {% if request.user.is_authenticated %}
                 <form action="{% url 'usuario:logout' %}" method="post">
                     {% csrf_token %}
-                    <button type="submit">Logout</button>
+                    <button id="logout-btn" type="submit">Logout</button>
                 </form>
                 <i class="fa-solid fa-user user-icon" id="user-icon"></i>
             {% else %}
@@ -46,7 +49,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
         </div>
     </header>
 
-    <div id="user-popup" class="popup hidden">
+    <!-- <div id="user-popup" class="popup hidden">
         <div class="popup-content">
             <span class="close-btn">&times;</span>
             <h3>Meu perfil</h3>
@@ -60,7 +63,7 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
             <a href="#">Meus Comentários</a>
             <button id="logout-btn">Sair</button>
         </div>
-    </div>
+    </div> -->
 
     <script src="../static/js/header.js"></script>
 </body>

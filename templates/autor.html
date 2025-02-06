@@ -1,32 +1,44 @@
 {% extends 'base.html' %}
 {% load static %}
-
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/autor.css' %}">
-<link rel="stylesheet" href="../static/css/book.css">
 {% endblock head %}
+
+{% block title %}Autor{% endblock title %}
 
 
 {% block content %}
     {% include 'header.html' %}
-        <div class="breadcrumb">
-            Autores &gt; {{ object.nome_completo }}
-        </div>
-        <section class="detalhes-livro">
-            <div class="livro-container">
-                <div class="livro-imagem">
-                    <img src="../book/img/image.png" alt="Capa do Livro">
-                </div>
-                <div class="livro-info">
-                    <h2 class="livro-materia">{{ object.nome_completo }}</h2>
-                    <p class="livro-editora"><strong>Data de nascimento: </strong>{{ object.data_nascimento }}</p>
-                    <p class="livro-descricao"><strong>Biografia: </strong>{{ object.biografia }}</p>
-                </div>
+    <div class="breadcrumb">
+        Autores &gt; {{ object.nome_completo }}
+    </div>
+    <body>
+    <section class="detalhes-autor">
+        <div class="autor-container">
+            <div class="autor-imagem">
+                <img src="../static/img/autor.png" alt="Foto do Autor">
             </div>
-        </section>
-
-
-        <!-- livros -->
-    {% include 'footer.html' %}
+            <div class="autor-info">
+                <h1 class="autor">{{ object.nome_completo }}</h1>
+                <p class="autor-nascimento"><strong>Data de nascimento: </strong>{{ object.data_nascimento }}</p>
+                <p class="autor-biografia"><strong>Biografia: </strong>{{ object.biografia }}</p>
+            </div>
+        </div>
+    </section>
+</body>
+<div class="livros-relacionados">
+    <h2>Livros do Autor</h2>
+    <div class="livros-grid">
+        <div class="livro-item">
+            <img src="../static/img/image.png" alt="Livro 1">
+            <p class="livro-titulo">Título do Livro 1</p>
+        </div>
+        <div class="livro-item">
+            <img src="../static/img/image.png" alt="Livro 2">
+            <p class="livro-titulo">Título do Livro 2</p>
+        </div>
+    </div>
+</div>
+{% include 'footer.html' %}
 {% endblock content %}
-    
+</html>
