@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
-from django.db.models import Case, When, Value, IntegerField
+from django.db.models import Case, When, Value, IntegerField, Q
 from django.http import HttpResponseForbidden
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
@@ -27,21 +27,49 @@ class ListarLivrosView(ListView):
 
     def get_queryset(self):
         search_query = self.request.GET.get('search_query', '').strip()
-
         queryset = Livros.objects.all()
 
-        # Busca no search
+        # Apply search query
         if search_query:
-            queryset = Livros.objects.search_query(search_query)
+            queryset = self.apply_search_query(queryset, search_query)
         else:
             return redirect('usuario:home')
+            
 
-        # Busca pelo botão de filtro
-        filtro_form = FiltrarLivrosForm(self.request.GET)
-        if filtro_form.is_valid():
-            queryset = queryset.filter(**{k: v for k, v in filtro_form.cleaned_data.items() if v})
+        # Apply filter form
+        queryset = self.apply_filters(queryset)
 
         return queryset
+
+    def apply_search_query(self, queryset, search_query):
+        """
+        Applies the search query to the queryset.
+        """
+        return queryset.filter(
+            Q(autor__nome_completo__icontains=search_query) |
+            Q(titulo__icontains=search_query) |
+            Q(editora__icontains=search_query) |
+            Q(materia__nome__icontains=search_query)
+        )
+
+    def apply_filters(self, queryset):
+        """
+        Applies filters from the FiltrarLivrosForm to the queryset.
+        """
+        filtro_form = FiltrarLivrosForm(self.request.GET)
+        if filtro_form.is_valid():
+            filters = {k: v for k, v in filtro_form.cleaned_data.items() if v}
+            queryset = queryset.filter(**filters)
+        return queryset
+
+    def get_context_data(self, **kwargs):
+        """
+        Adds additional context data to the template.
+        """
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('search_query', '').strip()
+        context['filtro_form'] = FiltrarLivrosForm(self.request.GET)
+        return context
 
 
 class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):

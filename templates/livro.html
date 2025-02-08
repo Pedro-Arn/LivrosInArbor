@@ -71,7 +71,7 @@
         
         <div class="novo-comentario">
             <h3 class="comentarios-titulo">Novo comentário: </h3>
-            <form method="POST"> {% csrf_token %}
+            <form method="POST" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}"> {% csrf_token %}
               {% for field in form %}
                 <div>
                     {{ form.corpo }}
@@ -85,7 +85,7 @@
               <button class="btn-enviar" type="submit">Enviar Comentário</button>
             </form>
         </div>
-        <textarea name="corpo" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}"></textarea>
+        <!-- <textarea name="corpo" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}"></textarea> -->
     </div>
     <div id="login-popup" class="popup">
         <div class="popup-content">
