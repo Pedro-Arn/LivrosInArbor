@@ -3,8 +3,6 @@ from django.utils.text import slugify
 
 from apps.autor.models import Autor
 from apps.curso.models import Materias
-from apps.livros.managers import LivrosManager
-
 
 class Link(models.Model):
     site = models.CharField(
@@ -54,8 +52,6 @@ class Livros(models.Model):
     )
     slug = models.SlugField(unique=True, blank=True)
     capa = models.ImageField(upload_to='livros', null=True, blank=True)
-
-    objects = LivrosManager()
 
     class Meta:
         verbose_name = 'Livro'
