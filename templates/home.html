@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block head %}
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock head %}
 
@@ -9,8 +8,11 @@
 
 {% block content %}
     {% include 'header.html' %}
+    <div class="hero">
+        <h1>Boas vindas à Livraria IGE<p>sua principal fonte de busca de livros.</p></h1>
+    </div>
     <section class="seção-2">
-        <div class="container">
+        <div class="home-container">
             <div class="bloco" data-curso="Civil">
                 <i class="fa-solid fa-building"></i>
                 Engenharia Civil

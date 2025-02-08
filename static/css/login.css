@@ -9,7 +9,8 @@
 }
 
 body {
-    background-color: rgb(241, 241, 243);
+    /* background-color: #8ca3b4; */
+    background: linear-gradient(180deg, #0A192F, #172A45);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,7 +19,8 @@ body {
 }
 
 .container {
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: #c2c4c5;
     border-radius: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
     position: relative;
@@ -65,7 +67,8 @@ body {
 }
 
 .container form {
-    background-color: #fff;
+    /* background-color: #fff; */
+    background-color: #c2c4c5;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,7 +78,7 @@ body {
 }
 
 .container input {
-    background: #d2d2d264;
+    background: #ffffff;
     border: none;
     margin: 8px 0;
     padding: 10px 15px;
@@ -87,7 +90,7 @@ body {
 }
 
 .form-dados {
-    color: #434343;
+    color: #000000;
     display: grid;
     padding: 10px 15px;
     font-size: 13px;
@@ -99,11 +102,12 @@ body {
 
 .form-dados select {
     border: 0.01rem solid #bbbbbb88;
+    background-color: #ffffff;
     padding: 10px 15px;
     border-radius: 8px;
     width: 100%;
     outline: none;
-    color: #333;
+    color: #000000;
     gap: 1.5rem;
     cursor: pointer;
 }
@@ -116,11 +120,11 @@ body {
 }
 
 .form-container::placeholder {
-    color: #434343;
+    color: #000000;
 }
   
 .form-container input[type="date"] {
-    color: #434343;
+    color: #000000;
 }
 
 .sign-up h1 {
@@ -189,7 +193,8 @@ body {
 }
 
 .toggle {
-    background-color: rgb(57, 83, 112);
+    /* background-color: rgb(57, 83, 112); */
+    background: #0A192F;
     height: 100%;
     color: #fff;
     position: relative;

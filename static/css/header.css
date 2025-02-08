@@ -6,17 +6,16 @@
     letter-spacing: 1px;
     margin: 0;
     padding: 0;
-    color: #000000;
+    color: #ffffff;
 }
 
 header {
     align-items: center;
     animation: fadeInDown 0.8s ease-in-out;
-    background: #faf3e6;
-    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    background-color: #080d305a;
     display: flex;
     justify-content: space-between;
-    padding: 15px 30px;
+    padding: 40px 30px;
     width: 100%;
     font-size: 14px;
 }
@@ -25,17 +24,18 @@ header {
     display: flex;
     align-items: center;
     gap: 8px; 
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 500;
 }
 
 .logo img {
-    width: 22px;
+    width: 33px;
 }
 
 .search-bar {
     align-items: center;
-    background: #d2d2d264;
+    background: #d2d2d28d;
+    color: #000000;
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(54, 53, 53, 0.093);
     display: flex;
@@ -46,6 +46,7 @@ header {
 
 .search-bar input {
     background: transparent;
+    color: #000000;
     border: none;
     flex: 1;
     outline: none;
@@ -84,8 +85,7 @@ header {
 
 #login-btn, #logout-btn {
     background: transparent;
-    border: 2px solid #045d9c;
-    ;
+    border: 2px solid #18516f;
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
@@ -95,7 +95,7 @@ header {
 }
 
 #login-btn:hover, #logout-btn:hover {
-    background: #045d9c;
+    background: #18516f;
     color: #fff;
 }
 
@@ -159,7 +159,7 @@ button:hover {
 } */
 
 .user-icon {
-    color: #045d9c;
+    color: #ffffff;
     cursor: pointer;
     font-size: 20px;
     padding: 8px 15px;

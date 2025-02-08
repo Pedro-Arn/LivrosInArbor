@@ -1,20 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-* {
-    box-sizing: border-box;
-    color: #14111d;
-    font-family: 'Poppins', sans-serif;
-    letter-spacing: 1px;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    align-items: center;
-    background: #faf3e6;
+.hero {
+    width: 100%;
+    height: 300px;
+    background:#080d305a;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    align-items: start;
+    justify-content: left;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.hero h1 {
+    margin: 25px;
+    font-size: 22px;
+}
+
+.hero p {
+    font-size: 20;
 }
 
 .seção-2 {
@@ -24,7 +27,7 @@ body {
     width: 95%;
 }
 
-.container {
+.home-container {
     display: grid;
     gap: 20px;
     grid-template-columns: repeat(3, 1fr);
@@ -35,12 +38,6 @@ body {
     width: 95%;
     text-align: center;
     align-items: center;
-}
-
-.container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
 }
 
 .bloco {
@@ -55,8 +52,8 @@ body {
     transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 
-.container .bloco {
-    background-color: #045d9c;
+.home-container .bloco {
+    background: #0A192F;
 }
 
 .bloco:hover {
@@ -83,7 +80,7 @@ body {
 }
 
 .modal-content {
-    background-color: white;
+    background-color: #8ca3b4;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     max-width: 400px;
@@ -105,8 +102,8 @@ body {
 
 .btn-materia,
 .btn-periodo {
-    background-color: #ffaf53;
-    color: #ffffff;
+    background-color: white;
+    color: #000000;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -116,14 +113,17 @@ body {
 
 .btn-materia:hover,
 .btn-periodo:hover {
-    background-color: #ff7700;
+    background-color: #b2b2b2;
 }
 
 .seção-3 {
+    margin: 20px;
+    margin-bottom: 20px;
     width: 93%;
-    background-color: #ffffff;
+    /* background-color: #4a5971; */
+    background-color: #172A45;
     border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     animation: fadeIn 1s ease-in-out;
     margin-bottom: 20px;
 }
@@ -145,7 +145,11 @@ body {
     text-align: center;
     font-size: 22px;
     margin-bottom: 15px;
-    color: #045d9c;
+    color: #ffffff;
+}
+
+.texto p {
+    font-size: 18px;
 }
 
 .carrossel-container {
