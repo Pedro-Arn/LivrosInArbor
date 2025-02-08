@@ -2,27 +2,32 @@
 {% load static %}
 
 {% block head %}
-
+<link rel="stylesheet" href="{% static 'css/perfil.css' %}">
 {% endblock head %}
 
+{% block title %}{{ username }}{% endblock title %}
 
 {% block content %}
   {% include 'header.html' %}
-    <div class="main">
-      <div class="container">
-        <div class="perfil">
-          fotos
-        </div>
-        <div class="info">
-          <span class="usuario">{{ username }}</span>
-          <p>{{ user.nome_completo }}</p>
-          <p>{{ user.data_nascimento }}</p>
-          <p>{{ user.get_genero_display }}</p>
-          <p>{{ user.get_ocupacao_display }}</p>
-        </div>
-        <div class="favoritos">
-          
-        </div>
+    <div class="container">
+      <div class="usuario-imagem">
+        {% if usario.foto_perfil.url %}
+          <img src="{{ usuario.foto_perfil.url }}" alt="Foto de {{ username }}">
+        {% else %}
+          <img src="{% static 'imgs/usuario/usuario.png' %}">
+        {% endif %}
+      </div>
+      <div class="conteudo-container">
+        <span class="usuario">{{ username }}</span>
+        <p>{{ usuario.nome_completo }}</p>
+        <p>{{ usuario.data_nascimento }}</p>
+        <p>{{ usuario.get_genero_display }}</p>
+        <p>{{ usuario.get_ocupacao_display }}</p>
+      </div>
+      <div class="favoritos">
+        {% for favorito in favoritos %}
+          <img src="{{ favorito.livro.capa.url }}" alt="{{ favorito.livro.titulo }}">
+        {% endfor %}
       </div>
     </div>
   {% include 'footer.html' %}

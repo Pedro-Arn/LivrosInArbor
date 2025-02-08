@@ -4,7 +4,6 @@ from django.utils.text import slugify
 from apps.autor.models import Autor
 from apps.curso.models import Materias
 from apps.livros.managers import LivrosManager
-from apps.usuario.models import Usuario
 
 
 class Link(models.Model):
@@ -46,6 +45,7 @@ class Livros(models.Model):
         on_delete=models.CASCADE,
         blank=False,
         null=True,
+        related_name='livros',
     )
     materia = models.ManyToManyField(
         Materias,
@@ -53,7 +53,7 @@ class Livros(models.Model):
         verbose_name='Materias associadas',
     )
     slug = models.SlugField(unique=True, blank=True)
-    # capa
+    capa = models.ImageField(upload_to='livros', null=True, blank=True)
 
     objects = LivrosManager()
 
@@ -72,6 +72,8 @@ class Livros(models.Model):
 
 
 class Comentario(models.Model):
+    from apps.usuario.models import Usuario
+
     livro = models.ForeignKey(
         Livros,
         on_delete=models.CASCADE,

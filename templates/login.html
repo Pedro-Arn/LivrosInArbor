@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+{% load static %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<link rel="stylesheet" href="{% static 'css/login.css' %}">
+<title>Login</title>
+</head>
+
+<body>
+<div class="container" id="container">
+    <div class="form-container sign-up">
+        <form method="POST"> {% csrf_token %}
+            <h1>Criar Conta</h1>
+            <div class="data">
+                {{ form_registrar.username }}
+                {{ form_registrar.first_name }}
+                {{ form_registrar.last_name }}
+                {{ form_registrar.email }}
+                {{ form_registrar.data_nascimento }}
+                <div class="form-dados">
+                    {{ form_registrar.genero.label }}
+                    {{ form_registrar.genero }}
+                    {{ form_registrar.ocupacao.label }}
+                    {{ form_registrar.ocupacao }}
+                    {{ form_registrar.tipo_identificacao.label }}
+                    {{ form_registrar.tipo_identificacao }}
+                </div>
+                {{ form_registrar.identificacao }}
+                {{ form_registrar.password1 }}
+                {{ form_registrar.password2 }}
+            </div>
+            <button type="submit">Criar conta</button>
+        </form>
+    </div>
+    <div class="form-container sign-in">
+        <form method="POST"> {% csrf_token %}
+            <h1>Entrar</h1>
+            {{ form_login }}
+            <button type="submit">Entrar</button>
+        </form>
+    </div>
+    <div class="toggle-container">
+        <div class="toggle">
+            <div class="toggle-panel toggle-left">
+                <h1>Bem vindo de volta!</h1>
+                <p>Insira seus dados pessoais para usar todos os recursos do site
+                </p>
+                <button class="hidden" id="login">Entrar</button>
+            </div>
+            <div class="toggle-panel toggle-right">
+                <h1>Olá!</h1>
+                <p>Registre-se com seus dados pessoais para usar todos os recursos do site</p>
+                <button class="hidden" id="register">Cadastra-se</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/login.js' %}"></script>
+</body>
+</html>

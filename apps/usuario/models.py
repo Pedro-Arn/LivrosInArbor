@@ -7,7 +7,6 @@ from apps.usuario.choices import (
     Ocupacoes,
     Identificacoes,
 )
-from apps.livros.models import Livros
 
 
 # Validação do campo de identificação (numérico, 11 a 13 digitos)
@@ -48,11 +47,13 @@ class Usuario(User):
         blank=True,
     )
     genero = models.CharField(
+        verbose_name="gênero",
         max_length=1,
         choices=Generos.choices,
         blank=False,
         null=False,
     )
+    foto_perfil = models.ImageField(upload_to='usuario', null=True)
 
     @property
     def nome_completo(self):
@@ -65,6 +66,8 @@ class Usuario(User):
 
 
 class Favoritos(models.Model):
+    from apps.livros.models import Livros
+
     livro = models.ForeignKey(
         Livros,
         related_name='livro_favorito',

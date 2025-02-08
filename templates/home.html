@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock head %}
+
+{% block title %}Livraria IGE{% endblock title %}
+
+{% block content %}
+    {% include 'header.html' %}
+    <div class="hero">
+        <h1>Boas vindas à Livraria IGE<p>sua principal fonte de busca de livros.</p></h1>
+    </div>
+    <section class="seção-2">
+        <div class="home-container">
+            <div class="bloco" data-curso="Civil">
+                <i class="fa-solid fa-building"></i>
+                Engenharia Civil
+            </div>
+            <div class="bloco" data-curso="Computação">
+                <i class="fa-solid fa-robot"></i>
+                Engenharia da Computação
+            </div>
+            <div class="bloco" data-curso="Materiais">
+                <i class="fa-solid fa-industry"></i>
+                Engenharia de Materiais
+            </div>
+            <div class="bloco" data-curso="Minas">
+                <i class="fas fa-hammer"></i>
+                Engenharia de Minas e Meio Ambiente
+            </div>
+            <div class="bloco" data-curso="Elétrica">
+                <i class="fa-solid fa-bolt"></i>
+                Engenharia Elétrica
+            </div>
+            <div class="bloco" data-curso="Mecânica">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                Engenharia Mecânica
+            </div>
+            <div class="bloco" data-curso="Química">
+                <i class="fa-solid fa-flask"></i>
+                Engenharia Química
+            </div>
+            <div class="bloco" data-curso="Geologia">
+                <i class="fa-solid fa-mountain"></i>
+                Geologia
+            </div>
+            <div class="bloco" data-curso="Sistemas">
+                <i class="fa-solid fa-laptop-code"></i>
+                Sistemas de Informação
+            </div>
+        </div>
+    </section>
+
+    <div class="modal" id="modal">
+        <div class="modal-content">
+            <h2 id="modal-titulo">Selecione o Período</h2>
+            <div class="periodos">
+                <button class="btn-periodo">1º Período</button>
+                <button class="btn-periodo">2º Período</button>
+                <button class="btn-periodo">3º Período</button>
+                <button class="btn-periodo">4º Período</button>
+                <button class="btn-periodo">5º Período</button>
+                <button class="btn-periodo">6º Período</button>
+                <button class="btn-periodo">7º Período</button>
+                <button class="btn-periodo">8º Período</button>
+                <button class="btn-periodo">9º Período</button>
+                <button class="btn-periodo">10º Período</button>
+            </div>
+        </div>
+    </div>
+
+    <section class="seção-3">
+        <div class="conteudo">
+            <div class="texto">
+                <h2>Livros Básicos das Engenharias</h2>
+                <p>
+                    Você sabia que existem livros essenciais para o estudo das engenharias? Eles abordam temas
+                    fundamentais como
+                    matemática, física, química, programação e mecânica, construindo a base para a compreensão dos
+                    princípios
+                    científicos e tecnológicos aplicados em cada área.
+                </p>
+                <p>
+                    Essas leituras são recomendadas para desenvolver o raciocínio lógico e solucionar problemas
+                    complexos.
+                </p>
+            </div>
+            <div class="carrossel-container">
+                <div class="carrossel">
+                    <img src="../static/imgs/fisica.png" alt="Livro 1" class="livro" data-materia="Física">
+                    <img src="../static/imgs/quimica.png" alt="Livro 2" class="livro" data-materia="Química">
+                    <img src="../static/imgs/matematica.png" alt="Livro 3" class="livro destaque" data-materia="Matemática">
+                    <img src="../static/imgs/mecanica.png" alt="Livro 4" class="livro" data-materia="Mecânica">
+                    <img src="../static/imgs/programaçao.png" alt="Livro 5" class="livro" data-materia="Programação">
+                </div>
+                <h3 id="materia-livro">Matéria: Matemática</h3>
+            </div>
+        </div>
+    </section>
+    {% include 'footer.html' %}
+    <script src="{% static 'js/home.js' %}"></script>
+{% endblock content %}
+
+</html>

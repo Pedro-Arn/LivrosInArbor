@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    letter-spacing: 1px;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+}
+
+header {
+    align-items: center;
+    animation: fadeInDown 0.8s ease-in-out;
+    background-color: #080d305a;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 30px;
+    width: 100%;
+    font-size: 14px;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 8px; 
+    font-size: 24px;
+    font-weight: 500;
+}
+
+.logo img {
+    width: 33px;
+}
+
+.search-bar {
+    align-items: center;
+    background: #d2d2d28d;
+    color: #000000;
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(54, 53, 53, 0.093);
+    display: flex;
+    padding: 5px 15px;
+    position: relative;
+    width: 400px;
+}
+
+.search-bar input {
+    background: transparent;
+    color: #000000;
+    border: none;
+    flex: 1;
+    outline: none;
+    padding: 5px;
+}
+
+.search-bar button {
+    border: none;
+    background-color: transparent;
+}
+
+.search-bar i {
+    color: #000000;
+    cursor: pointer;
+    font-size: 16px;
+    outline: none;
+}
+
+.nav-links {
+    display: flex;
+    gap: 60px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: #151f2a;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+}
+
+.nav-links a:hover {
+    color: #235E80;
+    transform: scale(1.1);
+}
+
+#login-btn, #logout-btn {
+    background: transparent;
+    border: 2px solid #18516f;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 8px 15px;
+    transition: all 0.3s ease-in-out;
+    width: 100px;
+}
+
+#login-btn:hover, #logout-btn:hover {
+    background: #18516f;
+    color: #fff;
+}
+
+/* #logout-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+    width: 100%;
+    outline: none;
+} */
+
+/* .popup {
+    animation: fadeIn 0.3s ease-in-out;
+    background: rgb(254, 254, 254);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    display: none;
+    font-size: 14px;
+    line-height: 35px;
+    padding: 20px 30px;
+    position: absolute;
+    right: 20px;
+    text-align: start;
+    top: 70px;
+    width: auto;
+    position: fixed;
+    z-index: 99999 !important;
+}
+
+.popup a {
+    text-decoration: none;
+}
+
+.popup h3 {
+    text-align: center;
+}
+
+.popup-content a:hover,
+button:hover {
+    color: rgb(99, 139, 186);
+    transition: all 0.3s ease-in-out;
+} */
+
+.close-btn {
+    cursor: pointer;
+    float: right;
+    font-size: 20px;
+}
+
+.user-area {
+    align-items: center;
+    display: flex;
+    gap: 15px;
+}
+
+/* .user-area button {
+    border: none;
+} */
+
+.user-icon {
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 8px 15px;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+    width: 100px;
+}
+
+.user-icon:hover {
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none;
+}
+
+@media (max-width: 990px) {
+    header {
+        align-items: center;
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        text-align: center;
+    }
+
+    .search-bar {
+        margin-top: 10px;
+        max-width: 300px;
+        width: 100%;
+    }
+
+    .popup {
+        left: 50%;
+        margin-top: 18%;
+        padding: 10px 15px;
+        transform: translateX(-50%);
+    }
+
+    .user-area {
+        margin-top: 10px;
+    }
+
+}

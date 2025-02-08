@@ -1,0 +1,217 @@
+.detalhes-container {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+}
+
+.imagem-container {
+  width: 180px; 
+  height: 280px;
+  display: flex;
+  justify-content: center;
+}
+
+.imagem-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+.livro-autor a {
+  text-decoration: none;
+}
+
+.livro-materia {
+  color: #ffffff;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+.livro-autor a:hover {
+  color: rgb(99, 139, 186);
+  transform: scale(1.1);
+  text-decoration: underline;
+}
+
+.livro-descricao {
+  font-size: 16px;
+  margin-top: 10px;
+  color: #ffffff;
+}
+
+
+.btn-comprar {
+  background-color: #ffaf53;
+  border-radius: 5px;
+  color: #ffffff;
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+  width: 180px;
+  text-align: center;
+}
+
+.btn-comprar:hover {
+  background-color: #ff7700;
+}
+
+.comentarios-titulo {
+  color: #ffffff;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+.comentarios-container {
+  margin-bottom: 20px;
+}
+
+.comentario {
+  background-color: #172A45;
+  border-radius: 10px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+  padding: 30px 50px;
+  width: 70vw;
+  height: auto;
+}
+
+.comentario-header {
+  align-items: center;
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.comentario-avatar {
+  align-items: center;
+  border: 2px solid #ffaf53;
+  border-radius: 50%;
+  display: flex;
+  font-size: 25px;
+  height: 50px;
+  margin-right: 10px;
+  justify-content: center;
+  width: 50px;
+}
+
+.comentario-avatar i {
+  color: #ffaf53;
+}
+
+.comentario-usuario {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.comentario-texto {
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.novo-comentario {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.novo-comentario textarea {
+  color: #000000;
+  border: 1px solid #e4e4e49c;
+  border-radius: 5px;
+  font-size: 15px;
+  min-height: 100px;
+  outline: none;
+  padding: 10px;
+  resize: vertical;
+  width: 100%;
+}
+
+.btn-enviar {
+  align-self: flex-end;
+  background-color: #ffaf53;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease;
+  margin: 20px;
+}
+
+.btn-enviar:hover {
+  background-color: #ffaf53;
+}
+
+.btn-excluir {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 12px;
+  margin-left: 95%;
+  margin-bottom: -50px;
+}
+
+.btn-excluir:hover {
+  background-color: #cc0000;
+}
+
+/* Popup CSS */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.popup-content {
+  background: #0A192F;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  border-radius: 5px;
+  text-align: center;
+  position: relative;
+}
+
+.popup-content p, a {
+  font-size: 16px;
+}
+
+.close-popup {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.close-popup:hover {
+  color: red;
+}
+
+@media screen and (max-width: 990px) {
+  .livro-container {
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  .livro-info {
+    margin-top: 20px;
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

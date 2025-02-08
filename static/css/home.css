@@ -1,54 +1,223 @@
-.main, .bottom{
-    display: block;
+.hero {
+    width: 100%;
+    height: 300px;
+    background:#080d305a;
+    clip-path: polygon(0 0, 100% 0, 0 100%);
+    display: flex;
+    align-items: start;
+    justify-content: left;
+    text-align: center;
+    padding: 20px;
+    position: relative;
+}
+
+.hero h1 {
+    margin: 25px;
+    font-size: 22px;
+}
+
+.hero p {
+    font-size: 20;
+}
+
+.seção-2 {
     align-items: center;
-    align-content: center;
+    padding: 20px;
+    text-align: center;
+    width: 95%;
+}
+
+.home-container {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.seção-2 {
+    padding: 20px;
+    width: 95%;
+    text-align: center;
+    align-items: center;
+}
+
+.bloco {
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    display: grid;
+    font-size: 16px;
+    gap: 15px;
+    padding-bottom: 20px;
+    padding-top: 30px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.home-container .bloco {
+    background: #0A192F;
+}
+
+.bloco:hover {
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    transform: scale(1.05);
+}
+
+.bloco i {
+    color: #faf3e6;
+    font-size: 40px;
+}
+
+.modal {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    top: 0;
+    height: 100%;
+    justify-content: center;
+    left: 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: #8ca3b4;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    padding: 30px;
+    text-align: center;
+    width: 80%;
+}
+
+#modal-titulo {
+    margin-bottom: 10px;
+}
+
+.materias,
+.periodos {
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(1, 1fr);
+}
+
+.btn-materia,
+.btn-periodo {
+    background-color: white;
+    color: #000000;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.btn-materia:hover,
+.btn-periodo:hover {
+    background-color: #b2b2b2;
+}
+
+.seção-3 {
+    margin: 20px;
+    margin-bottom: 20px;
+    width: 93%;
+    /* background-color: #4a5971; */
+    background-color: #172A45;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    animation: fadeIn 1s ease-in-out;
+    margin-bottom: 20px;
+}
+
+.conteudo {
+    display: flex;
     justify-content: space-between;
 }
 
-.top {
-    max-width: 400px;
-    margin-top: 50px;
-    margin-left: 100px;
-    margin-bottom: 300px;
-}
-.top h2 {
-    font-family: "Readex Pro", serif;
-    opacity: 70%;
-    justify-content: flex-end;
+.texto {
+    margin: 70px;
+    max-width: 50%;
     text-align: justify;
+    align-items: center;
+    line-height: 1.5;
 }
 
-.middle {
-    margin-left: 50px;
-}
-
-.middle p {
-    color: #fff;
-    text-decoration: underline;
-    margin-bottom: 50px;
-}
-
-.bottom {
-    display: flex;
-    margin: 40px;
-}
-
-.bottom img {
-    max-width: 600px;
-}
-
-.text-box {
-    border-style: solid;
-    color: white;
-    text-align: left;
-    border-width: thin;
-    max-width: 750px;
-}
-
-.text-box p {
-    margin: 20px;
-}
-
-.title {
+.texto h2 {
     text-align: center;
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.texto p {
+    font-size: 18px;
+}
+
+.carrossel-container {
+    margin-top: 30px;
+    margin-right: 50px;
+    max-width: 600px;
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+#materia-livro {
+    margin-top: 30px;
+}
+
+.carrossel {
+    display: flex;
+    gap: 15px;
+    transition: transform 0.8s ease-in-out;
+    will-change: transform;
+}
+
+.livro {
+    width: 130px;
+    border-radius: 5px;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
+    filter: brightness(0.8);
+}
+
+.livro.destaque {
+    filter: brightness(1);
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@media screen and (max-width: 990px) {
+    .conteudo {
+        flex-direction: column;
+        text-align: center;
+        align-items: center;
+    }
+
+    .texto {
+        margin-bottom: 0;
+    }
+
+    .carrossel-container {
+        margin: 0;
+        max-width: 400px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+
+    .carrossel-container{
+        max-width: 300px;
+    }
 }

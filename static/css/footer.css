@@ -1,81 +1,91 @@
-.footer {
-    background-color: #333;
-    color: #fff;
-    font-family: Arial, sans-serif;
-    text-align: center;
+* {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    letter-spacing: 1px;
+    font-size: 13px;
+    font-weight: 400;
 }
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+footer {
+    width: 100%;
 }
 
-.section-1 {
-    max-width: 400px;
-    text-align: center;
-}
-
-.section-1 .logo {
-    display: block;
-    margin: 0 auto 20px;
-}
-
-.sections {
+.footer-container {
+    background-color: #19232c;
+    color: #f9e9d1;
     display: flex;
     justify-content: center;
     align-items: flex-start;
-    gap: 80px;
-    margin: 10px;
+    padding: 40px 50px 0 50px ; 
+    flex-wrap: wrap;
+    gap: 40px;
 }
 
-.email-redirection {
+.logo-footer {
+    font-size: 20px;
     display: flex;
-    align-items: center;
-    flex-direction: row;
-    margin: 0 auto;
-    gap: 10px;
-}
-
-.section-2, 
-.section-3, 
-.section-4 {
-    margin: 10px;
-    text-align: left;
-}
-
-.section-2 h3, 
-.section-4 h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
-.section-3 h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 1px;
-}
-
-
-.section-4 .social-icons {
-    display: flex;
-}
-
-.icon {
-    vertical-align: middle;
-    margin-right: 10px;
-    max-width: 30px;
-}
-
-a {
+    justify-items: center;
     color: #fff;
-    text-decoration: none;
+    gap: 6px;
 }
 
-a:hover {
-    text-decoration: underline;
+.logo-footer img {
+    width: 20px;
+}
+
+.footer-contacts {
+    margin-right: 200px;
+}
+
+.footer-contacts p {
+    color: #f9e9d1;
+}
+
+.footer-list {
+    margin-left: 100px;
+}
+
+.footer-contacts,
+.footer-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    list-style: none;
+}
+
+.footer-list h3 {
+    color: #f9e9d1;
+}
+
+.footer-list .footer-link {
+    color: #a8a29e;
+    text-decoration: none;
+    transition: all 0.4s;
+}
+
+.footer-list .footer-link:hover {
+    color: #5f9ea0;
+}
+
+.footer-copyright {
+    color: #f9e9d1;
+    text-align: center;
+    width: 100%;
+    font-size: 10px; 
+    padding: 0 50px 10px 50px ; 
+    font-weight: 100;
+}
+
+@media screen and (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-contacts, .footer-list {
+        margin: 0;
+    }
 }

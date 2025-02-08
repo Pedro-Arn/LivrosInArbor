@@ -16,7 +16,7 @@ class HomePage(TemplateView):
 
 
 class RegistrarUsuarioView(FormView):
-    template_name = 'usuario/registrar.html'
+    template_name = 'login.html'
     form_class = RegistrarUsuarioForm
 
     def form_valid(self, form):
@@ -75,7 +75,7 @@ class PerfilUsuarioView(TemplateView):
     def get_context_data(self, **kwargs):
         username = self.kwargs['username']
         usuario = get_object_or_404(Usuario, username=username)
-        favoritos = Favoritos.usuario.get(usuario)
+        favoritos = Favoritos.objects.filter(usuario=usuario).select_related('livro')
 
         context = super().get_context_data(**kwargs)
         context = {

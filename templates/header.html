@@ -9,8 +9,11 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 <body>
     <header>
-        <div class="logo">LOGO</div>
-        
+        <div class="logo">
+            <img src="../static/imgs/Logo.png" alt="Logo">
+            LivrariaIGE
+        </div>
+
         <form class="search-bar" action="{% url 'livros:lista_livros' %}" method="GET" onsubmit="return checkSearchQuery()">
             <input type="text" name="search_query" placeholder="Pesquisar..." value="{{ request.GET.search_query }}">
             <button type="submit-search">
@@ -23,19 +26,19 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
             <i class="fas fa-search"></i>
         </div> -->
 
-        <nav>
+        <!-- <nav>
             <ul class="nav-links">
                 <li><a href="{% url 'usuario:home' %}">Home</a></li>
                 <li><a href="#">Contato</a></li>
                 <li><a href="#">Sobre</a></li>
             </ul>
-        </nav>
+        </nav> -->
 
         <div class="user-area">
             {% if request.user.is_authenticated %}
                 <form action="{% url 'usuario:logout' %}" method="post">
                     {% csrf_token %}
-                    <button type="submit">Logout</button>
+                    <button id="logout-btn" type="submit">Logout</button>
                 </form>
                 <i class="fa-solid fa-user user-icon" id="user-icon"></i>
             {% else %}
@@ -45,23 +48,6 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
             {% endif %}
         </div>
     </header>
-
-    <div id="user-popup" class="popup hidden">
-        <div class="popup-content">
-            <span class="close-btn">&times;</span>
-            <h3>Meu perfil</h3>
-            <p><strong>Nome Completo: </strong>Lívia Amaral Lopes</p>
-            <p><strong>E-mail: </strong>livia@gmail.com</p>
-            <p><strong>Usuário: </strong>lv.lopes</p>
-            <p><strong>Data de Nascimento: </strong>20/03/2004</p>
-            <p><strong>Gênero: </strong>Feminino</p>
-            <p><strong>Ocupação: </strong>Estudante</p>
-            <hr>
-            <a href="#">Meus Comentários</a>
-            <button id="logout-btn">Sair</button>
-        </div>
-    </div>
-
     <script src="../static/js/header.js"></script>
 </body>
 

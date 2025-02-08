@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Page</title>
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <aside class="filtros">
+            <h2>Filtrar Resultados</h2>
+            <label for="curso">Curso:</label>
+            <select id="curso">
+                <option value="">Selecione</option>
+                <option value="civil">Engenharia Civil</option>
+                <option value="computaçao">Engenharia da Computação</option>
+                <option value="materiais">Engenharia de Materiais</option>
+                <option value="minas">Engenharia de Minas e Meio Ambiente</option>
+                <option value="eletrica">Engenharia Elétrica</option>
+                <option value="mecanica">Engenharia Mecânica</option>
+                <option value="quimica">Engenharia Química</option>
+                <option value="geologia">Geologia</option>
+                <option value="sistemas">Sistemas de Informação</option>
+                <option value="todos">Todos</option>
+            </select>
+            <label for="periodo">Período:</label>
+            <select id="periodo">
+                <option value="">Selecione</option>
+                <option value="1">1º Período</option>
+                <option value="2">2º Período</option>
+                <option value="3">3º Período</option>
+                <option value="4">4º Período</option>
+                <option value="5">5º Período</option>
+                <option value="6">6º Período</option>
+                <option value="7">7º Período</option>
+                <option value="8">8º Período</option>
+                <option value="9">9º Período</option>
+                <option value="10">10º Período</option>
+                <option value="todos">Todos</option>
+
+            </select>
+            <label for="disciplina">Disciplina:</label>
+            <input type="text" id="disciplina" placeholder="Nome da disciplina">
+            <label for="livro">Livro:</label>
+            <input type="text" id="livro" placeholder="Nome do livro">
+            <label for="autor">Autor:</label>
+            <input type="text" id="autor" placeholder="Nome do autor">
+            <button class="btn-filtrar">Aplicar Filtros</button>
+        </aside>
+        <main class="resultados">
+            <h2>Resultados Encontrados</h2>
+            <div class="livros">
+                <div class="livro">
+                    <img src="../static/img/image.png" alt="Livro 1">
+                    <div class="info">
+                        <h3>Livro de Engenharia</h3>
+                        <p>Autor: João Silva</p>
+                        <button class="btn-comprar"
+                            onclick="window.location.href='pagina_destino.html';">Comprar</button>
+                    </div>
+                </div>
+                <div class="livro">
+                    <img src="../static/img/image.png" alt="Livro 2">
+                    <div class="info">
+                        <h3>Fundamentos de Mecânica</h3>
+                        <p>Autor: Maria Souza</p>
+                        <button class="btn-comprar"
+                            onclick="window.location.href='pagina_destino.html';">Comprar</button>
+                    </div>
+                </div>
+            </div>
+            <h2>Talvez você goste</h2>
+            <div class="sugestoes">
+                <div class="livro">
+                    <img src="../static/img/image.png" alt="Livro 3">
+                    <div class="info">
+                        <h3>Cálculo Aplicado</h3>
+                        <p>Autor: Roberto Lima</p>
+                        <button class="btn-comprar"
+                            onclick="window.location.href='pagina_destino.html';">Comprar</button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="{% static 'js/search.js' %}"></script>
+</body>
+
+</html>

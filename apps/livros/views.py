@@ -6,7 +6,6 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import (
     CreateView,
-    DeleteView,
     DetailView,
     ListView, 
     View,
@@ -17,11 +16,12 @@ from apps.livros.forms import (
     AdicionarLivrosForm,
     ComentarLivroForm,
 )
-from apps.livros.models import Livros, Comentario, Favoritos
+from apps.livros.models import Livros, Comentario
+from apps.usuario.models import Favoritos
 
 class ListarLivrosView(ListView):
     model = Livros
-    template_name = 'livro/listar_livro.html'
+    template_name = 'search.html'
     context_object_name = 'livros'
     paginate_by = 10
 
@@ -47,7 +47,7 @@ class ListarLivrosView(ListView):
 class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Livros
     form_class = AdicionarLivrosForm
-    template_name = 'livro/adicionar_livro.html'
+    template_name = 'adicionar_livro.html'
     login_url = 'usuario:login'
     success_url = '.'
 
@@ -70,7 +70,7 @@ class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
 class DetalhesLivroView(DetailView):
     model = Livros
-    template_name = 'book.html'
+    template_name = 'livro.html'
     context_object_name = 'livro'
 
     def get_context_data(self, **kwargs):
