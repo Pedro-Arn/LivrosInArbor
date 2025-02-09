@@ -39,7 +39,6 @@ DJANGO_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "storages",
-    "storages",
 ]
 
 CUSTOM_APPS = [
