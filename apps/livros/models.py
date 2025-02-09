@@ -50,9 +50,8 @@ class Livros(models.Model):
         null=True
     )
     editora = models.CharField(max_length=100, blank=False, null=True)
-    links = models.ForeignKey(
+    links = models.ManyToManyField(
         Link,
-        on_delete=models.CASCADE,
         blank=True,
         verbose_name='Onde comprar',
     )
