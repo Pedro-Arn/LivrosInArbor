@@ -64,6 +64,8 @@ class Usuario(User):
         super().clean()
         validar_identificacao(self.identificacao, self.tipo_identificacao)
 
+    class Meta:
+        db_table  = 'usuario'
 
 class Favoritos(models.Model):
     from apps.livros.models import Livros

@@ -4,6 +4,21 @@ from django.utils.text import slugify
 from apps.autor.models import Autor
 from apps.curso.models import Materias
 
+
+class Editora(models.Model):
+    nome = models.CharField(
+        max_length=100,
+        null=False,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        db_table = 'editora'
+
+
 class Link(models.Model):
     site = models.CharField(
         'Site de compra', 
@@ -16,6 +31,9 @@ class Link(models.Model):
         blank=False,
         null=False,
     )
+
+    def __str__(self):
+        return self.site
 
 
 class Livros(models.Model):
@@ -37,7 +55,7 @@ class Livros(models.Model):
         on_delete=models.CASCADE,
         blank=True,
         verbose_name='Onde comprar',
-        )
+    )
     autor = models.ForeignKey(
         Autor,
         on_delete=models.CASCADE,
@@ -54,6 +72,7 @@ class Livros(models.Model):
     capa = models.ImageField(upload_to='livros', null=True, blank=True)
 
     class Meta:
+        db_table = 'livros'
         verbose_name = 'Livro'
         verbose_name_plural = 'Livros'
         ordering = ['titulo',]
@@ -68,6 +87,8 @@ class Livros(models.Model):
 
 
 class Comentario(models.Model):
+    from apps.usuario.models import Usuario
+
     from apps.usuario.models import Usuario
 
     livro = models.ForeignKey(

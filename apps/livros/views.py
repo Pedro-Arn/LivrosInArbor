@@ -29,21 +29,19 @@ class ListarLivrosView(ListView):
         search_query = self.request.GET.get('search_query', '').strip()
         queryset = Livros.objects.all()
 
-        # Apply search query
+        # Se tiver pesquisa redireciona para o filtro, se não, volta para pagina inicial
         if search_query:
             queryset = self.apply_search_query(queryset, search_query)
         else:
             return redirect('usuario:home')
-            
 
-        # Apply filter form
         queryset = self.apply_filters(queryset)
 
         return queryset
 
     def apply_search_query(self, queryset, search_query):
         """
-        Applies the search query to the queryset.
+        Query para o search.
         """
         return queryset.filter(
             Q(autor__nome_completo__icontains=search_query) |
@@ -54,7 +52,7 @@ class ListarLivrosView(ListView):
 
     def apply_filters(self, queryset):
         """
-        Applies filters from the FiltrarLivrosForm to the queryset.
+        Aplica filtros do FiltrarLivrosForm para o queryset.
         """
         filtro_form = FiltrarLivrosForm(self.request.GET)
         if filtro_form.is_valid():
@@ -64,7 +62,7 @@ class ListarLivrosView(ListView):
 
     def get_context_data(self, **kwargs):
         """
-        Adds additional context data to the template.
+        Contexto adicional para o template.
         """
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search_query', '').strip()
@@ -162,7 +160,7 @@ class DetalhesLivroView(DetailView):
         return redirect(request.path)
 
 
-class AlternarFavoritosLivroView(LoginRequiredMixin, View):
+class AlternarFavoritosView(LoginRequiredMixin, View):
     login_url = reverse_lazy('usuario:login')
 
     def post(self, request, *args, **kwargs):
