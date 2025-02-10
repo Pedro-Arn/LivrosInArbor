@@ -35,6 +35,9 @@ class Link(models.Model):
     def __str__(self):
         return self.site
 
+    class Meta:
+        db_table = 'Link'
+
 
 class Livros(models.Model):
     titulo = models.CharField(

@@ -16,10 +16,14 @@
     <section class="container">
         <div class="detalhes-container">
             <div class="imagem-container">
-                <img src="{{ object.foto_perfil.url }}" alt="Foto do Autor">
+                {% if usario.foto_perfil.url %}
+                    <<img src="{{ object.foto_perfil.url }}" alt="Foto do Autor">
+                {% else %}
+                    <img src="{% static 'imgs/usuario/usuario.png' %}">
+                {% endif %}
             </div>
             <div class="conteudo-container">
-                <h1 class="autor">{{ object.nome_completo }}</h1>
+                <h2 class="autor">{{ object.nome_completo }}</h2>
                 <p class="autor-nascimento"><strong>Data de nascimento: </strong>{{ object.data_nascimento }}</p>
                 <p class="autor-biografia">{{ object.biografia }}</p>
             </div>

@@ -3,6 +3,7 @@ __pycache__
 **/migrations/**
 !**/migrations
 !**/migrations/__init__.py
+/media/
 
 ## Enviroment
 .venv
@@ -11,6 +12,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+.env
 
 ## vscode
 .vscode/*

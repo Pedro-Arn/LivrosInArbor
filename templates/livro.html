@@ -16,7 +16,11 @@
     <section class="container">
         <div class="detalhes-container">
             <div class="imagem-container">
-                <img src="{{ livro.capa.url }}" alt="Capa do Livro">
+                {% if usario.foto_perfil.url %}
+                    <img src="{{ livro.capa.url }}" alt="Capa do Livro">
+                {% else %}
+                    <img src="{% static 'imgs/usuario/usuario.png' %}">
+                {% endif %}
             </div>
             <div class="conteudo-container">
                 <h2 class="livro-materia">{{ livro.titulo }}</h2>

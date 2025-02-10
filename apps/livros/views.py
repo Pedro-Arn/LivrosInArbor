@@ -46,7 +46,7 @@ class ListarLivrosView(ListView):
         return queryset.filter(
             Q(autor__nome_completo__icontains=search_query) |
             Q(titulo__icontains=search_query) |
-            Q(editora__icontains=search_query) |
+            Q(editora__nome__icontains=search_query) |
             Q(materia__nome__icontains=search_query)
         )
 
