@@ -1,5 +1,7 @@
+/* Importação da fonte poppins */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
+/* Configurações gerais */
 * {
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
@@ -23,7 +25,7 @@ header {
 .logo {
     display: flex;
     align-items: center;
-    gap: 8px; 
+    gap: 8px;
     font-size: 24px;
     font-weight: 500;
 }
@@ -99,49 +101,6 @@ header {
     color: #fff;
 }
 
-/* #logout-btn {
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    display: block;
-    margin-top: 10px;
-    text-align: center;
-    width: 100%;
-    outline: none;
-} */
-
-/* .popup {
-    animation: fadeIn 0.3s ease-in-out;
-    background: rgb(254, 254, 254);
-    border-radius: 8px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    display: none;
-    font-size: 14px;
-    line-height: 35px;
-    padding: 20px 30px;
-    position: absolute;
-    right: 20px;
-    text-align: start;
-    top: 70px;
-    width: auto;
-    position: fixed;
-    z-index: 99999 !important;
-}
-
-.popup a {
-    text-decoration: none;
-}
-
-.popup h3 {
-    text-align: center;
-}
-
-.popup-content a:hover,
-button:hover {
-    color: rgb(99, 139, 186);
-    transition: all 0.3s ease-in-out;
-} */
-
 .close-btn {
     cursor: pointer;
     float: right;
@@ -153,10 +112,6 @@ button:hover {
     display: flex;
     gap: 15px;
 }
-
-/* .user-area button {
-    border: none;
-} */
 
 .user-icon {
     color:rgb(255, 255, 255);
@@ -176,18 +131,12 @@ button:hover {
     display: none;
 }
 
+/* Ajuste ao diminuir a tela */
 @media (max-width: 990px) {
     header {
         align-items: center;
         flex-direction: column;
         padding: 15px;
-    }
-
-    .nav-links {
-        flex-direction: column;
-        gap: 10px;
-        margin-top: 10px;
-        text-align: center;
     }
 
     .search-bar {
@@ -196,15 +145,7 @@ button:hover {
         width: 100%;
     }
 
-    .popup {
-        left: 50%;
-        margin-top: 18%;
-        padding: 10px 15px;
-        transform: translateX(-50%);
-    }
-
     .user-area {
         margin-top: 10px;
     }
-
 }

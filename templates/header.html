@@ -21,31 +21,19 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                 <i class="fas fa-search"></i>
             </button>
         </form>
-<!-- 
-        <div class="search-bar">
-            <input type="text">
-            <i class="fas fa-search"></i>
-        </div> -->
 
-        <!-- <nav>
-            <ul class="nav-links">
-                <li><a href="{% url 'usuario:home' %}">Home</a></li>
-                <li><a href="#">Contato</a></li>
-                <li><a href="#">Sobre</a></li>
-            </ul>
-        </nav> -->
-
+        <!-- Área de ver dados cadastrais, fazer login ou logout -->
         <div class="user-area">
             {% if request.user.is_authenticated %}
-                <form action="{% url 'usuario:logout' %}" method="post">
-                    {% csrf_token %}
-                    <button id="logout-btn" type="submit">Logout</button>
-                </form>
-                <i class="fa-solid fa-user user-icon" id="user-icon"></i>
+            <form action="{% url 'usuario:logout' %}" method="post">
+                {% csrf_token %}
+                <button id="logout-btn" type="submit">Logout</button>
+            </form>
+            <i class="fa-solid fa-user user-icon" id="user-icon"></i>
             {% else %}
-                <a href="{% url 'usuario:login' %}">
-                    <button id="login-btn">Login</button>
-                </a>
+            <a href="{% url 'usuario:login' %}">
+                <button id="login-btn">Login</button>
+            </a>
             {% endif %}
         </div>
     </header>

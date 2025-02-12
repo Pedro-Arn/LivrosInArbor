@@ -1,17 +1,29 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
+<!-- Esse código é um template base para um projeto Django, 
+ aqui está definido a estrutura principal da página para que 
+ outras páginas herdem esse layout e insiram seu próprio conteúdo nos blocos definidos. -->
+
 <head>
   
   {% load static %}
   <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache"/>
+  <meta http-equiv="Cache-Control" content="no-cache" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Importação do CDN font-awesome para icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+  <!-- Importação de um estilo base para as páginas -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <!-- Bloco de título dinâmico para que cada página defina o seu -->
   <title>{% block title %}{% endblock %}</title>
+  <!-- Bloco extra na head para as páginas adicionarem mais elementos -->
   {% block head %}{% endblock head %}
 </head>
+
 <body>
+  <!-- Bloco principal onde cada página vai preencher seu conteúdo  -->
   {% block content %}{% endblock %}
 </body>
+
 </html>
