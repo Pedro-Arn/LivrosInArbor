@@ -1,12 +1,10 @@
-.detalhes-container {
-  display: flex;
-  align-items: flex-start;
-  gap: 20px;
+.container {
+  padding: 50px;
 }
 
 .imagem-container {
-  width: 180px; 
-  height: 280px;
+  height: 250px;
+  width: 180px;
   display: flex;
   justify-content: center;
 }
@@ -18,28 +16,28 @@
   border-radius: 5px;
 }
 
-.livro-autor a {
-  text-decoration: none;
-}
-
-.livro-materia {
+.conteudo-container h2{
   color: #ffffff;
   font-size: 24px;
   margin-bottom: 15px;
 }
 
-.livro-autor a:hover {
-  color: rgb(99, 139, 186);
-  transform: scale(1.1);
-  text-decoration: underline;
-}
-
-.livro-descricao {
+.conteudo-container strong {
+  margin-bottom: 10px;
   font-size: 16px;
-  margin-top: 10px;
-  color: #ffffff;
 }
 
+.conteudo-container p {
+  margin-bottom: 10px;
+  font-size: 15px;
+  font-weight: 100;
+  text-align: justify;
+}
+
+.livro-autor a:hover {
+  color: #ffaf53;
+  transform: scale(1.1);
+}
 
 .btn-comprar {
   background-color: #ffaf53;
@@ -49,7 +47,7 @@
   padding: 10px 20px;
   text-decoration: none;
   transition: background-color 0.3s ease;
-  margin-top: 10px;
+  margin-top: 15px;
   width: 180px;
   text-align: center;
 }
@@ -61,10 +59,11 @@
 .comentarios-titulo {
   color: #ffffff;
   font-size: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .comentarios-container {
+  font-size: 18px;
   margin-bottom: 20px;
 }
 
@@ -94,6 +93,7 @@
   margin-right: 10px;
   justify-content: center;
   width: 50px;
+  object-fit: cover; 
 }
 
 .comentario-avatar i {
@@ -161,7 +161,6 @@
   background-color: #cc0000;
 }
 
-/* Popup CSS */
 .popup {
   display: none;
   position: fixed;
@@ -200,18 +199,28 @@
   color: red;
 }
 
-@media screen and (max-width: 990px) {
-  .livro-container {
-    align-items: center;
+/* Ajuste para telas menores */
+@media (max-width: 768px) {
+  .detalhes-container {
+    display: flex;
     flex-direction: column;
-    text-align: center;
+    align-items: center;
   }
-  .livro-info {
-    margin-top: 20px;
+  .comentario-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  .comentario-usuario {
+    margin-top: 10px;
+  } 
+  .comentarios-container {
+    align-items: center;
+    padding-right: 20px;
+    padding-left: 20px;
+  }
+  .popup {
+    padding-right: 20px;
+    padding-left: 20px;
+  }
 }

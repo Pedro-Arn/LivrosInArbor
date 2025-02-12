@@ -2,52 +2,44 @@
 {% load static %}
 {% block head %}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-crossorigin="anonymous" referrerpolicy="no-referrer" />
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 <link rel="stylesheet" href="{% static '../static/css/header.css' %}">
 {% endblock head %}
 
 <body>
     <header>
+        <!-- Área da logo -->
         <div class="logo">
             <img src="../static/imgs/Logo.png" alt="Logo">
             LivrariaIGE
         </div>
 
-        <form class="search-bar" action="{% url 'livros:lista_livros' %}" method="GET" onsubmit="return checkSearchQuery()">
+        <!-- Barra de pesquisa -->
+        <form class="search-bar" action="{% url 'livros:lista_livros' %}" method="GET"
+            onsubmit="return checkSearchQuery()">
             <input type="text" name="search_query" placeholder="Pesquisar..." value="{{ request.GET.search_query }}">
             <button type="submit-search">
                 <i class="fas fa-search"></i>
             </button>
         </form>
-<!-- 
-        <div class="search-bar">
-            <input type="text">
-            <i class="fas fa-search"></i>
-        </div> -->
 
-        <!-- <nav>
-            <ul class="nav-links">
-                <li><a href="{% url 'usuario:home' %}">Home</a></li>
-                <li><a href="#">Contato</a></li>
-                <li><a href="#">Sobre</a></li>
-            </ul>
-        </nav> -->
-
+        <!-- Área de ver dados cadastrais, fazer login ou logout -->
         <div class="user-area">
             {% if request.user.is_authenticated %}
-                <form action="{% url 'usuario:logout' %}" method="post">
-                    {% csrf_token %}
-                    <button id="logout-btn" type="submit">Logout</button>
-                </form>
-                <i class="fa-solid fa-user user-icon" id="user-icon"></i>
+            <form action="{% url 'usuario:logout' %}" method="post">
+                {% csrf_token %}
+                <button id="logout-btn" type="submit">Logout</button>
+            </form>
+            <i class="fa-solid fa-user user-icon" id="user-icon"></i>
             {% else %}
-                <a href="{% url 'usuario:login' %}">
-                    <button id="login-btn">Login</button>
-                </a>
+            <a href="{% url 'usuario:login' %}">
+                <button id="login-btn">Login</button>
+            </a>
             {% endif %}
         </div>
     </header>
+    <!-- Importação das configurações de aparição dos botões logout e user -->
     <script src="../static/js/header.js"></script>
 </body>
 

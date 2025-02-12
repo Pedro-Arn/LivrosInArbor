@@ -6,37 +6,43 @@
 
 {% block title %}{{ object.nome_completo }}{% endblock title %}
 
-
 {% block content %}
-    {% include 'header.html' %}
-    <div class="breadcrumb">
-        Autores &gt; {{ object.nome_completo }}
-    </div>
-    <body>
-    <section class="container">
-        <div class="detalhes-container">
-            <div class="imagem-container">
-                <img src="{{ object.foto_perfil.url }}" alt="Foto do Autor">
-            </div>
-            <div class="conteudo-container">
-                <h1 class="autor">{{ object.nome_completo }}</h1>
-                <p class="autor-nascimento"><strong>Data de nascimento: </strong>{{ object.data_nascimento }}</p>
-                <p class="autor-biografia">{{ object.biografia }}</p>
-            </div>
+
+<!-- Aplicação da header -->
+{% include 'header.html' %}
+
+<!-- Rota da Página -->
+<div class="breadcrumb">
+    Autores &gt; {{ object.nome_completo }}
+</div>
+
+<!-- Área de detalhes do autor -->
+<section class="container">
+    <div class="detalhes-container">
+        <div class="imagem-container">
+            <img src="{{ object.foto_perfil.url }}" alt="Foto do Autor">
         </div>
-    </section>
-</body>
+        <div class="conteudo-container">
+            <h2 class="autor">{{ object.nome_completo }}</h2>
+            <p class="autor-nascimento"><strong>Data de nascimento: </strong>{{ object.data_nascimento }}</p>
+            <p class="autor-biografia"><strong>Biografia: </strong>{{ object.biografia }}</p>
+        </div>
+    </div>
+</section>
+
+<!-- Área de livros do autor -->
 <div class="livros-relacionados">
     <h2>Livros do Autor</h2>
     <div class="livros-grid">
         {% for livro in object.livros.all %}
-            <a href="{% url 'livros:detalhes_livro' livro.slug %}" class="livro-item">
-                <img src="{{ livro.capa.url }}" alt="{{ livro.titulo }}" class="livro-capa">
-                <h3>{{ livro.titulo }}</h3>
-            </a>
+        <a href="{% url 'livros:detalhes_livro' livro.slug %}" class="livro-item">
+            <img src="{{ livro.capa.url }}" alt="{{ livro.titulo }}" class="livro-capa">
+            <h3>{{ livro.titulo }}</h3>
+        </a>
         {% endfor %}
     </div>
 </div>
+
+<!-- Aplicação do footer -->
 {% include 'footer.html' %}
 {% endblock content %}
-</html>

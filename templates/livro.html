@@ -9,26 +9,30 @@
 {% block title %}{{ livro.titulo }}{% endblock title %}
 
 {% block content %} 
+    <!-- Importação da header -->
     {% include 'header.html' %}
     <div class="breadcrumb">
         Livros &gt; {{ livro.titulo }}
     </div>
+
+    <!-- Seção de detalhes sobre o livro -->
     <section class="container">
         <div class="detalhes-container">
             <div class="imagem-container">
                 <img src="{{ livro.capa.url }}" alt="Capa do Livro">
             </div>
             <div class="conteudo-container">
-                <h2 class="livro-materia">{{ livro.titulo }}</h2>
+                <h2 class="livro">{{ livro.titulo }}</h2>
                 <p class="livro-editora"><strong>Editora: </strong>{{ livro.editora }}</p>
-                <p class="livro-ano"><strong>Ano de Publicação: </strong>{{ livro.ano_publicacao }}</p>
+                <p class="livro-ano"><strong>Data de Publicação: </strong>{{ livro.ano_publicacao }}</p>
                 <p class="livro-autor"><strong>Autor: </strong><a href="{% url 'autor:detalhes_autor' livro.autor.slug %}">{{ livro.autor.nome_completo }}</a></p>
-                <p class="livro-descricao"><strong>{{ livro.descricao }}</strong></p>
+                <p class="livro-descricao"><strong>Descrição: </strong>{{ livro.descricao }}</p>
             </div>
         </div>
         <a href="{{ livro.link.link }}" class="btn-comprar" target="_blank">Comprar</a>
     </section>
 
+    <!-- Seção de comentários sobre o livro -->
     <div class="comentarios-container">
         <h3 class="comentarios-titulo">Comentários</h3>
         
@@ -54,6 +58,7 @@
                 </div>
             {% endfor %}
 
+            <!-- Paginação para mais de 5 comentários -->
             <div class="pagination">
                 {% if comentarios.has_previous %}
                     <a href="?page=1" class="pagina-link">Primeira</a>
@@ -69,6 +74,7 @@
             </div>
         {% endif %}
         
+        <!-- Área de realizar novos comentários -->
         <div class="novo-comentario">
             <h3 class="comentarios-titulo">Novo comentário: </h3>
             <form method="POST" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}"> {% csrf_token %}
@@ -85,8 +91,9 @@
               <button class="btn-enviar" type="submit">Enviar Comentário</button>
             </form>
         </div>
-        <!-- <textarea name="corpo" data-authenticated="{% if request.user.is_authenticated %}true{% else %}false{% endif %}"></textarea> -->
     </div>
+
+    <!-- Janela que impede o usuário não autenticado de comentar e redireciona para o login -->
     <div id="login-popup" class="popup">
         <div class="popup-content">
             <span class="close-popup">&times;</span>
@@ -94,7 +101,11 @@
             <a href="{% url 'usuario:login' %}?next={{ request.path }}">Clique aqui para fazer login</a>.
         </div>
     </div>
+    
+    <!-- Importação das configurações de aparição do popup -->
     <script src="{% static 'js/comentarioPopup.js' %}"></script>
+
+    <!-- Importação do footer -->
     {% include 'footer.html' %}
 {% endblock content %}
 </html>
