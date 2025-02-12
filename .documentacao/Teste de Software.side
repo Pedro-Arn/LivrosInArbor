@@ -1,0 +1,296 @@
+{
+  "id": "bdcb6c96-b284-42e2-b602-332e457cb13f",
+  "version": "2.0",
+  "name": "Teste de Software",
+  "url": "http://127.0.0.1:8000",
+  "tests": [{
+    "id": "375881b2-684d-47ca-93db-0daa7c800061",
+    "name": "teste de software",
+    "commands": [{
+      "id": "6b4eb6c5-ea59-4c6e-b92f-690e57c20526",
+      "comment": "",
+      "command": "open",
+      "target": "/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ab3a3863-9390-41e6-8e0d-2cac2204ee88",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "163ffe15-84cd-43be-8030-e69701d5a7e9",
+      "comment": "",
+      "command": "click",
+      "target": "name=search_query",
+      "targets": [
+        ["name=search_query", "name"],
+        ["css=input", "css:finder"],
+        ["xpath=//input[@name='search_query']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "784ae57f-1cf6-44ef-b838-e06c0eefc07d",
+      "comment": "",
+      "command": "type",
+      "target": "name=search_query",
+      "targets": [
+        ["name=search_query", "name"],
+        ["css=input", "css:finder"],
+        ["xpath=//input[@name='search_query']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Introdução"
+    }, {
+      "id": "0093a4ba-a04a-40d8-b0a4-23e7e994bad4",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "name=search_query",
+      "targets": [
+        ["name=search_query", "name"],
+        ["css=input", "css:finder"],
+        ["xpath=//input[@name='search_query']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "2fe127d8-fa2e-4b97-87dd-050a16ed3712",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Introdução a Sistemas de Banco de Dados",
+      "targets": [
+        ["linkText=Introdução a Sistemas de Banco de Dados", "linkText"],
+        ["css=h2 > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Introdução a Sistemas de Banco de Dados')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '/livros/introducao-a-sistemas-de-banco-de-dados')])[2]", "xpath:href"],
+        ["xpath=//h2/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Introdução a Sistemas de Banco de Dados')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1ab62aad-b1a8-4116-9d3a-c180e4b2d80c",
+      "comment": "",
+      "command": "click",
+      "target": "id=id_corpo",
+      "targets": [
+        ["id=id_corpo", "id"],
+        ["name=corpo", "name"],
+        ["css=#id_corpo", "css:finder"],
+        ["xpath=//textarea[@id='id_corpo']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "f1bdfeda-88e1-4c21-a141-28f4aadf473f",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_corpo",
+      "targets": [
+        ["id=id_corpo", "id"],
+        ["name=corpo", "name"],
+        ["css=#id_corpo", "css:finder"],
+        ["xpath=//textarea[@id='id_corpo']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Teste\\n"
+    }, {
+      "id": "b3e5a3f0-23a5-4c0b-8f7d-60645e74e3cb",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-enviar",
+      "targets": [
+        ["css=.btn-enviar", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Enviar Comentário')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4156fd9f-25a1-480f-a75c-53980a17833f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Clique aqui para fazer login",
+      "targets": [
+        ["linkText=Clique aqui para fazer login", "linkText"],
+        ["css=a:nth-child(3)", "css:finder"],
+        ["xpath=//a[contains(text(),'Clique aqui para fazer login')]", "xpath:link"],
+        ["xpath=//div[@id='login-popup']/div/a", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/login/?next=/livros/introducao-a-sistemas-de-banco-de-dados')]", "xpath:href"],
+        ["xpath=//div[3]/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Clique aqui para fazer login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "61738691-4f25-4910-943e-201bf20321b5",
+      "comment": "",
+      "command": "click",
+      "target": "id=id_form2-username",
+      "targets": [
+        ["id=id_form2-username", "id"],
+        ["name=form2-username", "name"],
+        ["css=#id_form2-username", "css:finder"],
+        ["xpath=//input[@id='id_form2-username']", "xpath:attributes"],
+        ["xpath=//div[@id='container']/div[2]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0eaf11ae-6751-47f7-9f11-7b3de2f01dfd",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_form2-username",
+      "targets": [
+        ["id=id_form2-username", "id"],
+        ["name=form2-username", "name"],
+        ["css=#id_form2-username", "css:finder"],
+        ["xpath=//input[@id='id_form2-username']", "xpath:attributes"],
+        ["xpath=//div[@id='container']/div[2]/form/div/input", "xpath:idRelative"],
+        ["xpath=//div[2]/form/div/input", "xpath:position"]
+      ],
+      "value": "usuario"
+    }, {
+      "id": "106cd6ee-4bdf-4016-a737-5a165b66b492",
+      "comment": "",
+      "command": "click",
+      "target": "id=id_form2-password",
+      "targets": [
+        ["id=id_form2-password", "id"],
+        ["name=form2-password", "name"],
+        ["css=#id_form2-password", "css:finder"],
+        ["xpath=//input[@id='id_form2-password']", "xpath:attributes"],
+        ["xpath=//div[@id='container']/div[2]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2a1672f5-536a-4622-bb2e-6dcbc21d338d",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_form2-password",
+      "targets": [
+        ["id=id_form2-password", "id"],
+        ["name=form2-password", "name"],
+        ["css=#id_form2-password", "css:finder"],
+        ["xpath=//input[@id='id_form2-password']", "xpath:attributes"],
+        ["xpath=//div[@id='container']/div[2]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Teste123@"
+    }, {
+      "id": "47d61806-2b1e-4c58-bfb6-d9f7a41e2dda",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "id=id_form2-password",
+      "targets": [
+        ["id=id_form2-password", "id"],
+        ["name=form2-password", "name"],
+        ["css=#id_form2-password", "css:finder"],
+        ["xpath=//input[@id='id_form2-password']", "xpath:attributes"],
+        ["xpath=//div[@id='container']/div[2]/form/div[2]/input", "xpath:idRelative"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "7ea520f8-ef29-4520-8c02-e445904cf840",
+      "comment": "",
+      "command": "click",
+      "target": "name=search_query",
+      "targets": [
+        ["name=search_query", "name"],
+        ["css=.search-bar > input", "css:finder"],
+        ["xpath=//input[@name='search_query']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c288721d-af7a-4ce8-9bd8-4f9569b7d5a9",
+      "comment": "",
+      "command": "type",
+      "target": "name=search_query",
+      "targets": [
+        ["name=search_query", "name"],
+        ["css=.search-bar > input", "css:finder"],
+        ["xpath=//input[@name='search_query']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Introdução"
+    }, {
+      "id": "c82a68d3-d2e5-43b9-9988-77cc80fddd30",
+      "comment": "",
+      "command": "sendKeys",
+      "target": "name=search_query",
+      "targets": [
+        ["name=search_query", "name"],
+        ["css=.search-bar > input", "css:finder"],
+        ["xpath=//input[@name='search_query']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "${KEY_ENTER}"
+    }, {
+      "id": "73d19f43-a295-4a0d-b100-0249803a8e5e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Introdução a Sistemas de Banco de Dados",
+      "targets": [
+        ["linkText=Introdução a Sistemas de Banco de Dados", "linkText"],
+        ["css=h2 > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Introdução a Sistemas de Banco de Dados')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '/livros/introducao-a-sistemas-de-banco-de-dados')])[2]", "xpath:href"],
+        ["xpath=//h2/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Introdução a Sistemas de Banco de Dados')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "33759b18-8d10-4ebb-aec7-363ea5b82804",
+      "comment": "",
+      "command": "click",
+      "target": "id=id_corpo",
+      "targets": [
+        ["id=id_corpo", "id"],
+        ["name=corpo", "name"],
+        ["css=#id_corpo", "css:finder"],
+        ["xpath=//textarea[@id='id_corpo']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7648b537-187c-4e0b-861b-7b6a5206eb44",
+      "comment": "",
+      "command": "type",
+      "target": "id=id_corpo",
+      "targets": [
+        ["id=id_corpo", "id"],
+        ["name=corpo", "name"],
+        ["css=#id_corpo", "css:finder"],
+        ["xpath=//textarea[@id='id_corpo']", "xpath:attributes"],
+        ["xpath=//textarea", "xpath:position"]
+      ],
+      "value": "Teste\\n"
+    }, {
+      "id": "6d6066e4-7f06-400e-b140-e5e6b2e9ef9a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-enviar",
+      "targets": [
+        ["css=.btn-enviar", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[2]/div/form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Enviar Comentário')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "80e4b112-c0e4-4621-b6d0-f53bad721593",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://127.0.0.1:8000/"],
+  "plugins": []
+}
