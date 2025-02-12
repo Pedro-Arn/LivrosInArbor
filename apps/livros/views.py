@@ -23,24 +23,38 @@ class ListarLivrosView(ListView):
     model = Livros
     template_name = 'search.html'
     context_object_name = 'livros'
-    paginate_by = 10
+    paginate_by = 10  # Definir a paginação para exibir 10 livros por página
 
     def get_queryset(self):
         queryset = super().get_queryset()
         search_query = self.request.GET.get('search_query', '').strip()
+        ano_publicacao = self.request.GET.get('ano_publicacao', '').strip()
+        editora = self.request.GET.get('editora', '').strip()
+        materia = self.request.GET.get('materia', '').strip()
+        curso = self.request.GET.get('curso', '').strip()
+        periodo = self.request.GET.get('periodo', '').strip()
 
-        # Apply search query
+        # Aplicar a pesquisa por título, autor ou editora
         if search_query:
             queryset = self.apply_search_query(queryset, search_query)
 
-        # Apply additional filters
-        queryset = self.apply_filters(queryset)
+        # Aplicar filtros
+        if ano_publicacao:
+            queryset = queryset.filter(ano_publicacao=ano_publicacao)
+        if editora:
+            queryset = queryset.filter(editora__nome__icontains=editora)
+        if materia:
+            queryset = queryset.filter(materia__nome__icontains=materia)
+        if curso:
+            queryset = queryset.filter(materia__cursos__nome__icontains=curso)
+        if periodo:
+            queryset = queryset.filter(materia__periodo=periodo)
 
         return queryset
 
     def apply_search_query(self, queryset, search_query):
         """
-        Apply search query to the queryset.
+        Aplica a pesquisa ao queryset.
         """
         return queryset.filter(
             Q(titulo__icontains=search_query) |
@@ -49,67 +63,17 @@ class ListarLivrosView(ListView):
             Q(materia__nome__icontains=search_query)
         )
 
-    def apply_filters(self, queryset):
-        """
-        Apply additional filters based on form inputs.
-        """
-        filters = {}
-
-        # Filter by publication year
-        ano_publicacao = self.request.GET.get('ano_publicacao')
-        if ano_publicacao:
-            filters['ano_publicacao'] = ano_publicacao
-
-        # Filter by publisher
-        editora = self.request.GET.get('editora')
-        if editora:
-            filters['editora__nome__icontains'] = editora
-
-        # Filter by subject
-        materia = self.request.GET.get('materia')
-        if materia:
-            filters['materia__nome__icontains'] = materia
-
-        return queryset.filter(**filters)
-
     def get_context_data(self, **kwargs):
         """
-        Pass form data back to the template.
+        Passa os dados da pesquisa e dos filtros para o template.
         """
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search_query', '')
         context['ano_publicacao'] = self.request.GET.get('ano_publicacao', '')
         context['editora'] = self.request.GET.get('editora', '')
         context['materia'] = self.request.GET.get('materia', '')
-        return context
-
-    def apply_search_query(self, queryset, search_query):
-        """
-        Query para o search.
-        """
-        return queryset.filter(
-            Q(autor__nome_completo__icontains=search_query) |
-            Q(titulo__icontains=search_query) |
-            Q(editora__nome__icontains=search_query) |
-            Q(materia__nome__icontains=search_query)
-        )
-
-    def apply_filters(self, queryset):
-        """
-        Aplica filtros do FiltrarLivrosForm para o queryset.
-        """
-        filtro_form = FiltrarLivrosForm(self.request.GET)
-        if filtro_form.is_valid():
-            filters = {k: v for k, v in filtro_form.cleaned_data.items() if v}
-            queryset = queryset.filter(**filters)
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        """
-        Contexto adicional para o template.
-        """
-        context = super().get_context_data(**kwargs)
-        context['search_query'] = self.request.GET.get('search_query', '').strip()
+        context['curso'] = self.request.GET.get('curso', '')
+        context['periodo'] = self.request.GET.get('periodo', '')
         context['filtro_form'] = FiltrarLivrosForm(self.request.GET)
         return context
 
@@ -122,10 +86,10 @@ class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     success_url = '.'
 
     def form_valid(self, form):
-        # Save the book first
+        # Salva o livro primeiro
         self.object = form.save()
 
-        # Process new links
+        # Processa novos links
         new_links = form.cleaned_data.get('new_links', '').strip()
         if new_links:
             for line in new_links.split('\n'):
@@ -136,19 +100,10 @@ class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
 
         return redirect(self.get_success_url())
 
-    def form_invalid(self, form):
-        return super().form_invalid(form)
-
     def test_func(self):
-        # Permite acesso se o usuário for superuser ou estiver no grupo 'professor'
+        # Permite acesso se o usuário for superusuário ou estiver no grupo 'professor'
         user = self.request.user
         return user.is_superuser or user.groups.filter(name='professor').exists()
-
-    def get_redirect_url(self):
-        # Se não for professor, redireciona para outra pagina
-        if not self.test_func():
-            return 'usuario:home'
-        return super().get_redirect_url()
 
 
 class DetalhesLivroView(DetailView):
@@ -160,7 +115,7 @@ class DetalhesLivroView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['form'] = ComentarLivroForm()  # Form para comentarios
+        context['form'] = ComentarLivroForm()  # Formulário para comentários
         
         livro = self.get_object()
         comentarios_list = Comentario.objects.filter(livro=livro).annotate(
@@ -172,13 +127,14 @@ class DetalhesLivroView(DetailView):
         )
         ).order_by('tipo_ordem', '-postado_em')
 
-        # Paginação
-        paginator = Paginator(comentarios_list, 5)  # Define 5 comentários por página
+        # Paginação dos comentários (5 por página)
+        paginator = Paginator(comentarios_list, 5)
         page = self.request.GET.get('page')
         comentarios = paginator.get_page(page)
 
         context['comentarios'] = comentarios
 
+        # Verifica se o livro está favoritado pelo usuário
         if self.request.user.is_authenticated and hasattr(self.request.user, 'usuario'):
             context['is_favorited'] = Favoritos.objects.filter(livro=livro, usuario=self.request.user.usuario).exists()
         else:
@@ -187,12 +143,13 @@ class DetalhesLivroView(DetailView):
         return context
     
     def get_object(self):
+        # Obtém o livro com base no slug
         slug = self.kwargs['slug']
         return get_object_or_404(Livros, slug=slug)
 
     def post(self, request, *args, **kwargs):
         if self.request.user.is_superuser:
-            # Se o usuário é um administrador, não terá permissão para comentar no livro
+            # Se o usuário for administrador, não poderá comentar no livro
             return HttpResponseForbidden("Você não tem permissão para comentar.")
 
         livro = self.get_object()
@@ -206,12 +163,12 @@ class DetalhesLivroView(DetailView):
             
             if form.is_valid():
                 comentario = form.save(commit=False)
-                comentario.usuario = request.user.usuario  # Atribui o usuario atual
+                comentario.usuario = request.user.usuario  # Atribui o usuário atual
                 comentario.livro = livro  # Atribui o livro atual
                 comentario.save()
                 return redirect(request.path)  # Recarrega a página após a postagem
         else:
-            # Se o usuario não estiver logado, encaminha para a tela de login
+            # Se o usuário não estiver logado, redireciona para a tela de login
             return redirect(f'{reverse("usuario:login")}?next={request.path}')
 
         context = self.get_context_data(**kwargs)
@@ -234,18 +191,18 @@ class AlternarFavoritosView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         if not hasattr(request.user, 'usuario'):
-            # Se o usuário é um administrador, não terá permissão para favoritar o livro
+            # Se o usuário for administrador, não poderá favoritar o livro
             return HttpResponseForbidden("Você não tem permissão para favoritar este livro.")
 
         usuario = request.user.usuario
         livro = get_object_or_404(Livros, id=self.kwargs['pk'])
 
-        # Retorna ou cria uma instancia de favorito
+        # Obtém ou cria uma instância de favorito
         favorito, created = Favoritos.objects.get_or_create(usuario=usuario, livro=livro)
         
         if not created:  
             # Se já existir, desfavorita
             favorito.delete()
 
-        # Redirect back to the book detail page
+        # Redireciona de volta para a página de detalhes do livro
         return redirect(reverse('livros:detalhes_livro', kwargs={'slug': livro.slug}))

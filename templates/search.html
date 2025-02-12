@@ -38,7 +38,11 @@
                     <div class="livro">
                         <div class="imagem-container">
                             <a href="{% url 'livros:detalhes_livro' livro.slug %}">
+                                {% if usario.foto_perfil.url %}
                                 <img src="{{ livro.capa.url }}" alt="{{ livro.titulo }}">
+                                {% else %}
+                                <img src="{% static 'imgs/usuario.png' %}">
+                                {% endif %}
                             </a>
                         </div>
                         <div class="conteudo-container">
@@ -49,7 +53,7 @@
                             <p>Editora: {{ livro.editora.nome }}</p>
                             <p>Matéria:
                                 {% for materia in livro.materia.all %}
-                                    {{ materia.nome }}{% if not forloop.last %}, {% endif %}
+                                    {{ materia.nome }}
                                 {% endfor %}
                             </p>
                             <button class="btn-comprar" onclick="window.location.href='{{ livro.link_compra }}';">Comprar</button>

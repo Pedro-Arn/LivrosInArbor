@@ -75,8 +75,8 @@ class Livros(models.Model):
         related_name='materia_livro',
         verbose_name='Materias associadas',
     )
-    slug = models.SlugField(unique=True, blank=True)
-    capa = models.ImageField(upload_to='livros', null=True, blank=True)
+    slug = models.SlugField(unique=True, blank=True, max_length=100)
+    capa = models.ImageField(upload_to='livros', null=True, blank=False)
 
     class Meta:
         db_table = 'livros'

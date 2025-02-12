@@ -24,11 +24,11 @@
                 {% if usario.foto_perfil.url %}
                     <img src="{{ livro.capa.url }}" alt="Capa do Livro">
                 {% else %}
-                    <img src="{% static 'imgs/usuario/usuario.png' %}">
+                    <img src="{% static 'imgs/usuario.png' %}">
                 {% endif %}
             </div>
             <div class="conteudo-container">
-                <h2 class="livro-materia">{{ livro.titulo }}
+                <h2 class="livro-titulo">{{ livro.titulo }}
                         <form method="post" action="{% url 'livros:alternar_favorito' livro.id %}">
                             {% csrf_token %}
                             <input type="hidden" name="favorite_action" value="true">

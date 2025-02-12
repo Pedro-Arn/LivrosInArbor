@@ -1,6 +1,5 @@
 from django.contrib.auth.models import Group
 from django.contrib.auth import login
-from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -8,11 +7,32 @@ from django.urls import reverse_lazy
 
 from django.views.generic import TemplateView, FormView
 
+from apps.curso.models import Cursos, Materias
 from apps.usuario.forms import RegistrarUsuarioForm
 from apps.usuario.models import Usuario, Favoritos
 
 class HomePage(TemplateView):
     template_name = "home.html"
+
+    def get_context_data(self, **kwargs):
+        # Call the base implementation first to get the context
+        context = super().get_context_data(**kwargs)
+
+                # Fetch all courses
+        cursos = Cursos.objects.all()
+
+        # Add courses and their periods to the context
+        context['cursos'] = []
+        for curso in cursos:
+            # Fetch periods for the current course
+            periodos = Materias.objects.filter(cursos=curso).values('periodo').distinct()
+            context['cursos'].append({
+                'nome': curso.nome,
+                'periodos': [p['periodo'] for p in periodos],
+            })
+
+        return context
+
 
 
 class RegistrarUsuarioView(FormView):
