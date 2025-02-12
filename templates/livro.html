@@ -25,18 +25,18 @@
             </div>
             <div class="conteudo-container">
                 <h2 class="livro-materia">{{ livro.titulo }}
-                    <form method="post" action="{% url 'livros:alternar_favorito' livro.id %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="favorite_action" value="true">
-                        <button id="estrela-favorito" class="estrela-favorito {% if livro in usuario.favoritos.all %}preenchida{% else %}vazia{% endif %}" 
-                        data-livro-id="{{ livro.id }}">
-                        {% if is_favorited %}
-                            <!-- &#9733;  Estrela preenchida -->
-                        {% else %}
-                            <!-- &#9734;  Estrela vazia -->
-                        {% endif %}
-                        </button>
-                    </form>
+                        <form method="post" action="{% url 'livros:alternar_favorito' livro.id %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="favorite_action" value="true">
+                            <button id="estrela-favorito" class="estrela-favorito {% if livro in usuario.favoritos.all %}preenchida{% else %}vazia{% endif %}" 
+                            data-livro-id="{{ livro.id }}">
+                            {% if is_favorited %}
+                                &#9733; <!--  Estrela preenchida -->
+                            {% else %}
+                                &#9734;  <!-- Estrela vazia -->
+                            {% endif %}
+                            </button>
+                        </form>
                 </h2>
                 <p class="livro-editora"><strong>Editora: </strong>{{ livro.editora }}</p>
                 <p class="livro-ano"><strong>Ano de Publicação: </strong>{{ livro.ano_publicacao }}</p>

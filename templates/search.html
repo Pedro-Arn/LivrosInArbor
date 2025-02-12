@@ -47,7 +47,11 @@
                             </h2>
                             <p><strong>Autor: </strong><a class="autor-info" href="{% url 'autor:detalhes_autor' livro.autor.slug %}">{{ livro.autor.nome_completo }}</a></p>
                             <p>Editora: {{ livro.editora.nome }}</p>
-                            <p>Matéria: {{ livro.materia.nome }}</p>
+                            <p>Matéria:
+                                {% for materia in livro.materia.all %}
+                                    {{ materia.nome }}{% if not forloop.last %}, {% endif %}
+                                {% endfor %}
+                            </p>
                             <button class="btn-comprar" onclick="window.location.href='{{ livro.link_compra }}';">Comprar</button>
                         </div>
                     </div>
@@ -56,7 +60,7 @@
                 {% endfor %}
             </div>
         </main>
-        
+
     </div>
     <div class="paginacao">
         <span class="step-links">

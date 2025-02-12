@@ -16,7 +16,7 @@ from apps.livros.forms import (
     AdicionarLivrosForm,
     ComentarLivroForm,
 )
-from apps.livros.models import Livros, Comentario
+from apps.livros.models import Livros, Comentario, Link
 from apps.usuario.models import Favoritos
 
 class ListarLivrosView(ListView):
@@ -59,21 +59,17 @@ class ListarLivrosView(ListView):
         ano_publicacao = self.request.GET.get('ano_publicacao')
         if ano_publicacao:
             filters['ano_publicacao'] = ano_publicacao
-            print(f"Filtering by ano_publicacao: {ano_publicacao}")
 
         # Filter by publisher
         editora = self.request.GET.get('editora')
         if editora:
             filters['editora__nome__icontains'] = editora
-            print(f"Filtering by editora: {editora}")
 
         # Filter by subject
         materia = self.request.GET.get('materia')
         if materia:
             filters['materia__nome__icontains'] = materia
-            print(f"Filtering by materia: {materia}")
 
-        print(f"Applied filters: {filters}")
         return queryset.filter(**filters)
 
     def get_context_data(self, **kwargs):
@@ -183,7 +179,7 @@ class DetalhesLivroView(DetailView):
 
         context['comentarios'] = comentarios
 
-        if self.request.user.is_authenticated:
+        if self.request.user.is_authenticated and hasattr(self.request.user, 'usuario'):
             context['is_favorited'] = Favoritos.objects.filter(livro=livro, usuario=self.request.user.usuario).exists()
         else:
             context['is_favorited'] = False
@@ -195,6 +191,10 @@ class DetalhesLivroView(DetailView):
         return get_object_or_404(Livros, slug=slug)
 
     def post(self, request, *args, **kwargs):
+        if self.request.user.is_superuser:
+            # Se o usuário é um administrador, não terá permissão para comentar no livro
+            return HttpResponseForbidden("Você não tem permissão para comentar.")
+
         livro = self.get_object()
         
         comentario_id = request.POST.get("comentario_id")
@@ -233,6 +233,10 @@ class AlternarFavoritosView(LoginRequiredMixin, View):
     login_url = reverse_lazy('usuario:login')
 
     def post(self, request, *args, **kwargs):
+        if not hasattr(request.user, 'usuario'):
+            # Se o usuário é um administrador, não terá permissão para favoritar o livro
+            return HttpResponseForbidden("Você não tem permissão para favoritar este livro.")
+
         usuario = request.user.usuario
         livro = get_object_or_404(Livros, id=self.kwargs['pk'])
 

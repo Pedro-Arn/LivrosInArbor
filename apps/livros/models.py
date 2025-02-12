@@ -41,7 +41,7 @@ class Link(models.Model):
 
 class Livros(models.Model):
     titulo = models.CharField(
-        max_length=70,
+        max_length=150,
         blank=False,
         null=False,
         unique=False,
@@ -113,4 +113,4 @@ class Comentario(models.Model):
         ordering = ['postado_em',]
 
     def __str__(self):
-        return f'{self.livro.titulo} by {self.usuario.first_name}'
+        return f'{self.livro.titulo} por {self.usuario.first_name}'
