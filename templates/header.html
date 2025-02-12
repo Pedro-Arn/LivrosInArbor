@@ -24,6 +24,14 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
 
         <!-- Área de ver dados cadastrais, fazer login ou logout -->
         <div class="user-area">
+            {% if request.user.usuario.ocupacao == 'P' %}
+                <form action="{% url 'livros:novo_livro' %}" method="post">
+                    {% csrf_token %}
+                    <button id="logout-btn" type="submit">Adicionar livro</button>
+                </form>
+            {% endif %}
+                
+
             {% if request.user.is_authenticated %}
             <form action="{% url 'usuario:logout' %}" method="post">
                 {% csrf_token %}
