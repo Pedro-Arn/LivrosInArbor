@@ -29,7 +29,9 @@ crossorigin="anonymous" referrerpolicy="no-referrer" />
                 {% csrf_token %}
                 <button id="logout-btn" type="submit">Logout</button>
             </form>
-            <i class="fa-solid fa-user user-icon" id="user-icon"></i>
+            <a href="{% url 'usuario:perfil' request.user.username %}">
+                <i class="fa-solid fa-user user-icon" id="user-icon"></i>
+            </a>           
             {% else %}
             <a href="{% url 'usuario:login' %}">
                 <button id="login-btn">Login</button>
