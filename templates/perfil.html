@@ -1,11 +1,12 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}{{ username }}{% endblock title %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
 {% endblock head %}
 
-{% block title %}{{ username }}{% endblock title %}
 
 {% block content %}
   {% include 'header.html' %}

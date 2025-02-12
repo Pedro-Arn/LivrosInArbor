@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.paginator import Paginator
 from django.db.models import Case, When, Value, IntegerField, Q
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy, reverse
 from django.views.generic import (
@@ -26,18 +26,66 @@ class ListarLivrosView(ListView):
     paginate_by = 10
 
     def get_queryset(self):
+        queryset = super().get_queryset()
         search_query = self.request.GET.get('search_query', '').strip()
-        queryset = Livros.objects.all()
 
-        # Se tiver pesquisa redireciona para o filtro, se não, volta para pagina inicial
+        # Apply search query
         if search_query:
             queryset = self.apply_search_query(queryset, search_query)
-        else:
-            return redirect('usuario:home')
 
+        # Apply additional filters
         queryset = self.apply_filters(queryset)
 
         return queryset
+
+    def apply_search_query(self, queryset, search_query):
+        """
+        Apply search query to the queryset.
+        """
+        return queryset.filter(
+            Q(titulo__icontains=search_query) |
+            Q(autor__nome_completo__icontains=search_query) |
+            Q(editora__nome__icontains=search_query) |
+            Q(materia__nome__icontains=search_query)
+        )
+
+    def apply_filters(self, queryset):
+        """
+        Apply additional filters based on form inputs.
+        """
+        filters = {}
+
+        # Filter by publication year
+        ano_publicacao = self.request.GET.get('ano_publicacao')
+        if ano_publicacao:
+            filters['ano_publicacao'] = ano_publicacao
+            print(f"Filtering by ano_publicacao: {ano_publicacao}")
+
+        # Filter by publisher
+        editora = self.request.GET.get('editora')
+        if editora:
+            filters['editora__nome__icontains'] = editora
+            print(f"Filtering by editora: {editora}")
+
+        # Filter by subject
+        materia = self.request.GET.get('materia')
+        if materia:
+            filters['materia__nome__icontains'] = materia
+            print(f"Filtering by materia: {materia}")
+
+        print(f"Applied filters: {filters}")
+        return queryset.filter(**filters)
+
+    def get_context_data(self, **kwargs):
+        """
+        Pass form data back to the template.
+        """
+        context = super().get_context_data(**kwargs)
+        context['search_query'] = self.request.GET.get('search_query', '')
+        context['ano_publicacao'] = self.request.GET.get('ano_publicacao', '')
+        context['editora'] = self.request.GET.get('editora', '')
+        context['materia'] = self.request.GET.get('materia', '')
+        return context
 
     def apply_search_query(self, queryset, search_query):
         """
@@ -73,19 +121,32 @@ class ListarLivrosView(ListView):
 class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Livros
     form_class = AdicionarLivrosForm
-    template_name = 'adicionar_livro.html'
+    template_name = 'adicionarLivro.html'
     login_url = 'usuario:login'
     success_url = '.'
 
     def form_valid(self, form):
-        return super().form_valid(form)
+        # Save the book first
+        self.object = form.save()
+
+        # Process new links
+        new_links = form.cleaned_data.get('new_links', '').strip()
+        if new_links:
+            for line in new_links.split('\n'):
+                if line.strip():
+                    site, link = line.strip().split(',', 1)
+                    link_obj, created = Link.objects.get_or_create(site=site.strip(), link=link.strip())
+                    self.object.links.add(link_obj)
+
+        return redirect(self.get_success_url())
 
     def form_invalid(self, form):
         return super().form_invalid(form)
 
     def test_func(self):
-        # Limita apenas professores a terem acesso a essa tela
-        return self.request.user.groups.filter(name='professor').exists()
+        # Permite acesso se o usuário for superuser ou estiver no grupo 'professor'
+        user = self.request.user
+        return user.is_superuser or user.groups.filter(name='professor').exists()
 
     def get_redirect_url(self):
         # Se não for professor, redireciona para outra pagina
@@ -98,6 +159,8 @@ class DetalhesLivroView(DetailView):
     model = Livros
     template_name = 'livro.html'
     context_object_name = 'livro'
+    login_url = 'usuario:login'
+    sucess_url = '.'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -119,6 +182,12 @@ class DetalhesLivroView(DetailView):
         comentarios = paginator.get_page(page)
 
         context['comentarios'] = comentarios
+
+        if self.request.user.is_authenticated:
+            context['is_favorited'] = Favoritos.objects.filter(livro=livro, usuario=self.request.user.usuario).exists()
+        else:
+            context['is_favorited'] = False
+
         return context
     
     def get_object(self):
@@ -173,3 +242,6 @@ class AlternarFavoritosView(LoginRequiredMixin, View):
         if not created:  
             # Se já existir, desfavorita
             favorito.delete()
+
+        # Redirect back to the book detail page
+        return redirect(reverse('livros:detalhes_livro', kwargs={'slug': livro.slug}))

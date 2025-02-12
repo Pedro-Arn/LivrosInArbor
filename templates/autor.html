@@ -1,10 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}{{ object.nome_completo }}{% endblock title %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/autor.css' %}">
 {% endblock head %}
-
-{% block title %}{{ object.nome_completo }}{% endblock title %}
 
 
 {% block content %}

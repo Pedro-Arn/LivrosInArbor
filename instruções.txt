@@ -3,7 +3,7 @@
 1 - Ao descompactar a pasta, abra o cmd/terminal e execute os seguintes comandos:
 
 pip install virtualenv
-pip -m venv venv
+python -m venv venv
 cd venv\Scripts
 activate
 cd ..\..

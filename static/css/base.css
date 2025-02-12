@@ -22,7 +22,7 @@ body {
   margin-bottom: -30px;
   margin-top: 20px;
   width: 80%;
-  color: #ffffff;
+  color: #F2F4F8;
 }
 
 .container {
@@ -54,19 +54,19 @@ body {
 }
 
 .conteudo-container h2 {
-  font-size: 25px;
+  font-size: 24px;
   margin-bottom: 15px;
   font-weight: bold;
-  color: #ffffff;
+  color: #F2F4F8;
 }
 
 .conteudo-container strong {
-  font-size: 19px;
-  color: #ffffff;
+  font-size: 18px;
+  color: #F2F4F8;
 }
 
 .conteudo-container p, a {
-  font-size: 17px;
+  font-size: 16px;
 }
 
 .imagem-container img {

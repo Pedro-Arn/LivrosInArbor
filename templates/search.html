@@ -1,92 +1,80 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
+{% extends 'base.html' %}
 {% load static %}
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Search Page</title>
-    <link rel="stylesheet" href="{% static 'css/search.css' %}">
-</head>
 
-<body>
+{% block title %}Pesquisa{% endblock title %}
+
+{% block head %}
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+{% endblock head %}
+
+
+{% block content %}
+    {% include 'header.html' %}
     <div class="container">
         <aside class="filtros">
             <h2>Filtrar Resultados</h2>
-            <label for="curso">Curso:</label>
-            <select id="curso">
-                <option value="">Selecione</option>
-                <option value="civil">Engenharia Civil</option>
-                <option value="computaçao">Engenharia da Computação</option>
-                <option value="materiais">Engenharia de Materiais</option>
-                <option value="minas">Engenharia de Minas e Meio Ambiente</option>
-                <option value="eletrica">Engenharia Elétrica</option>
-                <option value="mecanica">Engenharia Mecânica</option>
-                <option value="quimica">Engenharia Química</option>
-                <option value="geologia">Geologia</option>
-                <option value="sistemas">Sistemas de Informação</option>
-                <option value="todos">Todos</option>
-            </select>
-            <label for="periodo">Período:</label>
-            <select id="periodo">
-                <option value="">Selecione</option>
-                <option value="1">1º Período</option>
-                <option value="2">2º Período</option>
-                <option value="3">3º Período</option>
-                <option value="4">4º Período</option>
-                <option value="5">5º Período</option>
-                <option value="6">6º Período</option>
-                <option value="7">7º Período</option>
-                <option value="8">8º Período</option>
-                <option value="9">9º Período</option>
-                <option value="10">10º Período</option>
-                <option value="todos">Todos</option>
+            <form method="get" action="{% url 'livros:lista_livros' %}">
 
-            </select>
-            <label for="disciplina">Disciplina:</label>
-            <input type="text" id="disciplina" placeholder="Nome da disciplina">
-            <label for="livro">Livro:</label>
-            <input type="text" id="livro" placeholder="Nome do livro">
-            <label for="autor">Autor:</label>
-            <input type="text" id="autor" placeholder="Nome do autor">
-            <button class="btn-filtrar">Aplicar Filtros</button>
+                <label for="search_query">Pesquisar:</label>
+                <input type="text" id="search_query" name="search_query" placeholder="Pesquisar por título, autor, etc." value="{{ search_query }}">
+                
+                <label for="ano_publicacao">Ano de Publicação:</label>
+                <input type="text" id="ano_publicacao" name="ano_publicacao" placeholder="Ano de publicação" value="{{ ano_publicacao }}">
+            
+                <label for="editora">Editora:</label>
+                <input type="text" id="editora" name="editora" placeholder="Nome da editora" value="{{ editora }}">
+            
+                <label for="materia">Matéria:</label>
+                <input type="text" id="materia" name="materia" placeholder="Nome da matéria" value="{{ materia }}">
+            
+                <button type="submit" class="btn-filtrar">Aplicar Filtros</button>
+            </form>
         </aside>
+
         <main class="resultados">
             <h2>Resultados Encontrados</h2>
             <div class="livros">
-                <div class="livro">
-                    <img src="../static/img/image.png" alt="Livro 1">
-                    <div class="info">
-                        <h3>Livro de Engenharia</h3>
-                        <p>Autor: João Silva</p>
-                        <button class="btn-comprar"
-                            onclick="window.location.href='pagina_destino.html';">Comprar</button>
+                {% for livro in livros %}
+                    <div class="livro">
+                        <div class="imagem-container">
+                            <a href="{% url 'livros:detalhes_livro' livro.slug %}">
+                                <img src="{{ livro.capa.url }}" alt="{{ livro.titulo }}">
+                            </a>
+                        </div>
+                        <div class="conteudo-container">
+                            <h2>
+                                <a href="{% url 'livros:detalhes_livro' livro.slug %}">{{ livro.titulo }}</a>
+                            </h2>
+                            <p><strong>Autor: </strong><a class="autor-info" href="{% url 'autor:detalhes_autor' livro.autor.slug %}">{{ livro.autor.nome_completo }}</a></p>
+                            <p>Editora: {{ livro.editora.nome }}</p>
+                            <p>Matéria: {{ livro.materia.nome }}</p>
+                            <button class="btn-comprar" onclick="window.location.href='{{ livro.link_compra }}';">Comprar</button>
+                        </div>
                     </div>
-                </div>
-                <div class="livro">
-                    <img src="../static/img/image.png" alt="Livro 2">
-                    <div class="info">
-                        <h3>Fundamentos de Mecânica</h3>
-                        <p>Autor: Maria Souza</p>
-                        <button class="btn-comprar"
-                            onclick="window.location.href='pagina_destino.html';">Comprar</button>
-                    </div>
-                </div>
-            </div>
-            <h2>Talvez você goste</h2>
-            <div class="sugestoes">
-                <div class="livro">
-                    <img src="../static/img/image.png" alt="Livro 3">
-                    <div class="info">
-                        <h3>Cálculo Aplicado</h3>
-                        <p>Autor: Roberto Lima</p>
-                        <button class="btn-comprar"
-                            onclick="window.location.href='pagina_destino.html';">Comprar</button>
-                    </div>
-                </div>
+                {% empty %}
+                    <p>Nenhum livro encontrado.</p>
+                {% endfor %}
             </div>
         </main>
+        
     </div>
-    <script src="{% static 'js/search.js' %}"></script>
-</body>
-
-</html>
+    <div class="paginacao">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; Primeira</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+    
+            <span class="atual">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+    
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Próxima</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">Última &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+    
+    {% include 'footer.html' %}
+{% endblock content %}

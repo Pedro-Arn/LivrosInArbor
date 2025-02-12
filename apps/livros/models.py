@@ -44,11 +44,11 @@ class Livros(models.Model):
         max_length=70,
         blank=False,
         null=False,
-        unique=True
+        unique=False,
     )
     descricao = models.TextField(max_length=500, blank=True)
     ano_publicacao = models.DateField(
-        'Data de publicação',
+        verbose_name='Data de publicação',
         blank=True,
         null=True
     )
