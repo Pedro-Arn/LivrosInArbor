@@ -14,7 +14,7 @@
 header {
     align-items: center;
     animation: fadeInDown 0.8s ease-in-out;
-    background-color: rgb(8, 13, 48);
+    background-color: rgba(8, 13, 48, 0.353);
     display: flex;
     justify-content: space-between;
     padding: 40px 30px;
@@ -67,25 +67,7 @@ header {
     outline: none;
 }
 
-.nav-links {
-    display: flex;
-    gap: 60px;
-    list-style: none;
-}
-
-.nav-links a {
-    color: rgb(21, 31, 42);
-    font-weight: 500;
-    text-decoration: none;
-    transition: all 0.3s ease-in-out;
-}
-
-.nav-links a:hover {
-    color: rgb(35, 94, 128)
-    transform: scale(1.1);
-}
-
-#login-btn, #logout-btn {
+#login-btn, #logout-btn, #add-btn {
     background: transparent;
     border: 2px solid rgb(24, 81, 111);
     border-radius: 5px;
@@ -96,7 +78,12 @@ header {
     width: 100px;
 }
 
-#login-btn:hover, #logout-btn:hover {
+#add-btn {
+    width: auto;
+    display: flex;
+}
+
+#login-btn:hover, #logout-btn:hover, #add-btn:hover {
     background:rgb(24, 81, 111);
     color: #fff;
 }
