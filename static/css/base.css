@@ -1,3 +1,4 @@
+/* Todos que herdarem essa base vão ter essas configurações de estilo */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
 
 * {
@@ -18,7 +19,7 @@ body {
 }
 
 .breadcrumb {
-  font-size: 20px;
+  font-size: 13px;
   margin-bottom: -30px;
   margin-top: 20px;
   width: 80%;
