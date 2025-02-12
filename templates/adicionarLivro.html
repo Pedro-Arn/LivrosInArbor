@@ -4,15 +4,19 @@
 {% block title %}Adicionar livro{% endblock title %}
 
 {% block head %}
+    <!-- Essa página herda configurações gerais de estilo base -->
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{% static 'css/adicionarLivro.css' %}">
 {% endblock head %}
 
 {% block content %}
+    <!-- Importação da header -->
     {% include 'header.html' %}
-    <div class="">
+    <div class="form-container">
         <h2>Adicionar Livro</h2>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
+            <!-- Campo para digitar nome do livro -->
             <div class="form-group">
                 <label for="{{ form.titulo.id_for_label }}">Título:</label>
                 {{ form.titulo }}
@@ -21,6 +25,7 @@
                 {% endif %}
             </div>
     
+            <!-- Campo para adicionar breve introdução sobre o conteúdo do livro -->
             <div class="form-group">
                 <label for="{{ form.descricao.id_for_label }}">Descrição:</label>
                 {{ form.descricao }}
@@ -29,6 +34,7 @@
                 {% endif %}
             </div>
     
+            <!-- Definição da data de publicação do livro -->
             <div class="form-group">
                 <label for="{{ form.ano_publicacao.id_for_label }}">Data de Publicação:</label>
                 {{ form.ano_publicacao }}
@@ -37,6 +43,7 @@
                 {% endif %}
             </div>
     
+            <!-- Campo de seleção da editora do livro -->
             <div class="form-group">
                 <label for="{{ form.editora.id_for_label }}">Editora:</label>
                 {{ form.editora }}
@@ -45,6 +52,7 @@
                 {% endif %}
             </div>
 
+            <!-- Submissão do link de compra do livro em formato válido para link -->
             <div class="form-group">
                 <label for="{{ form.new_links.id_for_label }}">Onde Comprar:</label>
                 {{ form.new_links }}
@@ -53,6 +61,7 @@
                 {% endif %}
             </div>
 
+            <!-- Campo para seleção do nome do autor do livro -->
             <div class="form-group">
                 <label for="{{ form.autor.id_for_label }}">Autor:</label>
                 {{ form.autor }}
@@ -61,6 +70,7 @@
                 {% endif %}
             </div>
     
+            <!-- Campo de seleção para as matérias associadas ao livro -->
             <div class="form-group">
                 <label for="{{ form.materia.id_for_label }}">Matérias Associadas:</label>
                 {{ form.materia }}
@@ -69,6 +79,7 @@
                 {% endif %}
             </div>
     
+            <!-- Campo fazer upload da capa do livro  -->
             <div class="form-group">
                 <label for="{{ form.capa.id_for_label }}">Capa do Livro:</label>
                 {{ form.capa }}
@@ -77,12 +88,13 @@
                 {% endif %}
             </div>
     
-            <!-- Submit button -->
+            <!-- Botão de confirmar campos preenchidos e adicionar livro -->
             <button type="submit" class="btn btn-primary">Adicionar Livro</button>
     
-            <!-- Cancel button to go back to the previous page -->
+            <!-- Botão de cencelar operação -->
             <a href="{% url 'usuario:home' %}" class="btn btn-secondary">Cancelar</a>
         </form>
     </div>
+    <!-- Importação do footer -->
     {% include 'footer.html' %}
 {% endblock content %}
