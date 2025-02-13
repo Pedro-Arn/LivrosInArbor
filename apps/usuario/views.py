@@ -1,14 +1,17 @@
 from django.contrib.auth.models import Group
 from django.contrib.auth import login
-from django.contrib.auth.views import LoginView
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
 
 from django.views.generic import TemplateView, FormView
 
-from apps.usuario.forms import RegistrarUsuarioForm
+from apps.usuario.forms import (
+    RegistrarUsuarioForm, 
+    EditarPerfilForm,
+    GerenciarFavoritosForm,
+    )
 from apps.usuario.models import Usuario, Favoritos
 
 class HomePage(TemplateView):
@@ -77,10 +80,35 @@ class PerfilUsuarioView(TemplateView):
         usuario = get_object_or_404(Usuario, username=username)
         favoritos = Favoritos.objects.filter(usuario=usuario).select_related('livro')
 
+        # Add forms to the context
         context = super().get_context_data(**kwargs)
-        context = {
+        context.update({
             'username': username,
             'usuario': usuario,
-            'favoritos': favoritos
-        }
+            'favoritos': favoritos,
+            'editar_perfil_form': EditarPerfilForm(instance=usuario),
+            'gerenciar_favoritos_form': GerenciarFavoritosForm(usuario=usuario),
+        })
         return context
+
+    def post(self, request, *args, **kwargs):
+        username = self.kwargs['username']
+        usuario = get_object_or_404(Usuario, username=username)
+
+        if 'editar_perfil' in request.POST:
+            form = EditarPerfilForm(request.POST, request.FILES, instance=usuario)
+            if form.is_valid():
+                form.save()
+                return redirect('perfil', username=username)
+
+        elif 'gerenciar_favoritos' in request.POST:
+            form = GerenciarFavoritosForm(usuario=usuario, data=request.POST)
+            if form.is_valid():
+                form.save()
+                return redirect('perfil', username=username)
+
+        # If forms are invalid, re-render the page with errors
+        context = self.get_context_data(**kwargs)
+        context['editar_perfil_form'] = form if 'editar_perfil' in request.POST else EditarPerfilForm(instance=usuario)
+        context['gerenciar_favoritos_form'] = form if 'gerenciar_favoritos' in request.POST else GerenciarFavoritosForm(usuario=usuario)
+        return render(request, self.template_name, context)

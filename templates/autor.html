@@ -8,8 +8,6 @@
 <link rel="stylesheet" href="{% static 'css/autor.css' %}">
 {% endblock head %}
 
-{% block title %}{{ object.nome_completo }}{% endblock title %}
-
 {% block content %}
 
 <!-- Aplicação da header -->
@@ -24,7 +22,11 @@
 <section class="container">
     <div class="detalhes-container">
         <div class="imagem-container">
+            {% if object.foto_perfil %}
             <img src="{{ object.foto_perfil.url }}" alt="Foto do Autor">
+            {% else %}
+            <img src="{% static 'imgs/usuario.png' %}">
+            {% endif %}
         </div>
         <div class="conteudo-container">
             <h2 class="autor">{{ object.nome_completo }}</h2>
@@ -40,7 +42,11 @@
     <div class="livros-grid">
         {% for livro in object.livros.all %}
         <a href="{% url 'livros:detalhes_livro' livro.slug %}" class="livro-item">
-            <img src="{{ livro.capa.url }}" alt="{{ livro.titulo }}" class="livro-capa">
+            {% if livro.capa %}
+                <img src="{{ livro.capa.url }}" alt="Capa do Livro">
+            {% else %}
+                <img src="{% static 'imgs/capa_base.png' %}">
+            {% endif %}
             <h3>{{ livro.titulo }}</h3>
         </a>
         {% endfor %}

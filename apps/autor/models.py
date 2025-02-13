@@ -11,7 +11,12 @@ class Autor(models.Model):
         verbose_name='Data de nascimento',
     )
     slug = models.SlugField(unique=True, blank=True)
-    foto_perfil = models.ImageField(upload_to='autor', null=True, blank=True)
+    foto_perfil = models.ImageField(
+        upload_to='autor',
+        null=True, 
+        blank=True,
+        default='usuario.png'
+    )
 
     class Meta:
         db_table  = 'autor'

@@ -53,7 +53,11 @@ class Usuario(User):
         blank=False,
         null=False,
     )
-    foto_perfil = models.ImageField(upload_to='usuario', null=True)
+    foto_perfil = models.ImageField(
+        upload_to='usuario',
+        null=True,
+        default='usuario.png',
+    )
 
     @property
     def nome_completo(self):

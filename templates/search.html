@@ -38,7 +38,11 @@
                     <div class="livro">
                         <div class="imagem-container">
                             <a href="{% url 'livros:detalhes_livro' livro.slug %}">
-                                <img src="{{ livro.capa.url }}" alt="{{ livro.titulo }}">
+                                {% if livro.capa %}
+                                    <img src="{{ livro.capa.url }}" alt="Capa do Livro">
+                                {% else %}
+                                    <img src="{% static 'imgs/capa_base.png' %}">
+                                {% endif %}
                             </a>
                         </div>
                         <div class="conteudo-container">

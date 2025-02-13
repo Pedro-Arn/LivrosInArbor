@@ -35,14 +35,119 @@
 
 /* Favorites section */
 .favoritos {
-  margin-top: 20px;
+  text-align: left;
+  align-items: left;
+  padding: 20px;
+  color: white;
+}
+
+.favoritos h2 {
+  font-size: 18px;
+  color: #ffffff;
+}
+
+.favoritos h3 {
+  text-align: justify;
+  font-size: 16px;
+  margin-top: 10px;
 }
 
 .favoritos img {
-  width: 120px;
-  height: 180px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  height: 240px;
+  width: 170px;
+}
+
+.livros-grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  flex-wrap: wrap;
+  padding: 15px;
+}
+
+
+.livro-item {
+  text-decoration: none;
+  width: 180px;
+  border-radius: 10px;
+  padding: 10px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.livro-item:hover {
+  transform: scale(1.1);
+}
+/* Modal Styling */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1000; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgba(0, 0, 0, 0.5); /* Black with opacity */
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto; /* 10% from the top and centered */
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 10px;
+  width: 50%; /* Adjust width as needed */
+  max-width: 600px;
+}
+
+.close-button {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover,
+.close-button:focus {
+  color: #000;
+  text-decoration: none;
+}
+
+/* Form Styling Inside Modal */
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content label {
+  margin-top: 10px;
+}
+
+.modal-content input[type="text"],
+.modal-content input[type="date"],
+.modal-content input[type="file"] {
+  padding: 5px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
   border-radius: 5px;
-  margin-right: 10px;
+}
+
+.modal-content button[type="submit"] {
+  margin-top: 10px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.modal-content button[type="submit"]:hover {
+  background-color: #218838;
 }
 
 @media (max-width: 768px) {

@@ -21,10 +21,10 @@
     <section class="container">
         <div class="detalhes-container">
             <div class="imagem-container">
-                {% if usario.foto_perfil.url %}
+                {% if livro.capa %}
                     <img src="{{ livro.capa.url }}" alt="Capa do Livro">
                 {% else %}
-                    <img src="{% static 'imgs/usuario/usuario.png' %}">
+                    <img src="{% static 'imgs/capa_base.png' %}">
                 {% endif %}
             </div>
             <div class="conteudo-container">
@@ -35,7 +35,7 @@
                             <button id="estrela-favorito" class="estrela-favorito {% if livro in usuario.favoritos.all %}preenchida{% else %}vazia{% endif %}" 
                             data-livro-id="{{ livro.id }}">
                             {% if is_favorited %}
-                                &#9733; <!--  Estrela preenchida -->
+                                &#9733;  <!--  Estrela preenchida -->
                             {% else %}
                                 &#9734;  <!-- Estrela vazia -->
                             {% endif %}
