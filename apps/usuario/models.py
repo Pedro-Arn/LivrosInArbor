@@ -53,7 +53,11 @@ class Usuario(User):
         blank=False,
         null=False,
     )
-    foto_perfil = models.ImageField(upload_to='usuario', null=True)
+    foto_perfil = models.ImageField(
+        upload_to='usuario',
+        null=True,
+        default='usuario.png',
+    )
 
     @property
     def nome_completo(self):
@@ -64,6 +68,8 @@ class Usuario(User):
         super().clean()
         validar_identificacao(self.identificacao, self.tipo_identificacao)
 
+    class Meta:
+        db_table  = 'usuario'
 
 class Favoritos(models.Model):
     from apps.livros.models import Livros

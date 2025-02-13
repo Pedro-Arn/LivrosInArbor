@@ -1,46 +1,59 @@
 <html>
 {% load static %}
 {% block head %}
+<!-- Importação do CDN de icons -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
     integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="{% static '../static/css/header.css' %}">
+<link rel="stylesheet" href="{% static 'css/header.css' %}">
 {% endblock head %}
 
 <body>
     <header>
-        <!-- Área da logo -->
-        <div class="logo">
-            <img src="../static/imgs/Logo.png" alt="Logo">
-            LivrariaIGE
-        </div>
-
-        <!-- Barra de pesquisa -->
+        <!-- Logo com redirecionamento para a tela principal -->
+        <a style="text-decoration: none;" href="{% url 'usuario:home' %}">
+            <div class="logo">
+                <img src="{% static 'imgs/logo.png' %}" alt="Logo">
+                LivrariaIGE
+            </div>
+        </a>
+        <!-- Barra para realizar pesquisas por atributos -->
         <form class="search-bar" action="{% url 'livros:lista_livros' %}" method="GET"
             onsubmit="return checkSearchQuery()">
             <input type="text" name="search_query" placeholder="Pesquisar..." value="{{ request.GET.search_query }}">
             <button type="submit-search">
+                <!-- Icon do CDN -->
                 <i class="fas fa-search"></i>
             </button>
         </form>
-
-        <!-- Área de ver dados cadastrais, fazer login ou logout -->
+        <!-- Botão de adicionar livros (aparecerá apenas para professores) -->
         <div class="user-area">
+            {% if request.user.usuario.ocupacao == 'P' %}
+            <form action="{% url 'livros:novo_livro' %}" method="post">
+                {% csrf_token %}
+                <button id="add-btn" type="submit">Adicionar Livro</button>
+            </form>
+            {% endif %}
+            <!-- Botão de fazer logout (aparecerá para quem está logado)-->
             {% if request.user.is_authenticated %}
             <form action="{% url 'usuario:logout' %}" method="post">
                 {% csrf_token %}
                 <button id="logout-btn" type="submit">Logout</button>
             </form>
-            <i class="fa-solid fa-user user-icon" id="user-icon"></i>
+            <!-- Botão de ver dados cadastrais com redirecionamento para a página do perfil (aparecerá para quem está logado)-->
+            <a href="{% url 'usuario:perfil' request.user.username %}">
+                <i class="fa-solid fa-user user-icon" id="user-icon"></i>
+            </a>
             {% else %}
+            <!-- Botão de fazer login (aparecerá para quem NÃO está logado)-->
             <a href="{% url 'usuario:login' %}">
                 <button id="login-btn">Login</button>
             </a>
             {% endif %}
         </div>
     </header>
-    <!-- Importação das configurações de aparição dos botões logout e user -->
-    <script src="../static/js/header.js"></script>
+    <!-- Importação das configurações de aparição dos botões -->
+    <script src="{% static 'js/header.js' %}"></script>
 </body>
 
 </html>

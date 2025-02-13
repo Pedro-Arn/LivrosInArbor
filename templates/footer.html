@@ -2,6 +2,7 @@
 <html lang="pt-br">
 
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../static/css/footer.css">
@@ -14,7 +15,7 @@
             <!-- Área da logomarca -->
             <div class="footer-contacts">
                 <div class="logo-footer">
-                    <img src="../static/imgs/Logo.png" alt="">
+                    <img src="{% static 'imgs/logo.png' %}" alt="">
                     LivrariaIGE
                 </div>
                 <p>Todo o conhecimento de Engenharia em um só lugar.</p>

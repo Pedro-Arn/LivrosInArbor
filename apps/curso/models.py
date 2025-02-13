@@ -27,6 +27,7 @@ class Materias(models.Model):
         return self.nome + ' - ' + str(self.periodo)
 
     class Meta:
+        db_table  = 'materias'
         verbose_name = 'Materia'
         verbose_name_plural = 'Materias'
         ordering = ['periodo',]
@@ -40,6 +41,7 @@ class Cursos(models.Model):
         return self.nome
 
     class Meta:
+        db_table  = 'cursos'
         verbose_name = 'Curso'
         verbose_name_plural = 'Cursos'
         ordering = ['nome',]

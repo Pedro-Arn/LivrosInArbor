@@ -1,5 +1,10 @@
 from django.contrib import admin
-from .models import Link, Livros, Comentario
+from .models import Link, Livros, Comentario, Editora
+
+
+@admin.register(Editora)
+class EditoraAdmin(admin.ModelAdmin):
+    list_display = ('nome',)
 
 
 @admin.register(Link)

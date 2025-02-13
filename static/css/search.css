@@ -1,38 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
-
-* {
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-body {
-    background: rgb(57, 83, 112);
-    display: flex;
-    justify-content: center;
-}
-
-.container {
-    display: flex;
-    gap: 20px;
-    max-width: 1200px;
-    width: 100%;
-    padding: 20px;
-}
-
 .filtros {
-    background: #fff;
+    background-color: #172A45;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 250px;
     margin-right: 30px;
-    height: 550px;
+    height: fit-content;
 }
 
 .filtros h2 {
-    color: #045d9c;
+    color: #F2F4F8;
     margin-bottom: 15px;
 }
 
@@ -49,22 +26,69 @@ body {
     border-radius: 5px;
     border: 1px solid #ccc;
     outline: none;
+    color: black;
 }
 
 .btn-filtrar {
     background-color: #ffaf53;
     border: none;
     border-radius: 5px;
-    color: white;
+    color: #F2F4F8;
     padding: 10px;
     width: 100%;
     margin-top: 15px;
     cursor: pointer;
-    transition: 0.3s;
 }
 
 .btn-filtrar:hover {
     background-color: #ff7700;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    max-height: fit-content;
+}
+
+.conteudo-container {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column; 
+    flex: 1;
+}
+
+.conteudo-container .livro {
+    font-size: 18px;
+    margin-bottom: -10px;
+    margin-left: -15px;
+}
+
+.conteudo-container a {
+    text-decoration: none;
+}
+
+.conteudo-container .matéria {
+    margin-bottom: 10px;
+}
+
+.conteudo-container a:hover {
+    color: rgb(99, 139, 186);
+    text-decoration: underline;
+}
+
+.imagem-container {
+    height: 190px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    max-height: min-content;
+}
+
+.imagem-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
 }
 
 .resultados {
@@ -72,74 +96,99 @@ body {
 }
 
 .resultados h2 {
-    margin-top: 20px;
     margin-bottom: 10px;
-    color: #045d9c;
-
 }
 
-.livros,
-.sugestoes {
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+.livros {
+    display: block;
 }
 
 .livro {
-    background: white;
+    background-color: #172A45;
+    display: flex;
     padding: 15px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 200px;
-    position: relative;
-}
-
-.info {
-    margin-bottom: 50px;
-}
-
-.livro img {
     width: 100%;
-    border-radius: 5px;
-}
-
-.info h3 {
-    color: #045d9c;
-    font-size: 16px;
+    position: relative;
+    margin-bottom: 15px;
+    max-height: fit-content;
 }
 
 .btn-comprar {
-    background: #ffaf53;
-    color: white;
-    border: none;
-    padding: 10px;
+    background-color: #ffaf53;
     border-radius: 5px;
+    color: #F2F4F8;
+    padding: 10px 20px;
+    text-decoration: none;
+    width: 150px; 
+    text-align: center;
     cursor: pointer;
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    right: 15px;
-    margin-top: 0;
+    border: none;
+    display: block;
+    margin-top: auto;
+    align-self: center;
 }
 
 .btn-comprar:hover {
     background: #ff7700;
 }
 
-@media screen and (max-width: 768px) {
-    .resultados {
-        grid-template-columns: 1fr;
-    }
+.paginacao {
+    margin: 10px;
+    text-align: center;
+    width: 100%;
 }
 
-@media screen and (max-width: 480px) {
+/* Responsividade para telas menores  */
+@media (max-width: 768px) {
     .container {
-        width: 100%;
-        padding: 10px;
+        flex-direction: column;
+        align-items: center;
     }
 
     .filtros {
-        padding: 10px;
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .conteudo-container {
+        margin-left: 0;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .imagem-container {
+        margin: 0 auto;
+        width: 120px;
+    }
+
+    .livro {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Responsividade para telas médias */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .filtros {
+        width: 50%;
+        margin-right: 20px;
+    }
+
+    .imagem-container {
+        width: 130px;
+    }
+
+    .livro {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }

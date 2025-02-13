@@ -1,35 +1,82 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title %}{{ username }}{% endblock title %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
 {% endblock head %}
 
-{% block title %}{{ username }}{% endblock title %}
 
 {% block content %}
   {% include 'header.html' %}
     <div class="container">
       <div class="usuario-imagem">
-        {% if usario.foto_perfil.url %}
+        {% if usario.foto_perfil %}
           <img src="{{ usuario.foto_perfil.url }}" alt="Foto de {{ username }}">
         {% else %}
           <img src="{% static 'imgs/usuario/usuario.png' %}">
         {% endif %}
       </div>
       <div class="conteudo-container">
-        <span class="usuario">{{ username }}</span>
+        <div class="usuario-header">
+          <span class="usuario">{{ username }}</span>
+          {% if request.user.usuario == usuario %}
+            <button class="edit-button" onclick="openModal('edit-profile-modal')">Editar Perfil</button>
+          {% endif %}
+        </div>
         <p>{{ usuario.nome_completo }}</p>
         <p>{{ usuario.data_nascimento }}</p>
         <p>{{ usuario.get_genero_display }}</p>
         <p>{{ usuario.get_ocupacao_display }}</p>
       </div>
       <div class="favoritos">
+      <div class="favoritos-header">
+        <h2>Favoritos do usuário</h2>
+        {% if request.user.usuario == usuario %}
+          <button class="edit-button" onclick="openModal('manage-favorites-modal')">Gerenciar Favoritos</button>
+        {% endif %}
+      </div>
+      <div class="livros-grid">
         {% for favorito in favoritos %}
-          <img src="{{ favorito.livro.capa.url }}" alt="{{ favorito.livro.titulo }}">
+        <a href="{% url 'livros:detalhes_livro' favorito.livro.slug %}" class="livro-item">
+          {% if favorito.livro.capa %}
+            <img src="{{ favorito.livro.capa.url }}" alt="{{ favorito.livro.titulo }}" class="livro-capa">
+          {% else %}
+            <img src="{% static 'imgs/capa_base.png' %}">
+          {% endif %}
+          <h3>{{ favorito.livro.titulo }}</h3>
+        </a>
         {% endfor %}
       </div>
     </div>
   {% include 'footer.html' %}
+
+  <!-- Modal Perfil -->
+  <div id="edit-profile-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('edit-profile-modal')">&times;</span>
+      <h2>Editar Perfil</h2>
+      <form method="post" action="{% url 'usuario:perfil' username=username %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ editar_perfil_form.as_p }}
+        <button type="submit" name="editar_perfil">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Favoritos -->
+  <div id="manage-favorites-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closeModal('manage-favorites-modal')">&times;</span>
+      <h2>Gerenciar Favoritos</h2>
+      <form method="post" action="{% url 'usuario:perfil' username=username %}">
+        {% csrf_token %}
+        {{ gerenciar_favoritos_form.as_p }}
+        <button type="submit" name="gerenciar_favoritos">Remover Selecionados</button>
+      </form>
+    </div>
+  </div>
+  <script src="{% static 'perfil.js' %}"></script>
+
 {% endblock content %}
-    

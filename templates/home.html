@@ -1,17 +1,22 @@
 <!-- Herda as configurações da base -->
 {% extends 'base.html' %}
 {% load static %}
+
+{% block title %}Livraria IGE{% endblock title %}
+
 {% block head %}
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock head %}
 
-{% block title %}Livraria IGE{% endblock title %}
 
 {% block content %}
+    <!-- Importação da header -->
     {% include 'header.html' %}
-    <div class="hero">
+    <!-- Mensagem de boas-vindas -->
+    <div class="seção-1">
         <h1>Boas vindas à Livraria IGE<p>sua principal fonte de busca de livros.</p></h1>
     </div>
+    <!-- Área com os blocos representando os 9 cursos do IGE -->
     <section class="seção-2" id="seção-2">
         <div class="home-container">
             <div class="bloco" data-curso="Civil">
@@ -52,25 +57,17 @@
             </div>
         </div>
     </section>
-
-    <div class="modal" id="modal">
+        <!-- Janela para a seleção do período -->
+        <div class="modal" id="modal">
         <div class="modal-content">
             <h2 id="modal-titulo">Selecione o Período</h2>
             <div class="periodos">
-                <button class="btn-periodo">1º Período</button>
-                <button class="btn-periodo">2º Período</button>
-                <button class="btn-periodo">3º Período</button>
-                <button class="btn-periodo">4º Período</button>
-                <button class="btn-periodo">5º Período</button>
-                <button class="btn-periodo">6º Período</button>
-                <button class="btn-periodo">7º Período</button>
-                <button class="btn-periodo">8º Período</button>
-                <button class="btn-periodo">9º Período</button>
-                <button class="btn-periodo">10º Período</button>
+                <!-- Dinamicamente adicionados via javascript -->
             </div>
         </div>
     </div>
 
+    <!-- Seção apenas informativa sobre as matérias básicas que alguns cursos compartilham -->
     <section class="seção-3" id="seção-3">
         <div class="conteudo">
             <div class="texto">
@@ -87,19 +84,24 @@
                     complexos.
                 </p>
             </div>
+            <!-- Amostragem de livros básicos famosos (apenas visual) -->
             <div class="carrossel-container">
                 <div class="carrossel">
+                    <!-- Capa dos livros -->
                     <img src="../static/imgs/fisica.png" alt="Livro 1" class="livro" data-materia="Física">
                     <img src="../static/imgs/quimica.png" alt="Livro 2" class="livro" data-materia="Química">
                     <img src="../static/imgs/matematica.png" alt="Livro 3" class="livro destaque" data-materia="Matemática">
                     <img src="../static/imgs/mecanica.png" alt="Livro 4" class="livro" data-materia="Mecânica">
                     <img src="../static/imgs/programaçao.png" alt="Livro 5" class="livro" data-materia="Programação">
                 </div>
+                <!-- Nome das matérias correspondentes as capas -->
                 <h3 id="materia-livro">Matéria: Matemática</h3>
             </div>
         </div>
     </section>
+    <!-- Importação do footer -->
     {% include 'footer.html' %}
+    <!-- Importação do dinamismo da amostragem e modal -->
     <script src="{% static 'js/home.js' %}"></script>
 {% endblock content %}
 

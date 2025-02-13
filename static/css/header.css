@@ -8,13 +8,13 @@
     letter-spacing: 1px;
     margin: 0;
     padding: 0;
-    color: #ffffff;
+    color:rgb(255, 255, 255);
 }
 
 header {
     align-items: center;
     animation: fadeInDown 0.8s ease-in-out;
-    background-color: #080d305a;
+    background-color: rgba(8, 13, 48, 0.353);
     display: flex;
     justify-content: space-between;
     padding: 40px 30px;
@@ -36,7 +36,8 @@ header {
 
 .search-bar {
     align-items: center;
-    background: #d2d2d28d;
+    background: rgb(210, 210, 210);
+    color: rgb(0, 0, 0);
     border-radius: 20px;
     box-shadow: 0 5px 15px rgba(54, 53, 53, 0.093);
     display: flex;
@@ -47,7 +48,7 @@ header {
 
 .search-bar input {
     background: transparent;
-    color: #000000;
+    color: rgb(0, 0, 0);
     border: none;
     flex: 1;
     outline: none;
@@ -60,19 +61,15 @@ header {
 }
 
 .search-bar i {
-    color: #000000;
+    color: rgb(0, 0, 0);
     cursor: pointer;
     font-size: 16px;
     outline: none;
 }
 
-.search-bar input::placeholder {
-    color: #000000;
-}
-
-#login-btn, #logout-btn {
+#login-btn, #logout-btn, #add-btn {
     background: transparent;
-    border: 2px solid #18516f;
+    border: 2px solid rgb(24, 81, 111);
     border-radius: 5px;
     cursor: pointer;
     font-weight: 600;
@@ -81,8 +78,13 @@ header {
     width: 100px;
 }
 
-#login-btn:hover, #logout-btn:hover {
-    background: #18516f;
+#add-btn {
+    width: auto;
+    display: flex;
+}
+
+#login-btn:hover, #logout-btn:hover, #add-btn:hover {
+    background:rgb(24, 81, 111);
     color: #fff;
 }
 
@@ -99,7 +101,7 @@ header {
 }
 
 .user-icon {
-    color: #ffffff;
+    color:rgb(255, 255, 255);
     cursor: pointer;
     font-size: 20px;
     padding: 8px 15px;

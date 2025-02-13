@@ -4,6 +4,21 @@ from django.utils.text import slugify
 from apps.autor.models import Autor
 from apps.curso.models import Materias
 
+
+class Editora(models.Model):
+    nome = models.CharField(
+        max_length=100,
+        null=False,
+        unique=True,
+    )
+
+    def __str__(self):
+        return self.nome
+
+    class Meta:
+        db_table = 'editora'
+
+
 class Link(models.Model):
     site = models.CharField(
         'Site de compra', 
@@ -17,27 +32,37 @@ class Link(models.Model):
         null=False,
     )
 
+    def __str__(self):
+        return self.site
+
+    class Meta:
+        db_table = 'Link'
+
 
 class Livros(models.Model):
     titulo = models.CharField(
-        max_length=70,
+        max_length=150,
         blank=False,
         null=False,
-        unique=True
+        unique=False,
     )
     descricao = models.TextField(max_length=500, blank=True)
     ano_publicacao = models.DateField(
-        'Data de publicação',
+        verbose_name='Data de publicação',
         blank=True,
         null=True
     )
-    editora = models.CharField(max_length=100, blank=False, null=True)
-    links = models.ForeignKey(
-        Link,
+    editora = models.ForeignKey(
+        Editora,
         on_delete=models.CASCADE,
+        blank=False,
+        null=True
+    )
+    links = models.ManyToManyField(
+        Link,
         blank=True,
         verbose_name='Onde comprar',
-        )
+    )
     autor = models.ForeignKey(
         Autor,
         on_delete=models.CASCADE,
@@ -51,9 +76,15 @@ class Livros(models.Model):
         verbose_name='Materias associadas',
     )
     slug = models.SlugField(unique=True, blank=True)
-    capa = models.ImageField(upload_to='livros', null=True, blank=True)
+    capa = models.ImageField(
+        upload_to='livros', 
+        null=True, 
+        blank=True,
+        default='capa_base.png'
+    )
 
     class Meta:
+        db_table = 'livros'
         verbose_name = 'Livro'
         verbose_name_plural = 'Livros'
         ordering = ['titulo',]
@@ -68,6 +99,8 @@ class Livros(models.Model):
 
 
 class Comentario(models.Model):
+    from apps.usuario.models import Usuario
+
     from apps.usuario.models import Usuario
 
     livro = models.ForeignKey(
@@ -85,4 +118,4 @@ class Comentario(models.Model):
         ordering = ['postado_em',]
 
     def __str__(self):
-        return f'{self.livro.titulo} by {self.usuario.first_name}'
+        return f'{self.livro.titulo} por {self.usuario.first_name}'

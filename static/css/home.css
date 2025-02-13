@@ -1,4 +1,4 @@
-.hero {
+.seção-1 {
     width: 100%;
     height: 300px;
     background:#080d305a;
@@ -6,18 +6,19 @@
     display: flex;
     align-items: start;
     justify-content: left;
-    text-align: center;
+    text-align: left;
     padding: 20px;
     position: relative;
 }
 
-.hero h1 {
+.seção-1 h1 {
+    color: #ffaf53;
     margin: 25px;
     font-size: 22px;
 }
 
-.hero p {
-    font-size: 20;
+.seção-1 p {
+    font-size: 16px;
 }
 
 .seção-2 {
@@ -42,7 +43,7 @@
 
 .bloco {
     border-radius: 15px;
-    color: white;
+    color: #F2F4F8;
     cursor: pointer;
     display: grid;
     font-size: 16px;
@@ -62,7 +63,7 @@
 }
 
 .bloco i {
-    color: #faf3e6;
+    color: #F2F4F8;
     font-size: 40px;
 }
 
@@ -80,7 +81,7 @@
 }
 
 .modal-content {
-    background-color: #8ca3b4;
+    background-color: #172A45;
     border-radius: 10px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
     max-width: 400px;
@@ -102,7 +103,7 @@
 
 .btn-materia,
 .btn-periodo {
-    background-color: white;
+    background-color: #F2F4F8;
     color: #000000;
     border: none;
     border-radius: 5px;
@@ -120,7 +121,6 @@
     margin: 20px;
     margin-bottom: 20px;
     width: 93%;
-    /* background-color: #4a5971; */
     background-color: #172A45;
     border-radius: 15px;
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
@@ -145,7 +145,7 @@
     text-align: center;
     font-size: 18px;
     margin-bottom: 15px;
-    color: #ffffff;
+    color: #F2F4F8;
 }
 
 .texto p {
@@ -199,6 +199,14 @@
 }
 
 @media screen and (max-width: 990px) {
+    .seção-1 {
+        clip-path: none
+    }
+
+    .seção-2 {
+        padding: 5px;
+    }
+
     .conteudo {
         flex-direction: column;
         text-align: center;
@@ -206,7 +214,8 @@
     }
 
     .texto {
-        margin-bottom: 0;
+        margin-bottom: -20px;
+        max-width: 90%;
     }
 
     .carrossel-container {
@@ -216,7 +225,6 @@
 }
 
 @media screen and (max-width: 400px) {
-
     .carrossel-container{
         max-width: 300px;
     }

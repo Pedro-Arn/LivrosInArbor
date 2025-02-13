@@ -1,8 +1,7 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
 
-from apps.usuario.models import Usuario
+from apps.usuario.models import Usuario, Favoritos
 
 
 class RegistrarUsuarioForm(UserCreationForm):
@@ -59,3 +58,25 @@ class RegistrarUsuarioForm(UserCreationForm):
                 'placeholder': 'Senha',
             }),
         }
+
+
+class EditarPerfilForm(forms.ModelForm):
+    class Meta:
+        model = Usuario
+        fields = ['foto_perfil', 'first_name', 'data_nascimento']
+
+
+class GerenciarFavoritosForm(forms.Form):
+    favoritos = forms.ModelMultipleChoiceField(
+        queryset=None,
+        widget=forms.CheckboxSelectMultiple,
+        required=False,
+    )
+
+    def __init__(self, usuario, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['favoritos'].queryset = Favoritos.objects.filter(usuario=usuario).select_related('livro')
+
+    def save(self):
+        favoritos_to_delete = self.cleaned_data['favoritos']
+        favoritos_to_delete.delete()
