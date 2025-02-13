@@ -46,21 +46,33 @@
 
 .container {
     display: flex;
+    flex-wrap: wrap;
     max-height: fit-content;
 }
 
 .conteudo-container {
     margin-left: 20px;
-    display: block;
+    display: flex;
+    flex-direction: column; 
+    flex: 1;
+}
+
+.conteudo-container .livro {
+    font-size: 18px;
+    margin-bottom: -10px;
+    margin-left: -15px;
 }
 
 .conteudo-container a {
     text-decoration: none;
 }
 
+.conteudo-container .matéria {
+    margin-bottom: 10px;
+}
+
 .conteudo-container a:hover {
     color: rgb(99, 139, 186);
-    transform: scale(1.1);
     text-decoration: underline;
 }
 
@@ -100,26 +112,22 @@
     width: 100%;
     position: relative;
     margin-bottom: 15px;
-    max-height: 240px;
-}
-
-.conteudo-container a {
-    font-size: 20px;
-    text-decoration: none
+    max-height: fit-content;
 }
 
 .btn-comprar {
     background-color: #ffaf53;
     border-radius: 5px;
     color: #F2F4F8;
-    display: block;
     padding: 10px 20px;
     text-decoration: none;
-    margin-left: 80%;
-    width: 120px;
-    height: 50px;
+    width: 150px; 
     text-align: center;
     cursor: pointer;
+    border: none;
+    display: block;
+    margin-top: auto;
+    align-self: center;
 }
 
 .btn-comprar:hover {
@@ -132,23 +140,55 @@
     width: 100%;
 }
 
-@media screen and (max-width: 768px) {
-    .resultados {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media screen and (max-width: 480px) {
+/* Responsividade para telas menores  */
+@media (max-width: 768px) {
     .container {
-        width: 100%;
-        padding: 10px;
-        flex-direction: column; /* Stack filter and results vertically on small screens */
+        flex-direction: column;
+        align-items: center;
     }
 
     .filtros {
-        padding: 10px;
-        margin-right: 0; /* Remove margin on small screens */
-        width: 100%; /* Full width on small screens */
-        height: auto; /* Adjust height for small screens */
+        width: 100%;
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+
+    .conteudo-container {
+        margin-left: 0;
+        margin-top: 20px;
+        display: flex;
+        flex-direction: column;
+        text-align: left;
+    }
+
+    .imagem-container {
+        margin: 0 auto;
+        width: 120px;
+    }
+
+    .livro {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Responsividade para telas médias */
+@media (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        flex-direction: row;
+    }
+
+    .filtros {
+        width: 50%;
+        margin-right: 20px;
+    }
+
+    .imagem-container {
+        width: 130px;
+    }
+
+    .livro {
+        flex-direction: row;
+        justify-content: space-between;
     }
 }

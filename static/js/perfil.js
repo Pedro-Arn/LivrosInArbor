@@ -6,7 +6,7 @@ function openModal(modalId) {
     document.getElementById(modalId).style.display = 'none';
   }
 
-  // Close modal when clicking outside of it
+  // Fechar o modal quando clicar fora
   window.onclick = function(event) {
     const modals = document.querySelectorAll('.modal');
     modals.forEach(modal => {
