@@ -16,16 +16,19 @@
   border-radius: 5px;
 }
 
+.titulo-estrela {
+  display: flex;
+  gap: 10px;
+}
+
 #estrela-favorito {
   background: transparent;
-  position: absolute;
-  cursor: pointer;
-  font-size: 24px;
-  padding: 8px 15px;
-  color: gold;
-  width: 100px;
   border: none;
-  margin-bottom: 20px;
+  cursor: pointer;
+  font-size: 30px;
+  color: gold;
+  padding: 0;
+  margin-top: -5px;
 }
 
 .custom-modal {
@@ -84,9 +87,7 @@
   background: #0056b3;
 }
 
-
 .estrela-favorito-preenchida, .estrela-favorito-vazia {
-  font-size: 24px;
   cursor: pointer;
   background: transparent;
   border: none;
@@ -173,16 +174,15 @@
   border: 2px solid #ffaf53;
   border-radius: 50%;
   display: flex;
-  font-size: 25px;
-  height: 50px;
+  height: 60px;
   margin-right: 10px;
   justify-content: center;
-  width: 50px;
+  width: 60px;
   object-fit: cover; 
 }
 
-.comentario-avatar i {
-  color: #ffaf53;
+.comentario-avatar img {
+  height: 90px;
 }
 
 .comentario-usuario {

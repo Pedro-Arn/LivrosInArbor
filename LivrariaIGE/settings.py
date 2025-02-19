@@ -76,7 +76,7 @@ WSGI_APPLICATION = "LivrariaIGE.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE'  : 'django.db.backends.mysql',
-        'NAME'    : 'LivrariaIGE2',
+        'NAME'    : 'LivrariaIGE',
         'USER'    : 'admin',
         'PASSWORD': 'admin',
         'HOST'    : 'localhost',
