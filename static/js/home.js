@@ -3,22 +3,18 @@ const modal = document.getElementById('modal');
 const periodosContainer = document.querySelector('.periodos');
 const modalTitulo = document.getElementById('modal-titulo');
 
-// Open modal when a course block is clicked
 blocos.forEach(bloco => {
   bloco.addEventListener('click', () => {
     const curso = bloco.getAttribute('data-curso');
     const periodos = bloco.getAttribute('data-periodos').split(',');
 
-    // Update modal with the course's periods
     modalTitulo.innerText = `Selecione o Período de ${curso}`;
     periodosContainer.innerHTML = periodos.map(p =>
       `<button class="btn-periodo" data-periodo="${p}" data-curso="${curso}">${p}º Período</button>`
     ).join("");
 
-    // Display the modal
     modal.style.display = 'flex';
 
-    // Add event listeners to period buttons
     document.querySelectorAll('.btn-periodo').forEach(button => {
       button.addEventListener('click', () => {
         const periodoId = button.dataset.periodo;
@@ -29,7 +25,7 @@ blocos.forEach(bloco => {
   });
 });
 
-// Close the modal when clicking outside
+// Fecha o modal quando clicar fora
 window.addEventListener('click', (e) => {
   if (e.target === modal) {
     modal.style.display = 'none';

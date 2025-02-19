@@ -5,6 +5,8 @@
 {% block title %}Livraria IGE{% endblock title %}
 
 {% block head %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 <link rel="stylesheet" href="{% static 'css/home.css' %}">
 {% endblock head %}
 
@@ -17,7 +19,7 @@
         <div class="home-container">
             {% for curso in cursos %}
             <div class="bloco" data-curso="{{ curso.nome }}" data-periodos="{{ curso.periodos|join:',' }}">
-                <i class="fa-solid fa-building"></i> <!-- Customize the icon based on the course -->
+                <i class="{{ curso.icone }}"></i> <!-- Customize the icon based on the course -->
                 {{ curso.nome }}
             </div>
             {% endfor %}
@@ -25,7 +27,7 @@
     </section>
     
     <!-- Modal Structure -->
-    <div id="modal" style="display: none;">
+    <div id="modal" class="modal" ">
         <div class="modal-content">
             <h2 id="modal-titulo"></h2>
             <div class="periodos"></div>

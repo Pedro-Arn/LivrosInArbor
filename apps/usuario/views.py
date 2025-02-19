@@ -36,6 +36,7 @@ class HomePage(TemplateView):
             periodos = curso.materias.values_list('periodo', flat=True).distinct()
             context['cursos'].append({
                 'nome': curso.nome,
+                'icone': curso.icone,
                 'periodos': list(periodos),
             })
 
