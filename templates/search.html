@@ -18,7 +18,7 @@
         <form method="get" action="{% url 'livros:lista_livros' %}">
             <!-- Pesquisar por atributo -->
             <label for="search_query">Pesquisar:</label>
-            <input type="text" id="search_query" name="search_query" placeholder="Pesquisar por título, autor, etc."
+            <input type="text" id="search_query" name="search_query" placeholder="Pesquisar por livro ou autor"
                 value="{{ search_query }}">
             <!-- Por ano de publicação -->
             <label for="ano_publicacao">Ano de Publicação:</label>
@@ -65,7 +65,7 @@
                     <!-- Com matéria correspondente -->
                     <p class="matéria">Matéria:
                         {% for materia in livro.materia.all %}
-                        {{ materia.nome }}
+                        {{ materia.nome }}{% if not forloop.last %}, {% endif %}
                         {% endfor %}
                     </p>
                     <!-- Botão para link de compra -->

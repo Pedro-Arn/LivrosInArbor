@@ -5,12 +5,6 @@ from django_select2.forms import Select2MultipleWidget, Select2Widget
 # Importação de classes de associação
 from apps.livros.models import Livros, Comentario
 
-# Definição de formulário para filtrar livros
-class FiltrarLivrosForm(forms.Form):
-    class Meta:
-        model = Livros
-        fields = ['ano_publicação', 'editora', 'materia',]
-
 # Definição de formulário para adicionar livros
 class AdicionarLivrosForm(forms.ModelForm):
     new_links = forms.CharField( # Tipo campo de texto longo

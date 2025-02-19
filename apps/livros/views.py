@@ -17,7 +17,6 @@ from django.views.generic import (
 )
 # Importação de formulários relacionados ao livro
 from apps.livros.forms import (
-    FiltrarLivrosForm,
     AdicionarLivrosForm,
     ComentarLivroForm,
 )
@@ -33,25 +32,43 @@ class ListarLivrosView(ListView):
     paginate_by = 10 # Quantidade de respostas na tela
  
     def get_queryset(self):
-        queryset = super().get_queryset() # Obtém lista de objetos associado a view
+        queryset = super().get_queryset()
         search_query = self.request.GET.get('search_query', '').strip()
+        ano_publicacao = self.request.GET.get('ano_publicacao', '').strip()
+        editora = self.request.GET.get('editora', '').strip()
+        materia = self.request.GET.get('materia', '').strip()
+        curso = self.request.GET.get('curso', '').strip()
+        periodo = self.request.GET.get('periodo', '').strip()
 
-        # Caso haja um termo de busca a funçãp apply é chamada
+        # # Caso haja um termo de busca a função apply é chamada
         if search_query:
             queryset = self.apply_search_query(queryset, search_query)
 
         # Insere filtros adicionais por atributos
         queryset = self.apply_filters(queryset)
 
-        return queryset # Correspondência à busca
+        # Apply filters
+        if ano_publicacao:
+            queryset = queryset.filter(ano_publicacao=ano_publicacao)
+        if editora:
+            queryset = queryset.filter(editora__nome__icontains=editora)
+        if materia:
+            queryset = queryset.filter(materia__nome__icontains=materia)
+        if curso:
+            queryset = queryset.filter(materia__cursos__nome__icontains=curso)  # Traverse through Materias to Cursos
+        if periodo:
+            queryset = queryset.filter(materia__periodo=periodo)  # Filter by periodo in Materias
+        
+        # Previnir resultados repetidos
+        queryset = queryset.distinct()
+
+        return queryset
 
     def apply_search_query(self, queryset, search_query):
         # Definição de atributos de busca
         return queryset.filter(
             Q(titulo__icontains=search_query) |
-            Q(autor__nome_completo__icontains=search_query) |
-            Q(editora__nome__icontains=search_query) |
-            Q(materia__nome__icontains=search_query)
+            Q(autor__nome_completo__icontains=search_query)
         )
 
     def apply_filters(self, queryset):
@@ -71,6 +88,18 @@ class ListarLivrosView(ListView):
         materia = self.request.GET.get('materia')
         if materia:
             filters['materia__nome__icontains'] = materia
+        
+        # Filtro por período
+        periodo = self.request.GET.get('periodo')
+        if periodo:
+            # Acessando curso através de materia
+            filters['materia__periodo'] = periodo
+
+        # Filtro por curso
+        curso = self.request.GET.get('curso')
+        if curso:
+            # Acessando curso através de materia
+            filters['materia__cursos__nome__icontains'] = curso
 
         return queryset.filter(**filters)
 
@@ -80,31 +109,9 @@ class ListarLivrosView(ListView):
         context['ano_publicacao'] = self.request.GET.get('ano_publicacao', '')
         context['editora'] = self.request.GET.get('editora', '')
         context['materia'] = self.request.GET.get('materia', '')
+        context['periodo'] = self.request.GET.get('periodo', '')
+        context['curso'] = self.request.GET.get('curso', '')
         return context
-
-    def apply_search_query(self, queryset, search_query):
-        return queryset.filter(
-            Q(autor__nome_completo__icontains=search_query) |
-            Q(titulo__icontains=search_query) |
-            Q(editora__nome__icontains=search_query) |
-            Q(materia__nome__icontains=search_query)
-        )
-
-    def apply_filters(self, queryset):
-        # Aplica filtros do 'FiltrarLivrosForm' para o queryset.
-        filtro_form = FiltrarLivrosForm(self.request.GET)
-        if filtro_form.is_valid():
-            filters = {k: v for k, v in filtro_form.cleaned_data.items() if v}
-            queryset = queryset.filter(**filters)
-        return queryset
-
-    def get_context_data(self, **kwargs):
-        # Contexto adicional para o template
-        context = super().get_context_data(**kwargs)
-        context['search_query'] = self.request.GET.get('search_query', '').strip()
-        context['filtro_form'] = FiltrarLivrosForm(self.request.GET)
-        return context
-
 
 class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Livros

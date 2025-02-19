@@ -20,7 +20,6 @@ class Materias(models.Model):
 
     nome = models.CharField(max_length=70, blank=False, null=False)
     fase_basica = models.BooleanField()
-    icone = models.CharField(max_length=50, blank=True, null=True)
     periodo = models.IntegerField(
         choices=PERIODOS_CHOICES,
         null=False, # Não pode ser nulo
@@ -43,6 +42,8 @@ class Materias(models.Model):
 class Cursos(models.Model):
     nome = models.CharField(max_length=50, blank=False, null=False)
     materias = models.ManyToManyField(Materias)
+    icone = models.CharField(max_length=50, blank=True, null=True)
+
 
     def __str__(self):
         return self.nome
