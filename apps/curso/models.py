@@ -18,9 +18,10 @@ class Materias(models.Model):
         (10, '10° período'),
     ]
 
-    nome = models.CharField(max_length=70, blank=False, null=False) # Tipo campo de texto
-    fase_basica = models.BooleanField() # Tipo booleano
-    periodo = models.IntegerField( # Tipo inteiro
+    nome = models.CharField(max_length=70, blank=False, null=False)
+    fase_basica = models.BooleanField()
+    icone = models.CharField(max_length=50, blank=True, null=True)
+    periodo = models.IntegerField(
         choices=PERIODOS_CHOICES,
         null=False, # Não pode ser nulo
         blank=False, # Não é opcional

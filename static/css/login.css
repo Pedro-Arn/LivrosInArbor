@@ -237,6 +237,15 @@ body {
     transform: translateX(0);
 }
 
+.alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+}
+
 .container.active .toggle-right {
     transform: translateX(200%);
 }

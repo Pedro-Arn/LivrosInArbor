@@ -18,13 +18,29 @@ from apps.usuario.forms import (
     GerenciarFavoritosForm,
     )
 # Importação de classes de associação
+from apps.curso.models import Cursos
 from apps.usuario.models import Usuario, Favoritos
 
 # Exibe tela inicial
 class HomePage(TemplateView):
     template_name = "home.html"
 
-# Criação da classe 'RegistrarUsuarioView' que faz a chamada do modelo e da tela correspondente a ela
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        cursos = Cursos.objects.all()
+
+        context['cursos'] = []
+        for curso in cursos:
+            # Buscar períodos para o curso atual usando o related_name (se definido) ou o nome relacionado padrão
+            periodos = curso.materias.values_list('periodo', flat=True).distinct()
+            context['cursos'].append({
+                'nome': curso.nome,
+                'periodos': list(periodos),
+            })
+
+        return context
+
 class RegistrarUsuarioView(FormView):
     template_name = 'login.html'
     form_class = RegistrarUsuarioForm
@@ -90,7 +106,7 @@ class PerfilUsuarioView(TemplateView):
         usuario = get_object_or_404(Usuario, username=username)
         favoritos = Favoritos.objects.filter(usuario=usuario).select_related('livro')
 
-        # Adição de formulário ao contexto
+        # Adiciona o formulário no contexto
         context = super().get_context_data(**kwargs)
         context.update({
             'username': username,
@@ -120,7 +136,7 @@ class PerfilUsuarioView(TemplateView):
                 form.save() # Salva no BD
                 return redirect('perfil', username=username)
 
-        # Caso o formulário seja inválido 
+        # Se o formulário for inválido, recarrega a página
         context = self.get_context_data(**kwargs)
         context['editar_perfil_form'] = form if 'editar_perfil' in request.POST else EditarPerfilForm(instance=usuario)
         context['gerenciar_favoritos_form'] = form if 'gerenciar_favoritos' in request.POST else GerenciarFavoritosForm(usuario=usuario)

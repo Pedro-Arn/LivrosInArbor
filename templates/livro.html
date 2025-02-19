@@ -28,27 +28,31 @@
                 {% endif %}
             </div>
             <div class="conteudo-container">
-                <h2 class="livro-materia">{{ livro.titulo }}
-                        <form method="post" action="{% url 'livros:alternar_favorito' livro.id %}">
-                            {% csrf_token %}
-                            <input type="hidden" name="favorite_action" value="true">
-                            <button id="estrela-favorito" class="estrela-favorito {% if livro in usuario.favoritos.all %}preenchida{% else %}vazia{% endif %}" 
-                            data-livro-id="{{ livro.id }}">
-                            {% if is_favorited %}
-                                &#9733;  <!--  Estrela preenchida -->
-                            {% else %}
-                                &#9734;  <!-- Estrela vazia -->
-                            {% endif %}
-                            </button>
-                        </form>
-                </h2>
+                <h2 class="livro-materia">{{ livro.titulo }}</h2>
+                    <form method="post" action="{% url 'livros:alternar_favorito' livro.id %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="favorite_action" value="true">
+                        <button id="estrela-favorito" class="estrela-favorito{% if livro in usuario.favoritos.all %}-preenchida{% else %}-vazia{% endif %}" 
+                        data-livro-id="{{ livro.id }}">
+                        {% if is_favorited %}
+                            &#9733;  <!--  Estrela preenchida -->
+                        {% else %}
+                            &#9734;  <!-- Estrela vazia -->
+                        {% endif %}
+                        </button>
+                    </form>
+                
                 <p class="livro-editora"><strong>Editora: </strong>{{ livro.editora }}</p>
                 <p class="livro-ano"><strong>Data de Publicação: </strong>{{ livro.ano_publicacao }}</p>
                 <p class="livro-autor"><strong>Autor: </strong><a href="{% url 'autor:detalhes_autor' livro.autor.slug %}">{{ livro.autor.nome_completo }}</a></p>
                 <p class="livro-descricao"><strong>{{ livro.descricao }}</strong></p>
             </div>
         </div>
-        <a class="btn-comprar" target="_blank">Comprar</a>
+        <a class="btn-comprar" 
+            href="{% if livro.links.first %}{{ livro.links.first.link }}{% else %}#{% endif %}" 
+            target="_blank">
+            Comprar
+        </a>
         <div id="customModal{{ livro.id }}" class="custom-modal">
             <div class="custom-modal-content">
                 <span class="custom-close" onclick="closeModal('{{ livro.id }}')">&times;</span>
@@ -73,7 +77,11 @@
                 <div class="comentario">
                     <div class="comentario-header">
                         <div class="comentario-avatar">
-                            <img src="{{usuario.foto_perfil.url}}" alt="usuario-foto">
+                            {% if usario.foto_perfil %}
+                            <img src="{{ usuario.foto_perfil.url }}" alt="Foto de {{ username }}">
+                            {% else %}
+                            <img src="{% static 'imgs/usuario.png' %}">
+                            {% endif %}
                         </div>
                         <span class="comentario-usuario">{{ comentario.usuario.get_full_name }} &gt; </span> {{ comentario.postado_em }}<br>
                     </div>

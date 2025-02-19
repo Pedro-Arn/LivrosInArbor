@@ -85,23 +85,19 @@
 }
 
 
-/* 
-.estrela-favorito {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+.estrela-favorito-preenchida, .estrela-favorito-vazia {
   font-size: 24px;
-  color: gold;
   cursor: pointer;
   background: transparent;
   border: none;
-} */
+  left: 42vw;
+}
 
-#estrela-favorito.preenchida {
+.estrela-favorito-preenchida {
   color: gold;
 }
 
-#estrela-favorito.vazia {
+.estrela-favorito-vazia {
   color: gray;
 }
 

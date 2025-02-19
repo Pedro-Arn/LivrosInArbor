@@ -69,8 +69,11 @@
                         {% endfor %}
                     </p>
                     <!-- Botão para link de compra -->
-                    <button class="btn-comprar"
-                        onclick="window.location.href='{{ livro.link_compra }}';">Comprar</button>
+                    <a class="btn-comprar" 
+                        href="{% if livro.links.first %}{{ livro.links.first.link }}{% else %}#{% endif %}" 
+                        target="_blank">
+                        Comprar
+                    </a>
                 </div>
             </div>
             {% empty %}

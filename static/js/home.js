@@ -1,54 +1,35 @@
-const btnPeriodo = document.querySelectorAll('.btn-periodo');
-const periodos = document.querySelector('.periodos');
 const blocos = document.querySelectorAll('.bloco');
 const modal = document.getElementById('modal');
 const periodosContainer = document.querySelector('.periodos');
 const modalTitulo = document.getElementById('modal-titulo');
 
-// Abrir modal ao clicar no bloco do curso
+// Open modal when a course block is clicked
 blocos.forEach(bloco => {
-  bloco.addEventListener('click', async () => {
+  bloco.addEventListener('click', () => {
     const curso = bloco.getAttribute('data-curso');
+    const periodos = bloco.getAttribute('data-periodos').split(',');
 
-    // Buscar períodos do curso via API Django
-    const response = await fetch(`/api/periodos/?curso=${curso}`);
-    const periodos = await response.json();
-
-    // Atualizar modal com os períodos do curso
+    // Update modal with the course's periods
     modalTitulo.innerText = `Selecione o Período de ${curso}`;
     periodosContainer.innerHTML = periodos.map(p =>
-      `<button class="btn-periodo" data-periodo="${p.id}">${p.numero}º Período</button>`
+      `<button class="btn-periodo" data-periodo="${p}" data-curso="${curso}">${p}º Período</button>`
     ).join("");
 
-    // Exibir modal
+    // Display the modal
     modal.style.display = 'flex';
 
-    // Adicionar evento para os botões de período
+    // Add event listeners to period buttons
     document.querySelectorAll('.btn-periodo').forEach(button => {
-      button.addEventListener('click', () => carregarMaterias(button.dataset.periodo));
+      button.addEventListener('click', () => {
+        const periodoId = button.dataset.periodo;
+        const curso = button.dataset.curso;
+        window.location.href = `/livros/?curso=${curso}&periodo=${periodoId}`;
+      });
     });
   });
 });
 
-// Carregar matérias do período
-async function carregarMaterias(periodoId) {
-  const response = await fetch(`/api/materias/?periodo=${periodoId}`);
-  const materias = await response.json();
-
-  modalTitulo.innerText = "Selecione a Disciplina";
-  periodosContainer.innerHTML = materias.map(m =>
-    `<button class="btn-materia" data-materia="${m.id}">${m.nome}</button>`
-  ).join("");
-
-  // Adicionar evento para redirecionar ao clicar em uma matéria
-  document.querySelectorAll('.btn-materia').forEach(button => {
-    button.addEventListener('click', () => {
-      window.location.href = `/livros/?materia=${button.dataset.materia}`;
-    });
-  });
-}
-
-// Fechar o modal ao clicar fora
+// Close the modal when clicking outside
 window.addEventListener('click', (e) => {
   if (e.target === modal) {
     modal.style.display = 'none';

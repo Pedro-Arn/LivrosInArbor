@@ -13,60 +13,24 @@
     <!-- Importação da header -->
     {% include 'header.html' %}
     <!-- Mensagem de boas-vindas -->
-    <div class="seção-1">
-        <h1>Boas vindas à Livraria IGE<p>sua principal fonte de busca de livros.</p></h1>
-    </div>
-    <!-- Área com os blocos representando os 9 cursos do IGE -->
     <section class="seção-2" id="seção-2">
         <div class="home-container">
-            <div class="bloco" data-curso="Civil">
-                <i class="fa-solid fa-building"></i>
-                Engenharia Civil
+            {% for curso in cursos %}
+            <div class="bloco" data-curso="{{ curso.nome }}" data-periodos="{{ curso.periodos|join:',' }}">
+                <i class="fa-solid fa-building"></i> <!-- Customize the icon based on the course -->
+                {{ curso.nome }}
             </div>
-            <div class="bloco" data-curso="Computação">
-                <i class="fa-solid fa-robot"></i>
-                Engenharia da Computação
-            </div>
-            <div class="bloco" data-curso="Materiais">
-                <i class="fa-solid fa-industry"></i>
-                Engenharia de Materiais
-            </div>
-            <div class="bloco" data-curso="Minas">
-                <i class="fas fa-hammer"></i>
-                Engenharia de Minas e Meio Ambiente
-            </div>
-            <div class="bloco" data-curso="Elétrica">
-                <i class="fa-solid fa-bolt"></i>
-                Engenharia Elétrica
-            </div>
-            <div class="bloco" data-curso="Mecânica">
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-                Engenharia Mecânica
-            </div>
-            <div class="bloco" data-curso="Química">
-                <i class="fa-solid fa-flask"></i>
-                Engenharia Química
-            </div>
-            <div class="bloco" data-curso="Geologia">
-                <i class="fa-solid fa-mountain"></i>
-                Geologia
-            </div>
-            <div class="bloco" data-curso="Sistemas">
-                <i class="fa-solid fa-laptop-code"></i>
-                Sistemas de Informação
-            </div>
+            {% endfor %}
         </div>
     </section>
-        <!-- Janela para a seleção do período -->
-        <div class="modal" id="modal">
+    
+    <!-- Modal Structure -->
+    <div id="modal" style="display: none;">
         <div class="modal-content">
-            <h2 id="modal-titulo">Selecione o Período</h2>
-            <div class="periodos">
-                <!-- Dinamicamente adicionados via javascript -->
-            </div>
+            <h2 id="modal-titulo"></h2>
+            <div class="periodos"></div>
         </div>
     </div>
-
     <!-- Seção apenas informativa sobre as matérias básicas que alguns cursos compartilham -->
     <section class="seção-3" id="seção-3">
         <div class="conteudo">
