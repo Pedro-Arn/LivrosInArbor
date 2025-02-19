@@ -1,13 +1,13 @@
 from django.core.exceptions import ValidationError
+# Importação da classe de configuração do modelo
 from django.db import models
 from django.contrib.auth.models import User
-
+# Importação de classes associadas
 from apps.usuario.choices import (
     Generos,
     Ocupacoes,
     Identificacoes,
 )
-
 
 # Validação do campo de identificação (numérico, 11 a 13 digitos)
 def validar_identificacao(valor, tipo):
@@ -21,18 +21,18 @@ def validar_identificacao(valor, tipo):
     elif tipo == 'M' and comprimento != 13: # Validação matrícula
         raise ValidationError("Matrícula deve ter 13 dígitos.")
 
-
+# Definição da classe 'Usuario' que herda de uma classe padrão do Django
 class Usuario(User):
-    ocupacao = models.CharField(
+    ocupacao = models.CharField( # Tipo campo livre
         verbose_name='Ocupação',
         max_length=1,
-        choices=Ocupacoes.choices,
-        null=False,
-        blank=False,
+        choices=Ocupacoes.choices, # Restringe a seleção
+        null=False, # Não pode ser nulo
+        blank=False, # Não é opcional
     )
     data_nascimento = models.DateField(
-        null=True,
-        blank=True,
+        null=True, # Pode ser nulo
+        blank=True, # É opcional
         verbose_name="Data de nascimento",
     )
     tipo_identificacao = models.CharField(
@@ -62,18 +62,19 @@ class Usuario(User):
     @property
     def nome_completo(self):
         return f"{self.first_name} {self.last_name}".strip()
-
+    
+    # Validação personalizada para o campo identificação
     def clean(self):
-        """Validação personalizada para o campo identificacao com base no tipo_identificacao."""
         super().clean()
         validar_identificacao(self.identificacao, self.tipo_identificacao)
 
+    # Configuração de informações adicionais
     class Meta:
         db_table  = 'usuario'
 
 class Favoritos(models.Model):
     from apps.livros.models import Livros
-
+    # Todos os atributos que constaram na classe (composição)
     livro = models.ForeignKey(
         Livros,
         related_name='livro_favorito',
@@ -90,5 +91,6 @@ class Favoritos(models.Model):
         verbose_name = 'Livro Favorito'
         verbose_name_plural = 'Livros Favoritos'
 
+    # Como livro será listado na tela admin
     def __str__(self):
         return self.livro.titulo

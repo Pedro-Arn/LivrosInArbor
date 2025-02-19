@@ -1,47 +1,52 @@
+# Importação des bibliotecas de restrições de acessos
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+# Importação de uma biblioteca de paginação
 from django.core.paginator import Paginator
 from django.db.models import Case, When, Value, IntegerField, Q
 from django.http import HttpResponseForbidden, JsonResponse
+# Importação da função que exibe erro 404
 from django.shortcuts import get_object_or_404, redirect
+# Importação da função que gera URL'S dinamicamente
 from django.urls import reverse_lazy, reverse
+# Importação de classes para construir view
 from django.views.generic import (
     CreateView,
     DetailView,
     ListView, 
     View,
 )
-
+# Importação de formulários relacionados ao livro
 from apps.livros.forms import (
     FiltrarLivrosForm,
     AdicionarLivrosForm,
     ComentarLivroForm,
 )
+# Importação de classes de associação
 from apps.livros.models import Livros, Comentario, Link
 from apps.usuario.models import Favoritos
 
+# Criação da classe 'ListarLivrosView' 
 class ListarLivrosView(ListView):
-    model = Livros
-    template_name = 'search.html'
-    context_object_name = 'livros'
-    paginate_by = 10
-
+    model = Livros # Faz a chamada do modelo que a corresponde
+    template_name = 'search.html' # Faz a chamada da tela que a corresponde
+    context_object_name = 'livros' # Nome da variável de acesso ao conjunto
+    paginate_by = 10 # Quantidade de respostas na tela
+ 
     def get_queryset(self):
-        queryset = super().get_queryset()
+        queryset = super().get_queryset() # Obtém lista de objetos associado a view
         search_query = self.request.GET.get('search_query', '').strip()
 
-        # Apply search query
+        # Caso haja um termo de busca a funçãp apply é chamada
         if search_query:
             queryset = self.apply_search_query(queryset, search_query)
 
-        # Apply additional filters
+        # Insere filtros adicionais por atributos
         queryset = self.apply_filters(queryset)
 
-        return queryset
+        return queryset # Correspondência à busca
 
     def apply_search_query(self, queryset, search_query):
-        """
-        Apply search query to the queryset.
-        """
+        # Definição de atributos de busca
         return queryset.filter(
             Q(titulo__icontains=search_query) |
             Q(autor__nome_completo__icontains=search_query) |
@@ -50,22 +55,19 @@ class ListarLivrosView(ListView):
         )
 
     def apply_filters(self, queryset):
-        """
-        Apply additional filters based on form inputs.
-        """
         filters = {}
 
-        # Filter by publication year
+        # Filtro por ano
         ano_publicacao = self.request.GET.get('ano_publicacao')
         if ano_publicacao:
             filters['ano_publicacao'] = ano_publicacao
 
-        # Filter by publisher
+        # Filtro por editora
         editora = self.request.GET.get('editora')
         if editora:
             filters['editora__nome__icontains'] = editora
 
-        # Filter by subject
+        # Filtro por matéria
         materia = self.request.GET.get('materia')
         if materia:
             filters['materia__nome__icontains'] = materia
@@ -73,9 +75,6 @@ class ListarLivrosView(ListView):
         return queryset.filter(**filters)
 
     def get_context_data(self, **kwargs):
-        """
-        Pass form data back to the template.
-        """
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search_query', '')
         context['ano_publicacao'] = self.request.GET.get('ano_publicacao', '')
@@ -84,9 +83,6 @@ class ListarLivrosView(ListView):
         return context
 
     def apply_search_query(self, queryset, search_query):
-        """
-        Query para o search.
-        """
         return queryset.filter(
             Q(autor__nome_completo__icontains=search_query) |
             Q(titulo__icontains=search_query) |
@@ -95,9 +91,7 @@ class ListarLivrosView(ListView):
         )
 
     def apply_filters(self, queryset):
-        """
-        Aplica filtros do FiltrarLivrosForm para o queryset.
-        """
+        # Aplica filtros do 'FiltrarLivrosForm' para o queryset.
         filtro_form = FiltrarLivrosForm(self.request.GET)
         if filtro_form.is_valid():
             filters = {k: v for k, v in filtro_form.cleaned_data.items() if v}
@@ -105,9 +99,7 @@ class ListarLivrosView(ListView):
         return queryset
 
     def get_context_data(self, **kwargs):
-        """
-        Contexto adicional para o template.
-        """
+        # Contexto adicional para o template
         context = super().get_context_data(**kwargs)
         context['search_query'] = self.request.GET.get('search_query', '').strip()
         context['filtro_form'] = FiltrarLivrosForm(self.request.GET)
@@ -122,7 +114,7 @@ class AdicionarLivroView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     success_url = '.'
 
     def form_valid(self, form):
-        # Save the book first
+        # Salva o livro adicionado
         self.object = form.save()
 
         # Process new links
@@ -240,12 +232,12 @@ class AlternarFavoritosView(LoginRequiredMixin, View):
         usuario = request.user.usuario
         livro = get_object_or_404(Livros, id=self.kwargs['pk'])
 
-        # Retorna ou cria uma instancia de favorito
+        # Retorna ou cria uma instância de favorito
         favorito, created = Favoritos.objects.get_or_create(usuario=usuario, livro=livro)
         
         if not created:  
             # Se já existir, desfavorita
             favorito.delete()
 
-        # Redirect back to the book detail page
+        # Redireciona de volta à pagina de detalhes do livro
         return redirect(reverse('livros:detalhes_livro', kwargs={'slug': livro.slug}))

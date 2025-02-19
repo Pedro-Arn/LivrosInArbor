@@ -1,20 +1,25 @@
+# Importação da classe de configuração do modelo
 from django.db import models
+# Importação da função que transforma textos em slugs
 from django.utils.text import slugify
 
+# Importação das classes de associação
 from apps.autor.models import Autor
 from apps.curso.models import Materias
 
-
+# Definição da classe 'Editora' que herda de uma classe padrão do Django
 class Editora(models.Model):
-    nome = models.CharField(
+    nome = models.CharField( # Tipo campo de texto
         max_length=100,
-        null=False,
-        unique=True,
+        null=False, # Não pode ser nulo
+        unique=True, # É único
     )
 
+    # Como editora será listada na tela admin
     def __str__(self):
         return self.nome
 
+    # Configuração de informações adicionais
     class Meta:
         db_table = 'editora'
 
@@ -54,7 +59,7 @@ class Livros(models.Model):
     )
     editora = models.ForeignKey(
         Editora,
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE, # Será deletada se o livro também for
         blank=False,
         null=True
     )
@@ -99,20 +104,19 @@ class Livros(models.Model):
 
 
 class Comentario(models.Model):
-    from apps.usuario.models import Usuario
-
+    # Importação da classe de associação
     from apps.usuario.models import Usuario
 
     livro = models.ForeignKey(
         Livros,
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE, # Será deletado se o livro também for
     )
     usuario = models.ForeignKey(
         Usuario,
-        on_delete=models.CASCADE,
+        on_delete=models.CASCADE, # Será deletado se o usuario também for
     )
     corpo = models.TextField()
-    postado_em = models.DateTimeField(auto_now_add=True)
+    postado_em = models.DateTimeField(auto_now_add=True) # Tipo data e hora, salva infos atuais
 
     class Meta:
         ordering = ['postado_em',]

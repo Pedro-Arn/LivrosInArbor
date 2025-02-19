@@ -1,4 +1,6 @@
+# Importação de uma função Django que associa URL'S
 from django.urls import path
+# Importação das classes de interesse ao livro
 from apps.livros.views import (
     ListarLivrosView,
     AdicionarLivroView,
@@ -8,6 +10,7 @@ from apps.livros.views import (
 
 app_name = 'livros'
 
+# Definição da URL para o app 'livros'
 urlpatterns = [
     path('livros/', ListarLivrosView.as_view(), name='lista_livros'),
     path('livros/<slug:slug>', DetalhesLivroView.as_view(), name='detalhes_livro'),

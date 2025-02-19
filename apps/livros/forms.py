@@ -1,24 +1,30 @@
+# Importação do módulo de crição de formulários
 from django import forms
+# Importação de componentes personalisados
 from django_select2.forms import Select2MultipleWidget, Select2Widget
-
+# Importação de classes de associação
 from apps.livros.models import Livros, Comentario
 
+# Definição de formulário para filtrar livros
 class FiltrarLivrosForm(forms.Form):
     class Meta:
         model = Livros
         fields = ['ano_publicação', 'editora', 'materia',]
 
+# Definição de formulário para adicionar livros
 class AdicionarLivrosForm(forms.ModelForm):
-    new_links = forms.CharField(
+    new_links = forms.CharField( # Tipo campo de texto longo
         widget=forms.Textarea(attrs={'placeholder': 'Insira os links no formato: Nome do site,URL\nNome do site,URL.'}),
-        required=False,
-        help_text='Insira os links no formato: Nome do site,URL (um por linha)..'
+        required=False, # É opcional
+        help_text='Insira os links no formato: Nome do site,URL (um por linha)..' # Mensagem de erro
     )
 
+    # Configuração de informações adicionais
     class Meta:
         model = Livros
-        fields = '__all__' 
-        exclude = ['slug', 'links']
+        fields = '__all__' # Inclui todos os campos de livros
+        exclude = ['slug', 'links'] # Exclui slug e links
+        # Definição dos widgets personalizados para os campos do formulário
         widgets = {
             'titulo': forms.TextInput(attrs={
                 'class': 'form-control',
@@ -53,7 +59,7 @@ class AdicionarLivrosForm(forms.ModelForm):
 class ComentarLivroForm(forms.ModelForm):
     class Meta:
         model = Comentario
-        fields = ['corpo']
+        fields = ['corpo'] # Inclui apenas o corpo 
 
         widgets = {
             'corpo': forms.Textarea(attrs={

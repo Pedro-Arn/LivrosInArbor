@@ -1,16 +1,11 @@
-"""
-ASGI config for LivrariaIGE project.
-
-It exposes the ASGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
-"""
-
+# Importação de modo de interação com o sistema operacional
 import os
-
+# Importação de uma função que retorna uma aplicação ASGI para 
+# o Django (gerenciamento as requisições HTTP)
 from django.core.asgi import get_asgi_application
 
+# Identificação do arquivo de configurações que o Django deve usar
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "LivrariaIGE.settings")
 
+# Cria a aplicação ASGI
 application = get_asgi_application()

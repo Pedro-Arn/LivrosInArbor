@@ -1,29 +1,37 @@
+# Importação do modelo de grupos de usuários do Django
 from django.contrib.auth.models import Group
+# Importação da função de autenticação o usuário 
 from django.contrib.auth import login
+# Importação do formulário de autenticação o usuário 
 from django.contrib.auth.forms import AuthenticationForm
+# Importação de redirecionamento após ação
 from django.http import HttpResponseRedirect
+# Importação de exibição de erro 404
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse_lazy
-
+# Importação de views genéricas
 from django.views.generic import TemplateView, FormView
-
+# Importação de classes-formulários de associação
 from apps.usuario.forms import (
     RegistrarUsuarioForm, 
     EditarPerfilForm,
     GerenciarFavoritosForm,
     )
+# Importação de classes de associação
 from apps.usuario.models import Usuario, Favoritos
 
+# Exibe tela inicial
 class HomePage(TemplateView):
     template_name = "home.html"
 
-
+# Criação da classe 'RegistrarUsuarioView' que faz a chamada do modelo e da tela correspondente a ela
 class RegistrarUsuarioView(FormView):
     template_name = 'login.html'
     form_class = RegistrarUsuarioForm
 
+    # Formulário de registro validado
     def form_valid(self, form):
-        user = form.save()
+        user = form.save() # Salva usuário no BD
 
         ocupacao = form.cleaned_data['ocupacao']
         if ocupacao == 'E':
@@ -40,15 +48,17 @@ class RegistrarUsuarioView(FormView):
         login(self.request, user)
         return super().form_valid(form)
     
+    # Passa informações para o template renderizado
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['form_registrar'] = kwargs.get('form_registrar', RegistrarUsuarioForm(prefix="form1"))
         context['form_login'] = kwargs.get('form_login', AuthenticationForm(prefix="form2"))
         return context
-
+    
+    # Processa dados de registro e login
     def post(self, request, *args, **kwargs):
         form_registrar = RegistrarUsuarioForm(request.POST, prefix="form1")
-        form_login = AuthenticationForm(request, data=request.POST, prefix="form2")  # Request para o form de login
+        form_login = AuthenticationForm(request, data=request.POST, prefix="form2") 
 
         if form_registrar.is_valid():
             # Lógica para registro
@@ -80,7 +90,7 @@ class PerfilUsuarioView(TemplateView):
         usuario = get_object_or_404(Usuario, username=username)
         favoritos = Favoritos.objects.filter(usuario=usuario).select_related('livro')
 
-        # Add forms to the context
+        # Adição de formulário ao contexto
         context = super().get_context_data(**kwargs)
         context.update({
             'username': username,
@@ -91,23 +101,26 @@ class PerfilUsuarioView(TemplateView):
         })
         return context
 
+    # Trata o envio dos formulários de edição e gerenciamento de perfil
     def post(self, request, *args, **kwargs):
         username = self.kwargs['username']
         usuario = get_object_or_404(Usuario, username=username)
-
+        
+        # Atualiza as informações do usuário
         if 'editar_perfil' in request.POST:
             form = EditarPerfilForm(request.POST, request.FILES, instance=usuario)
             if form.is_valid():
-                form.save()
+                form.save() # Salva no BD
                 return redirect('perfil', username=username)
-
+        
+        # Processa as alterações nos favoritos
         elif 'gerenciar_favoritos' in request.POST:
             form = GerenciarFavoritosForm(usuario=usuario, data=request.POST)
             if form.is_valid():
-                form.save()
+                form.save() # Salva no BD
                 return redirect('perfil', username=username)
 
-        # If forms are invalid, re-render the page with errors
+        # Caso o formulário seja inválido 
         context = self.get_context_data(**kwargs)
         context['editar_perfil_form'] = form if 'editar_perfil' in request.POST else EditarPerfilForm(instance=usuario)
         context['gerenciar_favoritos_form'] = form if 'gerenciar_favoritos' in request.POST else GerenciarFavoritosForm(usuario=usuario)
