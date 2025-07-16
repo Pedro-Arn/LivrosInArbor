@@ -1,11 +1,11 @@
-# LivrariaIGE
+# LIA (Livros In Arbor)
 
 ## O sistema
-A Livraria IGE é um software para consultas de livros, baseado nos cursos do Instituto de Geologia e Engenharias, campus II da UNIFESSPA - Marabá
+O Livros In Arbor é um software para consultas de livros, baseado nos cursos do Instituto de Geologia e Engenharias, campus II da UNIFESSPA - Marabá
 
 O sistema permite que os usuários se registrem, pesquisem livros disponíveis, realizem comentários sobre os livros, favoritem suas obras preferidas e gerenciem sua lista de favoritos. Além disso, a plataforma oferece um ambiente intuitivo e organizado, possibilitando uma melhor experiência na busca e administração dos materiais acadêmicos.
 
-O objetivo principal da Livraria IGE é centralizar e disponibilizar informações de maneira eficiente para estudantes e professores, promovendo um ambiente colaborativo onde os usuários podem interagir e compartilhar suas opiniões sobre as obras cadastradas. No futuro, o sistema pode incluir novas funcionalidades, como sugestões personalizadas e categorização avançada de livros.
+O objetivo principal do Livros In Arbor é centralizar e disponibilizar informações de maneira eficiente para estudantes e professores, promovendo um ambiente colaborativo onde os usuários podem interagir e compartilhar suas opiniões sobre as obras cadastradas. No futuro, o sistema pode incluir novas funcionalidades, como sugestões personalizadas e categorização avançada de livros.
 
 ## Iniciação do Projeto
 
@@ -85,9 +85,9 @@ Para encerrar o servidor, use `CTRL + C` no terminal.
 | `/livros/` | Lista de livros |
 | `/livros/<slug:slug>` | Detalhes de um livro específico |
 | `/livros/adicionar/` | Adicionar um livro (somente professores) |
-| `/livros/<slug:slug>/favoritar/` | Favoritar um livro (em desenvolvimento) |
-| `/livros/<slug:slug>/desfavoritar/` | Desfavoritar um livro (em desenvolvimento) |
+| `/livros/<slug:slug>/favoritar/` | Favoritar um livro |
+| `/livros/<slug:slug>/desfavoritar/` | Desfavoritar um livro |
 | `/registrar/` | Registrar um novo usuário |
 | `/login/` | Realizar login |
-| `/logout/` | Logout (não funcional manualmente) |
+| `/logout/` | Logout |
 | `/perfil/<username>` | Perfil de um usuário |
